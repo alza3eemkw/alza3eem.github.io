@@ -2,12 +2,12 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <link rel="manifest" href="manifest.json">
-<link rel="apple-touch-icon" href="icon-192.png">
-<meta name="apple-mobile-web-app-title" content="منصة الزعيم">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="theme-color" content="#008000">
+    <link rel="apple-touch-icon" href="icon-192.png">
+    <meta name="apple-mobile-web-app-title" content="منصة الزعيم">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="theme-color" content="#0c1629">
     <title>منصة الزعيم الرياضية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
@@ -15,10 +15,10 @@
             --primary: #008000;
             --primary-dark: #005500;
             --card-accent: #10b981;
-            --card-glow: rgba(16, 185, 129, 0.25);
+            --card-glow: rgba(16, 185, 129, 0.2);
             --bg-base: #0c1629;
-            --glass-bg: rgba(23, 37, 65, 0.88);
-            --glass-border: rgba(255, 255, 255, 0.15);
+            --glass-bg: rgba(17, 27, 48, 0.82);
+            --glass-border: rgba(255, 255, 255, 0.1);
             --text-light: #f8fafc;
             --text-dim: #94a3b8;
         }
@@ -32,8 +32,8 @@
             font-family: 'Cairo', sans-serif; 
             background: var(--bg-base);
             background-image: 
-                radial-gradient(circle at 10% 10%, rgba(0, 128, 0, 0.18) 0%, transparent 45%),
-                radial-gradient(circle at 90% 90%, rgba(16, 185, 129, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 10% 10%, rgba(0, 128, 0, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 90% 90%, rgba(16, 185, 129, 0.12) 0%, transparent 45%),
                 linear-gradient(135deg, #070d18 0%, #172541 100%);
             background-attachment: fixed;
             min-height: 100vh;
@@ -46,80 +46,145 @@
             color: var(--text-light);
         }
 
+        /* iPhone App Container Framework */
+        .iphone-frame {
+            width: 100%;
+            max-width: 430px;
+            min-height: 100vh;
+            margin: 0 auto;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            background: rgba(12, 22, 41, 0.95);
+            box-shadow: 0 0 50px rgba(0, 0, 0, 0.6);
+            overflow: hidden;
+        }
+
+        /* Sticky Header */
         .sticky-header {
-            position: fixed;
+            position: sticky;
             top: 0;
             left: 0;
             width: 100%;
-            height: 72px;
-            background: rgba(12, 22, 41, 0.85);
-            backdrop-filter: blur(25px);
-            -webkit-backdrop-filter: blur(25px);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            height: 70px;
+            background: rgba(12, 22, 41, 0.9);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 0 28px;
+            padding: 0 20px;
             z-index: 1000;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .header-logo {
-            display: inline-flex;
+            display: flex;
             align-items: center;
-            cursor: default;
             text-decoration: none;
         }
 
         .header-logo img {
-            height: 45px;
+            height: 38px;
             width: auto;
             display: block;
-            filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
-            transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
         }
 
-        .header-logo:hover img {
-            transform: scale(1.05);
+        .header-actions {
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .hamburger-btn {
+        .header-icon-btn {
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            width: 44px;
-            height: 44px;
-            border-radius: 14px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            width: 38px;
+            height: 38px;
+            border-radius: 12px;
             display: flex;
             justify-content: center;
             align-items: center;
             cursor: pointer;
             color: var(--text-light);
-            font-size: 1.3rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            transition: all 0.25s ease;
         }
 
-        .hamburger-btn:hover {
-            background: rgba(16, 185, 129, 0.18);
+        .header-icon-btn:hover {
+            background: rgba(16, 185, 129, 0.15);
             border-color: var(--card-accent);
             color: var(--card-accent);
-            transform: translateY(-2px);
-            box-shadow: 0 6px 18px var(--card-glow);
         }
 
+        .header-icon-btn svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        /* Top Navigation Bar (Sub-header Pills) */
+        .top-nav-scroll {
+            display: flex;
+            gap: 8px;
+            padding: 12px 20px;
+            overflow-x: auto;
+            background: rgba(12, 22, 41, 0.7);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+            scrollbar-width: none;
+            flex-shrink: 0;
+        }
+        .top-nav-scroll::-webkit-scrollbar {
+            display: none;
+        }
+
+        .nav-pill {
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: var(--text-dim);
+            padding: 7px 16px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-pill:hover, .nav-pill.active {
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: #ffffff;
+            border-color: rgba(16, 185, 129, 0.4);
+            box-shadow: 0 4px 15px var(--card-glow);
+        }
+
+        .nav-pill .coming-soon-tag {
+            font-size: 0.6rem;
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+            padding: 2px 6px;
+            border-radius: 6px;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        /* Side Drawer Navigation */
         .drawer-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(5, 10, 20, 0.7);
+            background: rgba(5, 10, 20, 0.75);
             backdrop-filter: blur(8px);
             -webkit-backdrop-filter: blur(8px);
             opacity: 0;
             visibility: hidden;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1100;
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 1200;
         }
 
         .drawer-overlay.open {
@@ -130,17 +195,17 @@
         .side-drawer {
             position: fixed;
             top: 0;
-            right: -340px;
-            width: 320px;
+            right: -320px;
+            width: 300px;
             height: 100%;
             background: linear-gradient(180deg, #0e1930 0%, #0a1224 100%);
             border-left: 1px solid rgba(255, 255, 255, 0.1);
             box-shadow: -15px 0 40px rgba(0, 0, 0, 0.7);
-            z-index: 1200;
+            z-index: 1300;
             display: flex;
             flex-direction: column;
-            transition: right 0.45s cubic-bezier(0.16, 1, 0.3, 1);
-            padding: 28px 22px;
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            padding: 24px 20px;
         }
 
         .side-drawer.open {
@@ -151,24 +216,22 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 24px;
-            padding-bottom: 16px;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            flex-shrink: 0;
         }
 
         .drawer-title {
-            font-size: 1.15rem;
+            font-size: 1.1rem;
             font-weight: 800;
             color: #ffffff;
-            letter-spacing: -0.3px;
         }
 
         .close-drawer {
             background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.08);
-            width: 36px;
-            height: 36px;
+            width: 34px;
+            height: 34px;
             border-radius: 10px;
             color: var(--text-dim);
             cursor: pointer;
@@ -182,176 +245,421 @@
             background: rgba(239, 68, 68, 0.2);
             color: #ef4444;
             border-color: rgba(239, 68, 68, 0.4);
-            transform: rotate(90deg);
         }
 
         .drawer-nav-container {
             flex: 1;
             overflow-y: auto;
-            overflow-x: hidden;
             display: flex;
             flex-direction: column;
-            gap: 10px;
-            padding-left: 4px;
-            padding-right: 2px;
-            margin-bottom: 10px;
-        }
-
-        .drawer-nav-container::-webkit-scrollbar {
-            width: 5px;
-        }
-
-        .drawer-nav-container::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.02);
-            border-radius: 10px;
-        }
-
-        .drawer-nav-container::-webkit-scrollbar-thumb {
-            background: rgba(16, 185, 129, 0.3);
-            border-radius: 10px;
-        }
-
-        .drawer-nav {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            width: 100%;
+            gap: 8px;
+            scrollbar-width: thin;
+            scrollbar-color: rgba(16, 185, 129, 0.3) transparent;
         }
 
         .drawer-item {
             display: flex;
             align-items: center;
-            gap: 14px;
-            padding: 15px 18px;
+            justify-content: space-between;
+            padding: 13px 16px;
             background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.06);
             color: var(--text-dim);
-            border-radius: 16px;
+            border-radius: 14px;
             cursor: pointer;
             font-weight: 700;
-            font-family: 'Cairo', sans-serif;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: all 0.25s ease;
         }
 
-        .drawer-item span.icon {
-            font-size: 1.25rem;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));
-            transition: transform 0.3s ease;
+        .drawer-item-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .drawer-item:hover {
-            background: rgba(255, 255, 255, 0.07);
-            color: #ffffff;
-            transform: translateX(-6px);
-            border-color: rgba(255, 255, 255, 0.15);
+        .drawer-item svg {
+            width: 18px;
+            height: 18px;
+            fill: currentColor;
+            opacity: 0.8;
         }
 
-        .drawer-item.active {
+        .drawer-item:hover, .drawer-item.active {
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: #ffffff;
-            box-shadow: 0 6px 20px var(--card-glow);
             border-color: rgba(16, 185, 129, 0.4);
+            transform: translateX(-4px);
+            box-shadow: 0 4px 15px var(--card-glow);
         }
 
-        .drawer-item .coming-soon-badge-drawer {
-            margin-right: auto;
-            font-size: 0.65rem;
-            background: rgba(239, 68, 68, 0.25);
-            color: #fca5a5;
-            padding: 3px 9px;
-            border-radius: 8px;
-            font-weight: 800;
-            border: 1px solid rgba(239, 68, 68, 0.3);
+        .drawer-arrow {
+            font-size: 0.8rem;
+            opacity: 0.6;
         }
 
         .drawer-footer-link {
             display: flex;
             align-items: center;
-            justify-content: center;
-            gap: 10px;
-            padding: 15px;
-            margin-top: auto;
-            flex-shrink: 0;
+            justify-content: space-between;
+            padding: 14px 16px;
+            margin-top: 12px;
             background: rgba(16, 185, 129, 0.1);
             border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 16px;
+            border-radius: 14px;
             color: #34d399;
             font-weight: 800;
             text-decoration: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: all 0.25s ease;
         }
 
         .drawer-footer-link:hover {
             background: rgba(16, 185, 129, 0.2);
-            box-shadow: 0 6px 22px var(--card-glow);
-            transform: translateY(-2px);
+            box-shadow: 0 4px 15px var(--card-glow);
         }
 
-        .main-wrapper {
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 110px 20px 50px 20px;
-            min-height: 100vh;
+        /* Main App Body Content Area */
+        .app-body {
+            flex: 1;
+            padding: 20px 16px 90px 16px;
+            overflow-y: auto;
         }
 
-        .box { 
-            width: 100%; 
-            max-width: 480px; 
-            background: var(--glass-bg); 
-            padding: 36px 24px; 
-            border-radius: 36px; 
-            box-shadow: 0 30px 60px -15px rgba(0, 0, 0, 0.7), 
-                        0 0 0 1px var(--glass-border) inset; 
-            backdrop-filter: blur(30px);
-            -webkit-backdrop-filter: blur(30px);
-            position: relative;
-        }
-
-        .tabs { display: none; }
         .content { display: none; }
-        .content.active { display: block; }
+        .content.active { display: block; animation: fadeIn 0.3s ease; }
 
-        .title { 
-            text-align: center; 
-            font-size: 1.9rem; 
-            margin-bottom: 22px; 
-            font-weight: 900; 
-            letter-spacing: -0.5px;
-            background: linear-gradient(180deg, #ffffff 20%, #86efac 100%);
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            background: linear-gradient(135deg, rgba(16, 37, 65, 0.9) 0%, rgba(9, 20, 38, 0.95) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            border-radius: 24px;
+            padding: 24px 20px;
+            margin-bottom: 20px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+        }
+
+        .hero-badge-tag {
+            font-size: 0.65rem;
+            font-weight: 800;
+            letter-spacing: 1.5px;
+            color: #34d399;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+        }
+
+        .hero-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            line-height: 1.4;
+            color: #ffffff;
+            margin-bottom: 12px;
+            background: linear-gradient(180deg, #ffffff 30%, #86efac 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
-        .coming-soon-container {
-            text-align: center;
-            padding: 24px 10px;
+        .hero-desc {
+            font-size: 0.8rem;
+            color: var(--text-dim);
+            font-weight: 600;
+            line-height: 1.6;
         }
 
-        .pulse-icon {
-            font-size: 4rem;
+        /* Section Header with "View All" */
+        .section-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+            margin-top: 24px;
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: #ffffff;
+            letter-spacing: -0.3px;
+        }
+
+        .view-all-btn {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.25);
+            color: #34d399;
+            padding: 5px 12px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .view-all-btn:hover {
+            background: rgba(16, 185, 129, 0.2);
+        }
+
+        /* Next Match Card */
+        .next-match-card {
+            background: linear-gradient(135deg, rgba(18, 30, 53, 0.9) 0%, rgba(10, 18, 35, 0.95) 100%);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            border-radius: 22px;
+            padding: 20px 16px;
+            margin-bottom: 16px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .next-match-teams {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
             margin-bottom: 18px;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.06);
         }
 
-        .rules-box { 
-            background: rgba(18, 30, 53, 0.75); 
-            padding: 22px; 
-            border-radius: 22px; 
-            margin-bottom: 24px; 
-            font-size: 0.9rem; 
-            color: #e2e8f0; 
+        .team-block {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .team-name-badge {
+            font-size: 1.05rem;
+            font-weight: 900;
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .team-name-badge.primary-team {
+            color: #4ade80;
+        }
+
+        .match-center-info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 0 10px;
+        }
+
+        .match-time-text {
+            font-size: 1.1rem;
+            font-weight: 900;
+            color: #ffffff;
+            margin-bottom: 2px;
+        }
+
+        .match-tournament-tag {
+            font-size: 0.68rem;
+            color: var(--text-dim);
+            font-weight: 700;
+        }
+
+        .match-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 8px;
+            text-align: center;
+        }
+
+        .match-info-item {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 10px 8px;
+            border-radius: 12px;
+        }
+
+        .match-info-label {
+            font-size: 0.68rem;
+            color: var(--text-dim);
+            font-weight: 700;
+            margin-bottom: 3px;
+        }
+
+        .match-info-value {
+            font-size: 0.82rem;
+            color: #ffffff;
+            font-weight: 800;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 16px;
+        }
+
+        .service-card {
+            background: linear-gradient(135deg, rgba(23, 37, 65, 0.85) 0%, rgba(13, 23, 42, 0.9) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 16px 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .service-card:hover {
+            border-color: rgba(16, 185, 129, 0.4);
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px var(--card-glow);
+            background: linear-gradient(135deg, rgba(27, 44, 77, 0.9) 0%, rgba(16, 28, 50, 0.95) 100%);
+        }
+
+        .service-icon-wrap {
+            width: 42px;
+            height: 42px;
+            border-radius: 12px;
+            background: rgba(16, 185, 129, 0.12);
+            border: 1px solid rgba(16, 185, 129, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 10px;
+            color: #34d399;
+        }
+
+        .service-icon-wrap svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        .service-card-title {
+            font-size: 0.85rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 4px;
+        }
+
+        .service-card-desc {
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            font-weight: 600;
+            line-height: 1.3;
+        }
+
+        .service-card .soon-badge {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            font-size: 0.55rem;
+            background: rgba(239, 68, 68, 0.2);
+            color: #fca5a5;
+            padding: 2px 6px;
+            border-radius: 6px;
+            font-weight: 800;
+            border: 1px solid rgba(239, 68, 68, 0.3);
+        }
+
+        /* News Preview Card */
+        .news-preview-card {
+            background: linear-gradient(135deg, rgba(18, 30, 53, 0.85) 0%, rgba(10, 18, 35, 0.9) 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 18px;
+            padding: 16px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            display: flex;
+            gap: 14px;
+            align-items: center;
+        }
+
+        .news-preview-card:hover {
+            border-color: rgba(16, 185, 129, 0.3);
+            transform: translateX(-3px);
+        }
+
+        .news-icon-box {
+            width: 45px;
+            height: 45px;
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
             border: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--card-accent);
+            flex-shrink: 0;
+        }
+
+        .news-icon-box svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+        }
+
+        .news-preview-info {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .news-date {
+            font-size: 0.7rem;
+            color: var(--card-accent);
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .news-title-text {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: #ffffff;
+            margin-bottom: 4px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .news-desc-text {
+            font-size: 0.75rem;
+            color: var(--text-dim);
+            font-weight: 600;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            line-height: 1.4;
+        }
+
+        /* Forms, Rules, and General Boxes */
+        .rules-box { 
+            background: rgba(18, 30, 53, 0.8); 
+            padding: 18px; 
+            border-radius: 18px; 
+            margin-bottom: 16px; 
+            font-size: 0.85rem; 
+            color: #e2e8f0; 
+            border: 1px solid rgba(255, 255, 255, 0.08);
             border-right: 4px solid var(--card-accent); 
+            line-height: 1.6;
         }
 
         .prize-section { 
-            margin-bottom: 14px; 
-            padding-bottom: 12px; 
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.12); 
+            margin-bottom: 12px; 
+            padding-bottom: 10px; 
+            border-bottom: 1px dashed rgba(255, 255, 255, 0.1); 
         }
 
         .prize-section:last-child { 
@@ -361,192 +669,87 @@
         }
 
         .draw-list { 
-            margin: 8px 0 0 0; 
-            padding-right: 20px; 
-            line-height: 1.7; 
+            margin: 6px 0 0 0; 
+            padding-right: 18px; 
+            line-height: 1.6; 
             color: #94a3b8;
+            font-size: 0.82rem;
         }
 
         input, select, textarea { 
             width: 100%; 
-            padding: 15px 18px; 
-            margin: 9px 0; 
-            border: 1px solid rgba(255, 255, 255, 0.12); 
-            border-radius: 16px; 
+            padding: 14px 16px; 
+            margin: 8px 0; 
+            border: 1px solid rgba(255, 255, 255, 0.1); 
+            border-radius: 14px; 
             box-sizing: border-box; 
             font-family: 'Cairo', sans-serif;
-            font-size: 0.92rem;
-            background: rgba(10, 18, 35, 0.75);
+            font-size: 0.9rem;
+            background: rgba(10, 18, 35, 0.8);
             color: #ffffff;
+            outline: none;
+            transition: all 0.25s ease;
         }
 
         input:focus, select:focus, textarea:focus {
-            outline: none;
             border-color: var(--card-accent);
-            box-shadow: 0 0 0 4px var(--card-glow);
+            box-shadow: 0 0 0 3px var(--card-glow);
         }
 
         button[type="submit"] { 
             width: 100%; 
-            padding: 16px; 
+            padding: 15px; 
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%); 
             color: white; 
             border: none; 
-            border-radius: 16px; 
+            border-radius: 14px; 
             font-weight: 800; 
             font-family: 'Cairo', sans-serif;
-            font-size: 1.05rem;
+            font-size: 1rem;
             cursor: pointer; 
-            margin-top: 16px; 
-            box-shadow: 0 8px 25px var(--card-glow);
+            margin-top: 14px; 
+            box-shadow: 0 6px 20px var(--card-glow);
+            transition: all 0.25s ease;
         }
 
-        .rank-card { 
-            background: rgba(12, 22, 41, 0.7); 
-            padding: 14px 18px; 
-            border-radius: 16px; 
-            margin-bottom: 12px; 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center;
-            color: #ffffff;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-right: 4px solid var(--card-accent); 
+        button[type="submit"]:hover {
+            filter: brightness(1.1);
+            transform: translateY(-1px);
         }
-
-        .footer { text-align: center; margin-top: 25px; padding-top: 16px; border-top: 1px solid rgba(255,255,255,0.08); color: var(--text-dim); font-size: 0.82rem; font-weight: 600; }
-        .sponsor-container { margin-top: 12px; display: flex; flex-direction: column; align-items: center; gap: 6px; width: 100%; }
-        .sponsors-row { display: flex; justify-content: center; align-items: center; gap: 12px; width: 100%; margin-top: 4px; }
-        .sponsor-logo-uniform { width: 65px; height: 65px; object-fit: contain; filter: drop-shadow(0 4px 10px rgba(0,0,0,0.4)); }
-        #halha-logo { width: 90px; height: 90px; object-fit: contain; }
-        #samar-logo { width: 100px; height: 100px; object-fit: contain; transform: scale(1.4); margin: 0 4px; }
 
         .match-details-box {
             background: linear-gradient(135deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.9) 100%);
             color: #ffffff;
-            padding: 18px;
-            border-radius: 18px;
-            margin-bottom: 22px;
-            border: 1px solid rgba(56, 189, 248, 0.25);
+            padding: 16px;
+            border-radius: 16px;
+            margin-bottom: 18px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            font-size: 0.88rem;
+            line-height: 1.6;
         }
 
         .notice-box {
-            background: rgba(15, 23, 42, 0.6);
+            background: rgba(15, 23, 42, 0.7);
             padding: 16px;
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 0.88rem;
+            line-height: 1.7;
         }
 
-        .sidebar-hint-banner {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(0, 128, 0, 0.2) 100%);
-            border: 1px solid rgba(16, 185, 129, 0.4);
-            color: #34d399;
-            padding: 14px 18px;
-            border-radius: 16px;
-            margin-bottom: 20px;
-            text-align: right;
-            font-size: 0.9rem;
-            font-weight: 700;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            display: flex;
+        /* Leaderboard Rank Cards */
+        .rank-card { 
+            background: rgba(17, 27, 48, 0.75); 
+            padding: 12px 16px; 
+            border-radius: 14px; 
+            margin-bottom: 10px; 
+            display: flex; 
+            justify-content: space-between; 
             align-items: center;
-            justify-content: space-between;
-            gap: 12px;
-        }
-
-        .scroll-alert-banner {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15) 0%, rgba(0, 128, 0, 0.2) 100%);
-            border: 1px solid rgba(16, 185, 129, 0.35);
-            color: #34d399;
-            padding: 12px 18px;
-            border-radius: 14px;
-            margin-bottom: 20px;
-            text-align: center;
-            font-size: 0.9rem;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        /* تنسيقات صفحة المباراة القادمة الجديدة */
-        .next-match-card {
-            background: linear-gradient(135deg, rgba(18, 30, 53, 0.9) 0%, rgba(10, 18, 35, 0.95) 100%);
-            border: 1px solid rgba(16, 185, 129, 0.3);
-            border-radius: 24px;
-            padding: 24px 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4), 0 0 20px var(--card-glow);
-            text-align: center;
-        }
-
-        .next-match-teams {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 15px;
-            margin: 20px 0;
-            padding: 15px 10px;
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 18px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .team-name-badge {
-            font-size: 1.15rem;
-            font-weight: 900;
             color: #ffffff;
-            flex: 1;
-            text-align: center;
-        }
-
-        .team-name-badge.primary-team {
-            color: #4ade80;
-            text-shadow: 0 0 12px rgba(74, 222, 128, 0.3);
-        }
-
-        .vs-badge {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: #ffffff;
-            font-weight: 900;
-            font-size: 0.95rem;
-            padding: 8px 14px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px var(--card-glow);
-            letter-spacing: 1px;
-        }
-
-        .match-info-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-top: 18px;
-            text-align: right;
-        }
-
-        .match-info-item {
-            background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.06);
-            padding: 12px 14px;
-            border-radius: 14px;
-        }
-
-        .match-info-item.full-width {
-            grid-column: span 2;
-        }
-
-        .match-info-label {
-            font-size: 0.75rem;
-            color: var(--text-dim);
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .match-info-value {
-            font-size: 0.95rem;
-            color: #ffffff;
-            font-weight: 800;
+            border-right: 4px solid var(--card-accent); 
+            font-size: 0.88rem;
         }
 
         /* BUILD YOUR XI Styles */
@@ -555,7 +758,7 @@
             display: grid;
             grid-template-columns: 1fr 1fr;
             gap: 10px;
-            margin-bottom: 14px;
+            margin-bottom: 12px;
         }
         .xi-control-group {
             display: flex;
@@ -566,7 +769,7 @@
             grid-column: span 2;
         }
         .xi-control-group label {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: 700;
             color: var(--text-dim);
         }
@@ -574,14 +777,15 @@
             display: flex;
             gap: 6px;
             flex-wrap: wrap;
-            margin-top: 6px;
+            margin-top: 4px;
         }
         .xi-color-dot {
-            width: 26px;
-            height: 26px;
+            width: 24px;
+            height: 24px;
             border-radius: 50%;
             border: 2px solid rgba(255, 255, 255, 0.2);
             cursor: pointer;
+            transition: transform 0.2s ease;
         }
         .xi-color-dot.active {
             border-color: var(--card-accent);
@@ -592,10 +796,11 @@
             width: 100%;
             aspect-ratio: 4 / 5;
             background: linear-gradient(135deg, #134e2e 0%, #0d381f 100%);
-            border-radius: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.25);
+            border-radius: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.2);
             overflow: hidden;
-            margin: 16px 0;
+            margin: 14px 0;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
         }
         .xi-svg-pitch {
             position: absolute;
@@ -607,24 +812,25 @@
         }
         .xi-team-header {
             position: absolute;
-            top: 10px;
+            top: 8px;
             left: 0;
             width: 100%;
             text-align: center;
             font-weight: 900;
-            font-size: 1.1rem;
+            font-size: 1rem;
             color: #fff;
             z-index: 5;
             pointer-events: none;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.5);
         }
         .xi-created-footer {
             position: absolute;
-            bottom: 8px;
+            bottom: 6px;
             left: 0;
             width: 100%;
             text-align: center;
             font-weight: 700;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             color: rgba(255,255,255,0.7);
             z-index: 5;
             pointer-events: none;
@@ -637,27 +843,28 @@
             align-items: center;
             cursor: pointer;
             z-index: 10;
-            width: 58px;
+            width: 52px;
         }
         .xi-player-circle {
-            width: 38px;
-            height: 38px;
+            width: 34px;
+            height: 34px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-weight: 900;
-            font-size: 0.9rem;
-            border: 2px solid rgba(255,255,255,0.8);
+            font-size: 0.82rem;
+            border: 2px solid rgba(255,255,255,0.85);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.4);
         }
         .xi-player-name-badge {
-            margin-top: 3px;
-            background: rgba(0, 0, 0, 0.65);
-            padding: 2px 6px;
-            border-radius: 6px;
-            font-size: 0.65rem;
+            margin-top: 2px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 2px 5px;
+            border-radius: 5px;
+            font-size: 0.6rem;
             font-weight: 700;
-            max-width: 70px;
+            max-width: 65px;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
@@ -667,23 +874,23 @@
         
         .xi-action-btn-single {
             width: 100%;
-            padding: 14px;
+            padding: 13px;
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             border: 1px solid rgba(16, 185, 129, 0.4);
             border-radius: 14px;
             color: #fff;
             font-family: 'Cairo', sans-serif;
             font-weight: 800;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             cursor: pointer;
             text-align: center;
-            margin-top: 14px;
+            margin-top: 12px;
             box-shadow: 0 4px 15px var(--card-glow);
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
         }
         .xi-action-btn-single:hover {
             filter: brightness(1.1);
-            transform: translateY(-2px);
+            transform: translateY(-1px);
         }
 
         #shareToast {
@@ -693,14 +900,14 @@
             transform: translateX(-50%) translateY(100px);
             background: rgba(16, 185, 129, 0.95);
             color: #fff;
-            padding: 12px 24px;
-            border-radius: 14px;
+            padding: 10px 20px;
+            border-radius: 12px;
             font-weight: 800;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             box-shadow: 0 10px 25px rgba(0,0,0,0.5);
             z-index: 3000;
             opacity: 0;
-            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             pointer-events: none;
         }
         #shareToast.show {
@@ -714,16 +921,16 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(5, 10, 20, 0.75);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
+            background: rgba(5, 10, 20, 0.8);
+            backdrop-filter: blur(6px);
+            -webkit-backdrop-filter: blur(6px);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 2000;
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
+            transition: all 0.25s ease;
             padding: 20px;
         }
         .xi-modal-overlay.open {
@@ -734,32 +941,33 @@
             background: linear-gradient(180deg, #0e1930 0%, #0a1224 100%);
             border: 1px solid rgba(255, 255, 255, 0.15);
             width: 100%;
-            max-width: 380px;
-            border-radius: 24px;
-            padding: 24px;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.7);
+            max-width: 340px;
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.7);
         }
         .xi-modal-title {
-            font-size: 1.1rem;
+            font-size: 1.05rem;
             font-weight: 900;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             color: #fff;
             text-align: center;
         }
         .xi-modal-buttons {
             display: flex;
-            gap: 10px;
-            margin-top: 16px;
+            gap: 8px;
+            margin-top: 14px;
         }
         .xi-modal-buttons button {
             flex: 1;
             margin: 0;
-            padding: 12px;
-            border-radius: 14px;
+            padding: 11px;
+            border-radius: 12px;
             font-family: 'Cairo', sans-serif;
             font-weight: 800;
             cursor: pointer;
             border: none;
+            font-size: 0.85rem;
         }
         .xi-btn-cancel {
             background: rgba(255, 255, 255, 0.08);
@@ -775,102 +983,410 @@
             background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
             color: #fff;
         }
+
+        /* Footer & Sponsors */
+        .footer { 
+            text-align: center; 
+            margin-top: 24px; 
+            padding-top: 16px; 
+            border-top: 1px solid rgba(255,255,255,0.08); 
+            color: var(--text-dim); 
+            font-size: 0.78rem; 
+            font-weight: 600; 
+        }
+        .sponsor-container { 
+            margin-top: 10px; 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            gap: 6px; 
+            width: 100%; 
+        }
+        .sponsors-row { 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
+            gap: 12px; 
+            width: 100%; 
+            margin-top: 2px; 
+        }
+        .sponsor-logo-uniform { width: 50px; height: 50px; object-fit: contain; filter: drop-shadow(0 3px 8px rgba(0,0,0,0.4)); }
+        #halha-logo { width: 70px; height: 70px; object-fit: contain; }
+        #samar-logo { width: 75px; height: 75px; object-fit: contain; transform: scale(1.3); margin: 0 4px; }
+
+        /* iPhone Bottom Navigation Bar (Dock) */
+        .iphone-dock {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 72px;
+            background: rgba(12, 22, 41, 0.92);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 0 8px 10px 8px;
+            z-index: 1000;
+        }
+
+        .dock-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            color: var(--text-dim);
+            cursor: pointer;
+            font-family: 'Cairo', sans-serif;
+            font-size: 0.65rem;
+            font-weight: 700;
+            transition: all 0.25s ease;
+            text-decoration: none;
+            flex: 1;
+            padding: 4px 0;
+        }
+
+        .dock-item svg {
+            width: 22px;
+            height: 22px;
+            fill: currentColor;
+            margin-bottom: 4px;
+            transition: transform 0.25s ease;
+        }
+
+        .dock-item:hover, .dock-item.active {
+            color: #4ade80;
+        }
+
+        .dock-item.active svg {
+            transform: translateY(-2px);
+            filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.4));
+        }
     </style>
 </head>
 <body>
 
-    <header class="sticky-header">
-        <div class="header-logo">
-            <img src="https://i.ibb.co/Q3417SNF/972-CDF93-4-F40-4-B7-D-82-A1-FCC9-BB608-B51.png" alt="Alza3eem Logo">
-        </div>
-        <button class="hamburger-btn" id="hamburgerToggle" aria-label="فتح القائمة">
-            ☰
-        </button>
-    </header>
-
-    <div class="drawer-overlay" id="drawerOverlay"></div>
-    <div class="side-drawer" id="sideDrawer">
-        <div class="drawer-header">
-            <span class="drawer-title">قائمة المنصة</span>
-            <button class="close-drawer" id="closeDrawer" aria-label="إغلاق القائمة">✕</button>
-        </div>
-        <div class="drawer-nav-container">
-            <nav class="drawer-nav">
-                <a href="#" class="drawer-item active" data-tab="about" onclick="switchTab('about', event)">
-                    <span class="icon">🏠</span>
-                    <span>منصتنا</span>
-                </a>
-                <a href="#" class="drawer-item" data-tab="next-match" onclick="switchTab('next-match', event)">
-                    <span class="icon">⚽</span>
-                    <span>المباراة القادمة</span>
-                </a>
-                <a href="#" class="drawer-item" data-tab="prediction" onclick="switchTab('prediction', event)">
-                    <span class="icon">🎯</span>
-                    <span>سجل توقعك</span>
-                </a>
-                <a href="#" class="drawer-item" data-tab="kickoff" onclick="switchTab('kickoff', event)">
-                    <span class="icon">⏳</span>
-                    <span>Kick off</span>
-                    <span class="coming-soon-badge-drawer">soon</span>
-                </a>
-                <a href="#" class="drawer-item" data-tab="build-xi" onclick="switchTab('build-xi', event)">
-                    <span class="icon">📋</span>
-                    <span>BUILD YOUR XI</span>
-                </a>
-                <a href="#" class="drawer-item" data-tab="leaderboard" onclick="switchTab('leaderboard', event)">
-                    <span class="icon">📊</span>
-                    <span>الجدول</span>
-                </a>
-                <a href="https://alza3eemkw.github.io/sport-id/" class="drawer-item">
-                    <span class="icon">🪪</span>
-                    <span>Sport ID</span>
-                </a>
-            </nav>
-        </div>
-        <a href="https://instagram.com/alza3eem__kw" target="_blank" class="drawer-footer-link">
-            <span>📸</span>
-            <span>تواصل معنا</span>
-        </a>
-    </div>
-
-    <div class="main-wrapper">
-        <div class="box">
-            <div class="tabs">
-                <button class="tab-btn active" onclick="showTab('about', event)">منصتنا</button>
-                <button class="tab-btn" onclick="showTab('next-match', event)">المباراة القادمة</button>
-                <button class="tab-btn" onclick="showTab('prediction', event)">سجل توقعك</button>
-                <button class="tab-btn" onclick="showTab('build-xi', event)">BUILD YOUR XI</button>
-                <button class="tab-btn" onclick="showTab('leaderboard', event)">الجدول</button>
-                <a href="https://alza3eemkw.github.io/sport-id/" class="tab-btn">Sport ID</a>
-                <button class="tab-btn" onclick="showTab('kickoff', event)">
-                    Kick off
-                    <span class="coming-soon-badge">soon</span>
+    <div class="iphone-frame">
+        <!-- Sticky Header -->
+        <header class="sticky-header">
+            <a href="#" class="header-logo" onclick="switchTab('about', event)">
+                <img src="https://i.ibb.co/Q3417SNF/972-CDF93-4-F40-4-B7-D-82-A1-FCC9-BB608-B51.png" alt="Alza3eem Logo">
+            </a>
+            <div class="header-actions">
+                <button class="header-icon-btn" id="hamburgerToggle" aria-label="فتح القائمة">
+                    <svg viewBox="0 0 24 24"><path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z"/></svg>
                 </button>
             </div>
+        </header>
 
+        <!-- Top Navigation Bar -->
+        <nav class="top-nav-scroll">
+            <a href="#" class="nav-pill active" data-tab="about" onclick="switchTab('about', event)">الرئيسية</a>
+            <a href="#" class="nav-pill" data-tab="next-match" onclick="switchTab('next-match', event)">المباريات</a>
+            <a href="#" class="nav-pill" data-tab="prediction" onclick="switchTab('prediction', event)">منصة التوقعات</a>
+            <a href="#" class="nav-pill" data-tab="build-xi" onclick="switchTab('build-xi', event)">بناء تشكيلتك</a>
+            <a href="#" class="nav-pill" data-tab="leaderboard" onclick="switchTab('leaderboard', event)">الجدول</a>
+            <a href="#" class="nav-pill" data-tab="news" onclick="switchTab('news', event)">آخر الأخبار</a>
+            <a href="https://alza3eemkw.github.io/sport-id/" class="nav-pill">Sport ID</a>
+            <a href="#" class="nav-pill" data-tab="kickoff" onclick="switchTab('kickoff', event)">
+                Kick off <span class="coming-soon-tag">soon</span>
+            </a>
+        </nav>
+
+        <!-- Side Drawer & Overlay -->
+        <div class="drawer-overlay" id="drawerOverlay"></div>
+        <div class="side-drawer" id="sideDrawer">
+            <div class="drawer-header">
+                <span class="drawer-title">قائمة المنصة</span>
+                <button class="close-drawer" id="closeDrawer" aria-label="إغلاق القائمة">✕</button>
+            </div>
+            <div class="drawer-nav-container">
+                <a href="#" class="drawer-item active" data-tab="about" onclick="switchTab('about', event)">
+                    <div class="drawer-item-content">
+                        <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                        <span>الرئيسية</span>
+                    </div>
+                    <span class="drawer-arrow">‹</span>
+                </a>
+                <a href="#" class="drawer-item" data-tab="next-match" onclick="switchTab('next-match', event)">
+                    <div class="drawer-item-content">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                        <span>المباريات</span>
+                    </div>
+                    <span class="drawer-arrow">‹</span>
+                </a>
+                <a href="#" class="drawer-item" data-tab="prediction" onclick="switchTab('prediction', event)">
+                    <div class="drawer-item-content">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        <span>منصة التوقعات</span>
+                    </div>
+                    <span class="drawer-arrow">‹</span>
+                </a>
+                <a href="#" class="drawer-item" data-tab="build-xi" onclick="switchTab('build-xi', event)">
+                    <div class="drawer-item-content">
+                        <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                        <span>بناء تشكيلتك</span>
+                    </div>
+                    <span class="drawer-arrow">‹</span>
+                </a>
+                <a href="#" class="drawer-item" data-tab="leaderboard" onclick="switchTab('leaderboard', event)">
+                    <div class="drawer-item-content">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                        <span>الجدول</span>
+                    </div>
+                    <span class="drawer-arrow">‹</span>
+                </a>
+                <a href="#" class="drawer-item" data-tab="news" onclick="switchTab('news', event)">
+                    <div class="drawer-item-content">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                        <span>آخر الأخبار</span>
+                    </div>
+                    <span class="drawer-arrow">‹</span>
+                </a>
+                <a href="https://alza3eemkw.github.io/sport-id/" class="drawer-item">
+                    <div class="drawer-item-content">
+                        <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12zM6 10h2v2H6zm0 4h8v2H6zm4-4h8v2h-8z"/></svg>
+                        <span>Sport ID</span>
+                    </div>
+                    <span class="drawer-arrow">‹</span>
+                </a>
+                <a href="#" class="drawer-item" data-tab="kickoff" onclick="switchTab('kickoff', event)">
+                    <div class="drawer-item-content">
+                        <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                        <span>Kick off</span>
+                    </div>
+                    <span class="coming-soon-tag">soon</span>
+                </a>
+            </div>
+            <a href="https://instagram.com/alza3eem__kw" target="_blank" class="drawer-footer-link">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <svg style="width: 18px; height: 18px; fill: currentColor;" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+                    <span>تواصل معنا</span>
+                </div>
+                <span>Instagram</span>
+            </a>
+        </div>
+
+        <!-- Main Body App Content -->
+        <div class="app-body">
+            
+            <!-- الرئيسية Tab -->
             <div id="about" class="content active">
-                <div class="sidebar-hint-banner">
-                    <div>💡 تنبيه: جميع أقسام وخدمات المنصة متاحة داخل قائمة الثلاث خطوط في الأعلى</div>
-                    <div style="font-size: 1.3rem;">⬆️</div>
+                <div class="hero-banner">
+                    <div class="hero-badge-tag">Sports For All</div>
+                    <div class="hero-title">أكثر من لعبة .. مجتمع يجمعنا</div>
+                    <div class="hero-desc">أخبار . مسابقات . محتوى . النادي العربي واكثر...</div>
                 </div>
 
-                <div class="scroll-alert-banner">
-                    <span>⬇️</span>
-                    <span>يرجى التمرير حتى أسفل الصفحة لمتابعة القراءة بالكامل</span>
+                <div class="section-header-row">
+                    <div class="section-title">المباراة القادمة</div>
+                    <button class="view-all-btn" onclick="switchTab('next-match', event)">
+                        <span>عرض تفاصيل المباراة القادمة</span>
+                        <span>›</span>
+                    </button>
                 </div>
 
-                <div class="title">منصة الزعيم الرياضية ⚽️</div>
-
-                <div class="rules-box" style="text-align: center; line-height: 1.7; font-size: 0.95rem;">
-                  منصة رياضية تفاعلية تقدم محتوى متخصص لجماهير النادي العربي، وتوفر خدمات رياضية مبتكرة تخدم اللاعبين، الفرق، الجماهير، وصنّاع المحتوى الرياضي.
+                <div class="next-match-card">
+                    <div class="next-match-teams">
+                        <div class="team-block">
+                            <span class="team-name-badge primary-team">العربي</span>
+                        </div>
+                        <div class="match-center-info">
+                            <span class="match-time-text">يحدد قريبا</span>
+                            <span class="match-tournament-tag">يحدد قريبا</span>
+                        </div>
+                        <div class="team-block">
+                            <span class="team-name-badge">يحدد قريبا</span>
+                        </div>
+                    </div>
+                    <div class="match-info-grid">
+                        <div class="match-info-item">
+                            <div class="match-info-label">التاريخ</div>
+                            <div class="match-info-value">يحدد قريبا</div>
+                        </div>
+                        <div class="match-info-item">
+                            <div class="match-info-label">الملعب</div>
+                            <div class="match-info-value">يحدد قريبا</div>
+                        </div>
+                        <div class="match-info-item">
+                            <div class="match-info-label">نوع المباراة</div>
+                            <div class="match-info-value">يحدد قريبا</div>
+                        </div>
+                    </div>
                 </div>
+
+                <div class="section-header-row">
+                    <div class="section-title">خدمات المنصة</div>
+                </div>
+
+                <div class="services-grid">
+                    <div class="service-card" onclick="switchTab('about', event)">
+                        <div class="service-icon-wrap">
+                            <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                        </div>
+                        <div class="service-card-title">منصتنا</div>
+                        <div class="service-card-desc">كل ما تحتاجه في مكان واحد</div>
+                    </div>
+                    <div class="service-card" onclick="switchTab('prediction', event)">
+                        <div class="service-icon-wrap">
+                            <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        </div>
+                        <div class="service-card-title">سجل توقعك</div>
+                        <div class="service-card-desc">توقع واربح النقاط</div>
+                    </div>
+                    <div class="service-card" onclick="switchTab('build-xi', event)">
+                        <div class="service-icon-wrap">
+                            <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                        </div>
+                        <div class="service-card-title">بناء تشكيلتك</div>
+                        <div class="service-card-desc">كون فريقك المثالي</div>
+                    </div>
+                    <div class="service-card" onclick="switchTab('leaderboard', event)">
+                        <div class="service-icon-wrap">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
+                        </div>
+                        <div class="service-card-title">الجدول</div>
+                        <div class="service-card-desc">جدول ترتيب افضل المتوقعين بالموسم</div>
+                    </div>
+                    <a href="https://alza3eemkw.github.io/sport-id/" class="service-card" style="text-decoration: none;">
+                        <div class="service-icon-wrap">
+                            <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12zM6 10h2v2H6zm0 4h8v2H6zm4-4h8v2h-8z"/></svg>
+                        </div>
+                        <div class="service-card-title">Sport ID</div>
+                        <div class="service-card-desc">هويتك في عالم الرياضة</div>
+                    </a>
+                    <div class="service-card" onclick="switchTab('kickoff', event)" style="position: relative;">
+                        <div class="soon-badge">soon</div>
+                        <div class="service-icon-wrap">
+                            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                        </div>
+                        <div class="service-card-title">Kick off</div>
+                        <div class="service-card-desc">قريباً</div>
+                    </div>
+                </div>
+
+                <div class="section-header-row">
+                    <div class="section-title">آخر الأخبار</div>
+                    <button class="view-all-btn" onclick="switchTab('news', event)">
+                        <span>عرض جميع الأخبار</span>
+                        <span>›</span>
+                    </button>
+                </div>
+
+                <!-- Preview of latest news -->
+                <div id="homeNewsPreview"></div>
+
+                <div class="footer">
+                    <p>إدارة المنصة: @alza3eem__kw</p>
+                    <div class="sponsor-container">
+                        <p style="font-size: 0.72rem; font-weight: 700; margin: 0; color: var(--text-dim);">الرعاة الرسميون:</p>
+                        <div class="sponsors-row">
+                            <img src="https://i.ibb.co/v6WXzMpR/IMG-5197.png" alt="حلها" id="halha-logo">
+                            <img src="https://i.ibb.co/RTXLRggY/IMG-5213.png" alt="Samar" id="samar-logo">
+                            <img src="https://i.ibb.co/1JZ77zpt/IMG-5227.png" alt="اضمنها" class="sponsor-logo-uniform">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- المباراة القادمة Tab -->
+            <div id="next-match" class="content">
+                <div class="section-title" style="margin-bottom: 16px;">المباراة القادمة</div>
+
+                <div class="next-match-card">
+                    <div class="next-match-teams">
+                        <div class="team-block">
+                            <span class="team-name-badge primary-team">العربي</span>
+                        </div>
+                        <div class="match-center-info">
+                            <span class="match-time-text" id="matchTimeDisplay">يحدد قريبا</span>
+                            <span class="match-tournament-tag">يحدد قريبا</span>
+                        </div>
+                        <div class="team-block">
+                            <span class="team-name-badge" id="matchOpponentDisplay">يحدد قريبا</span>
+                        </div>
+                    </div>
+
+                    <div class="match-info-grid">
+                        <div class="match-info-item">
+                            <div class="match-info-label">اليوم</div>
+                            <div class="match-info-value" id="matchDayDisplay">يحدد قريبا</div>
+                        </div>
+                        <div class="match-info-item">
+                            <div class="match-info-label">التاريخ</div>
+                            <div class="match-info-value" id="matchDateDisplay">يحدد قريبا</div>
+                        </div>
+                        <div class="match-info-item">
+                            <div class="match-info-label">الملعب</div>
+                            <div class="match-info-value" id="matchStadiumDisplay">يحدد قريبا</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rules-box" style="margin-top: 16px;">
+                    <h3 style="margin-top: 0; margin-bottom: 10px; font-weight: 800; color: #38bdf8;">معلومات اللقاء:</h3>
+                    <p style="margin: 4px 0;">استعد لمؤازرة الزعيم في المواجهة المرتقبة.</p>
+                </div>
+
+                <div class="footer">
+                    <p>إدارة المنصة: @alza3eem__kw</p>
+                    <div class="sponsor-container">
+                        <p style="font-size: 0.72rem; font-weight: 700; margin: 0; color: var(--text-dim);">الرعاة الرسميون:</p>
+                        <div class="sponsors-row">
+                            <img src="https://i.ibb.co/v6WXzMpR/IMG-5197.png" alt="حلها" id="halha-logo">
+                            <img src="https://i.ibb.co/RTXLRggY/IMG-5213.png" alt="Samar" id="samar-logo">
+                            <img src="https://i.ibb.co/1JZ77zpt/IMG-5227.png" alt="اضمنها" class="sponsor-logo-uniform">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- منصة التوقعات Tab -->
+            <div id="prediction" class="content">
+                <div class="section-title" style="margin-bottom: 16px;">سجل توقعك</div>
                 
-                <div class="rules-box">
-                    <h3 style="margin-top: 0; margin-bottom: 12px; font-weight: 700;">🏆 نظام الجوائز والبروتوكول:</h3>
+                <div class="match-details-box">
+                    <h3 style="margin-top: 0; color: #38bdf8; font-size: 16px; font-weight: 900;">تفاصيل المباراة</h3>
+                    <p style="margin: 4px 0;"><strong>المباراة:</strong> العربي / يحدد قريبا</p>
+                    <p style="margin: 4px 0;"><strong>الموعد:</strong> يحدد قريبا</p>
+                    <p style="margin: 4px 0;"><strong>نوع المباراة:</strong> يحدد قريبا</p>
+                    <p style="margin: 4px 0; color: #f87171;"><strong>ملاحظة:</strong> يغلق باب التوقعات قبل صافرة البداية بخمس دقائق</p>
+                </div>
+
+                <form action="https://formsubmit.co/alza3eem.kw@gmail.com" method="POST" id="my-form">
+                    <input type="hidden" name="_captcha" value="false">
+                    <input type="hidden" name="_subject" value="توقع جديد في منصة الزعيم ⚽️">
+                    <input type="hidden" name="_next" value="">
+
+                    <input type="text" name="الاسم" id="name-input" placeholder="الاسم الكريم" required>
+                    <input type="text" name="حساب_الانستقرام" id="insta-input" placeholder="@حساب الإنستغرام" required>
+                    <select name="التوقع" id="prediction-select" required>
+                        <option value="" disabled selected>اختر توقع النتيجة</option>
+                        <option>فوز العربي</option>
+                        <option>تعادل العربي</option>
+                        <option>خسارة العربي</option>
+                    </select>
+                    <input type="text" name="اسم_اللاعب" id="player-input" placeholder="توقع اسم لاعب سيسجل للنادي العربي" required>
+                    <select name="عدد_الاهداف" id="goals-select" required>
+                        <option value="" disabled selected>توقع عدد أهداف العربي</option>
+                        <option>صفر</option>
+                        <option>أقل من ثلاثة اهداف</option>
+                        <option>ثلاثة اهداف او اكثر</option>
+                    </select>
+                    <button type="submit">إرسال التوقع</button>
+                </form>
+                <p id="my-form-status" style="text-align: center; margin-top: 10px; font-weight: 700; font-size: 0.85rem;"></p>
+
+                <div class="rules-box" style="margin-top: 20px;">
+                    <h3 style="margin-top: 0; margin-bottom: 10px; font-weight: 800;">🏆 نظام الجوائز والبروتوكول:</h3>
                     
                     <div class="prize-section">
                         <div><b>المركز الأول (على مستوى الموسم):</b></div>
-                        <div style="margin-top: 4px;">10$ ( gift card من اختيارك ) + جوائز مميزة من لعبة <b>Samar</b>.</div>
+                        <div style="margin-top: 3px; color: var(--text-dim);">10$ ( gift card من اختيارك ) + جوائز مميزة من لعبة <b>Samar</b>.</div>
                     </div>
 
                     <div class="prize-section">
@@ -881,7 +1397,7 @@
                             <li>كود لعبة من حلها</li>
                             <li>جولة من لعبة اضمنها</li>
                         </ul>
-                        <div style="margin-top: 8px; font-size: 0.82rem; font-weight: 700; line-height: 1.6; color: #cbd5e1;">
+                        <div style="margin-top: 6px; font-size: 0.78rem; font-weight: 700; line-height: 1.5; color: #cbd5e1;">
                             سيتم سحب اسم عشوائياً من الذين توقعوا توقع صحيح<br>
                             (على المباريات التي سيتم الاعلان عنها بالحساب (انستاغرام))<br>
                             يشترط إضافة حسابات الرعاة:<br>
@@ -891,7 +1407,7 @@
                         </div>
                     </div>
 
-                    <div style="margin-top: 12px; font-weight: 700; background: rgba(0,128,0,0.2); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(16,185,129,0.3);">
+                    <div style="margin-top: 10px; font-weight: 700; background: rgba(0,128,0,0.15); padding: 8px 10px; border-radius: 10px; border: 1px solid rgba(16,185,129,0.3); font-size: 0.82rem;">
                         نقطتين للنتيجة | نقطتين لتوقع عدد الأهداف | أربع نقاط لتوقع اسم اللاعب المسجل.
                     </div>
                 </div>
@@ -899,7 +1415,7 @@
                 <div class="footer">
                     <p>إدارة المنصة: @alza3eem__kw</p>
                     <div class="sponsor-container">
-                        <p style="font-size: 0.75rem; font-weight: 700; margin: 0; color: var(--text-dim);">الرعاة الرسميون:</p>
+                        <p style="font-size: 0.72rem; font-weight: 700; margin: 0; color: var(--text-dim);">الرعاة الرسميون:</p>
                         <div class="sponsors-row">
                             <img src="https://i.ibb.co/v6WXzMpR/IMG-5197.png" alt="حلها" id="halha-logo">
                             <img src="https://i.ibb.co/RTXLRggY/IMG-5213.png" alt="Samar" id="samar-logo">
@@ -909,99 +1425,9 @@
                 </div>
             </div>
 
-            <div id="next-match" class="content">
-                <div class="title">المباراة القادمة</div>
-
-                <div class="next-match-card">
-                    <div class="next-match-teams">
-                        <div class="team-name-badge primary-team">العربي</div>
-                        <div class="vs-badge">VS</div>
-                        <div class="team-name-badge" id="matchOpponentDisplay">[اسم الفريق]</div>
-                    </div>
-
-                    <div class="match-info-grid">
-                        <div class="match-info-item">
-                            <div class="match-info-label">اليوم</div>
-                            <div class="match-info-value" id="matchDayDisplay">[اليوم]</div>
-                        </div>
-                        <div class="match-info-item">
-                            <div class="match-info-label">التاريخ</div>
-                            <div class="match-info-value" id="matchDateDisplay">[التاريخ]</div>
-                        </div>
-                        <div class="match-info-item">
-                            <div class="match-info-label">الوقت</div>
-                            <div class="match-info-value" id="matchTimeDisplay">[الوقت]</div>
-                        </div>
-                        <div class="match-info-item">
-                            <div class="match-info-label">الملعب</div>
-                            <div class="match-info-value" id="matchStadiumDisplay">[اسم الملعب]</div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="footer">
-                    <p>إدارة المنصة: @alza3eem__kw</p>
-                    <div class="sponsor-container">
-                        <p style="font-size: 0.75rem; font-weight: 700; margin: 0; color: var(--text-dim);">الرعاة الرسميون:</p>
-                        <div class="sponsors-row">
-                            <img src="https://i.ibb.co/v6WXzMpR/IMG-5197.png" alt="حلها" id="halha-logo">
-                            <img src="https://i.ibb.co/RTXLRggY/IMG-5213.png" alt="Samar" id="samar-logo">
-                            <img src="https://i.ibb.co/1JZ77zpt/IMG-5227.png" alt="اضمنها" class="sponsor-logo-uniform">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div id="prediction" class="content">
-                <div class="title">منصة الزعيم الرياضية ⚽️</div>
-                
-                <div class="match-details-box">
-                    <h3 style="margin-top: 0; color: #38bdf8; font-size: 18px;">تفاصيل المباراة</h3>
-                    <p style="margin: 5px 0;"><strong>المباراة:</strong> العربي الكويتي / الصليبيخات الكويتي</p>
-                    <p style="margin: 5px 0;"><strong>الموعد:</strong> 4/9 - 8:50pm</p>
-                    <p style="margin: 5px 0;"><strong>نوع المباراة:</strong>دوري زين</p>
-                    <p style="margin: 5px 0; color: #f87171;"><strong>ملاحظة:</strong> يغلق باب التوقعات قبل صافرة البداية بخمس دقائق </p>
-                </div>
-
-                <form action="https://formsubmit.co/alza3eem.kw@gmail.com" method="POST" id="my-form">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_subject" value="توقع جديد في منصة الزعيم ⚽️">
-                    <input type="hidden" name="_next" value="">
-
-                    <input type="text" name="الاسم" id="name-input" placeholder="الاسم الكريم" required>
-                    <input type="text" name="حساب_الانستقرام" id="insta-input" placeholder="@حساب الإنستغرام" required>
-                    <select name="التوقع" id="prediction-select">
-                        <option value="" disabled selected>اختر توقع النتيجة</option>
-                        <option>فوز العربي</option>
-                        <option>تعادل العربي</option>
-                        <option>خسارة العربي</option>
-                    </select>
-                    <input type="text" name="اسم_اللاعب" id="player-input" placeholder="توقع اسم لاعب سيسجل للنادي العربي" required>
-                    <select name="عدد_الاهداف" id="goals-select">
-                        <option value="" disabled selected>توقع عدد أهداف العربي</option>
-                        <option>صفر</option>
-                        <option>أقل من ثلاثة اهداف</option>
-                        <option>ثلاثة اهداف او اكثر</option>
-                    </select>
-                    <button type="submit">إرسال التوقع</button>
-                </form>
-                <p id="my-form-status" style="text-align: center; margin-top: 10px; font-weight: 700;"></p>
-                
-                <div class="footer">
-                    <p>إدارة المنصة: @alza3eem__kw</p>
-                    <div class="sponsor-container">
-                        <p style="font-size: 0.75rem; font-weight: 700; margin: 0; color: var(--text-dim);">الرعاة الرسميون:</p>
-                        <div class="sponsors-row">
-                            <img src="https://i.ibb.co/v6WXzMpR/IMG-5197.png" alt="حلها" id="halha-logo">
-                            <img src="https://i.ibb.co/RTXLRggY/IMG-5213.png" alt="Samar" id="samar-logo">
-                            <img src="https://i.ibb.co/1JZ77zpt/IMG-5227.png" alt="اضمنها" class="sponsor-logo-uniform">
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+            <!-- BUILD YOUR XI Tab -->
             <div id="build-xi" class="content">
-                <div class="title">BUILD YOUR XI</div>
+                <div class="section-title" style="margin-bottom: 14px;">BUILD YOUR XI</div>
                 <div class="xi-container">
                     <div class="xi-controls-grid">
                         <div class="xi-control-group">
@@ -1028,7 +1454,7 @@
                         <div class="xi-control-group full-width">
                             <label>KIT COLOR</label>
                             <div style="display: flex; gap: 8px; align-items: center; margin-top: 4px;">
-                                <input type="color" id="xiKitColorPicker" value="#FF0000" style="width: 44px; height: 42px; padding: 0; border-radius: 12px; cursor: pointer; background: transparent;" title="اختر لون القميص">
+                                <input type="color" id="xiKitColorPicker" value="#FF0000" style="width: 40px; height: 38px; padding: 0; border-radius: 10px; cursor: pointer; background: transparent;" title="اختر لون القميص">
                                 <div class="xi-colors-row" id="xiKitColorsPreset" style="margin-top: 0; flex: 1;">
                                     <div class="xi-color-dot" style="background: #000000;" data-color="#000000"></div>
                                     <div class="xi-color-dot" style="background: #FFFFFF;" data-color="#FFFFFF"></div>
@@ -1039,8 +1465,6 @@
                                     <div class="xi-color-dot" style="background: #800080;" data-color="#800080"></div>
                                     <div class="xi-color-dot" style="background: #FF6600;" data-color="#FF6600"></div>
                                     <div class="xi-color-dot" style="background: #00CFFF;" data-color="#00CFFF"></div>
-                                    <div class="xi-color-dot" style="background: #1E1E1E;" data-color="#1E1E1E"></div>
-                                    <div class="xi-color-dot" style="background: #0F172A;" data-color="#0F172A"></div>
                                     <div class="xi-color-dot" style="background: #22C55E;" data-color="#22C55E"></div>
                                 </div>
                             </div>
@@ -1082,7 +1506,7 @@
                 <div class="footer">
                     <p>إدارة المنصة: @alza3eem__kw</p>
                     <div class="sponsor-container">
-                        <p style="font-size: 0.75rem; font-weight: 700; margin: 0; color: var(--text-dim);">الرعاة الرسميون:</p>
+                        <p style="font-size: 0.72rem; font-weight: 700; margin: 0; color: var(--text-dim);">الرعاة الرسميون:</p>
                         <div class="sponsors-row">
                             <img src="https://i.ibb.co/v6WXzMpR/IMG-5197.png" alt="حلها" id="halha-logo">
                             <img src="https://i.ibb.co/RTXLRggY/IMG-5213.png" alt="Samar" id="samar-logo">
@@ -1092,13 +1516,15 @@
                 </div>
             </div>
 
+            <!-- الجدول Tab -->
             <div id="leaderboard" class="content">
-                <div class="title">🏆 جدول التوب 10</div>
+                <div class="section-title" style="margin-bottom: 14px;">🏆 جدول التوب 10</div>
                 <div id="rank-list"></div>
+                
                 <div class="footer">
                     <p>إدارة المنصة: @alza3eem__kw</p>
                     <div class="sponsor-container">
-                        <p style="font-size: 0.75rem; font-weight: 700; margin: 0; color: var(--text-dim);">الرعاة الرسميون:</p>
+                        <p style="font-size: 0.72rem; font-weight: 700; margin: 0; color: var(--text-dim);">الرعاة الرسميون:</p>
                         <div class="sponsors-row">
                             <img src="https://i.ibb.co/v6WXzMpR/IMG-5197.png" alt="حلها" id="halha-logo">
                             <img src="https://i.ibb.co/RTXLRggY/IMG-5213.png" alt="Samar" id="samar-logo">
@@ -1108,27 +1534,46 @@
                 </div>
             </div>
 
+            <!-- آخر الأخبار Tab -->
+            <div id="news" class="content">
+                <div class="section-title" style="margin-bottom: 14px;">آخر الأخبار</div>
+                <div id="fullNewsListContainer"></div>
+
+                <div class="footer">
+                    <p>إدارة المنصة: @alza3eem__kw</p>
+                    <div class="sponsor-container">
+                        <p style="font-size: 0.72rem; font-weight: 700; margin: 0; color: var(--text-dim);">الرعاة الرسميون:</p>
+                        <div class="sponsors-row">
+                            <img src="https://i.ibb.co/v6WXzMpR/IMG-5197.png" alt="حلها" id="halha-logo">
+                            <img src="https://i.ibb.co/RTXLRggY/IMG-5213.png" alt="Samar" id="samar-logo">
+                            <img src="https://i.ibb.co/1JZ77zpt/IMG-5227.png" alt="اضمنها" class="sponsor-logo-uniform">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Kick off Tab -->
             <div id="kickoff" class="content">
-                <div class="coming-soon-container">
-                    <div class="pulse-icon">⏳</div>
-                    <div class="title" style="font-size: 1.6rem;">Kick off</div>
+                <div style="text-align: center; padding: 30px 10px;">
+                    <div style="font-size: 3.5rem; margin-bottom: 14px;">⏳</div>
+                    <div class="section-title" style="font-size: 1.5rem; margin-bottom: 16px;">Kick off</div>
                     
-                    <div class="notice-box" style="margin-top: 20px; text-align: right; line-height: 1.8;">
+                    <div class="notice-box" style="text-align: right;">
                         🙏 <b>شكراً على انتظاركم،</b><br>
                         ونعتذر أشد الاعتذار عالتاخير.<br><br>
                         <b>سبب التأخير:</b> نظراً للعمل على تطوير وتحديث واجهات النظام، إضافة ميزات تفاعلية جديدة، وإجراء اختبارات دقيقة لضمان استقرار المنصة وتقديمها بأفضل شكل ممكن للجميع.
                     </div>
 
-                    <div class="rules-box" style="text-align: center; margin-top: 20px;">
+                    <div class="rules-box" style="text-align: center; margin-top: 16px;">
                         تابعونا عبر إنستغرام:<br>
-                        <b style="color: var(--card-accent); font-size: 1rem; display: block; margin-top: 8px;">@alza3eem__kw</b>
+                        <b style="color: var(--card-accent); font-size: 0.95rem; display: block; margin-top: 6px;">@alza3eem__kw</b>
                     </div>
                 </div>
 
                 <div class="footer">
                     <p>إدارة المنصة: @alza3eem__kw</p>
                     <div class="sponsor-container">
-                        <p style="font-size: 0.75rem; font-weight: 700; margin: 0; color: var(--text-dim);">الرعاة الرسميون:</p>
+                        <p style="font-size: 0.72rem; font-weight: 700; margin: 0; color: var(--text-dim);">الرعاة الرسميون:</p>
                         <div class="sponsors-row">
                             <img src="https://i.ibb.co/v6WXzMpR/IMG-5197.png" alt="حلها" id="halha-logo">
                             <img src="https://i.ibb.co/RTXLRggY/IMG-5213.png" alt="Samar" id="samar-logo">
@@ -1137,12 +1582,38 @@
                     </div>
                 </div>
             </div>
+
         </div>
+
+        <!-- iPhone Bottom Navigation Dock -->
+        <nav class="iphone-dock">
+            <button class="dock-item active" data-tab="about" onclick="switchTab('about', event)">
+                <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
+                <span>الرئيسية</span>
+            </button>
+            <button class="dock-item" data-tab="next-match" onclick="switchTab('next-match', event)">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                <span>المباريات</span>
+            </button>
+            <button class="dock-item" data-tab="prediction" onclick="switchTab('prediction', event)">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                <span>التوقعات</span>
+            </button>
+            <button class="dock-item" data-tab="build-xi" onclick="switchTab('build-xi', event)">
+                <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
+                <span>التشكيلة</span>
+            </button>
+            <button class="dock-item" data-tab="news" onclick="switchTab('news', event)">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                <span>الأخبار</span>
+            </button>
+        </nav>
     </div>
 
     <!-- عنصر التنبيه (Toast) لزر المشاركة -->
     <div id="shareToast">انقر مرتين لمشاركة التشكيلة !</div>
 
+    <!-- Modal لبناء التشكيلة (Player Edit) -->
     <div class="xi-modal-overlay" id="xiModalOverlay">
         <div class="xi-modal-box">
             <div class="xi-modal-title" id="xiModalTitle">PLAYER</div>
@@ -1150,7 +1621,7 @@
                 <label>PLAYER NAME</label>
                 <input type="text" id="xiModalNameInput" placeholder="اسم اللاعب" maxlength="15">
             </div>
-            <div class="xi-control-group" style="margin-bottom: 16px;">
+            <div class="xi-control-group" style="margin-bottom: 14px;">
                 <label>NUMBER</label>
                 <input type="number" id="xiModalNumberInput" placeholder="الرقم" min="1" max="99">
             </div>
@@ -1162,10 +1633,11 @@
         </div>
     </div>
 
+    <!-- Modal إعادة تعيين التشكيلة -->
     <div class="xi-modal-overlay" id="xiResetModalOverlay">
         <div class="xi-modal-box">
             <div class="xi-modal-title">Reset your current XI?</div>
-            <div class="xi-modal-buttons" style="margin-top: 20px;">
+            <div class="xi-modal-buttons" style="margin-top: 16px;">
                 <button class="xi-btn-cancel" id="xiResetCancelBtn">CANCEL</button>
                 <button class="xi-btn-remove" id="xiResetConfirmBtn" style="background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); color: #fff;">RESET</button>
             </div>
@@ -1173,16 +1645,72 @@
     </div>
 
 <script>
-    // بيانات المباراة القادمة (تستطيع تغييرها بسهولة قبل كل مباراة من هنا)
+    // ==========================================
+    // NEWS DATA
+    // ==========================================
+    const clubNewsData = [
+        {
+            title: "المحترف زيد القنبر تم استدعاءه لمنتخب فلسطين",
+            description: " استدعاء زيد القنبر لمنتخب بلاده استعدادا للدورة الودية بالصين.",
+            date: "18 سبتمبر 2026"
+        }
+    ];
+
+    function renderNewsSection() {
+        const homePreview = document.getElementById('homeNewsPreview');
+        const fullListContainer = document.getElementById('fullNewsListContainer');
+
+        if (!clubNewsData || clubNewsData.length === 0) {
+            if (homePreview) homePreview.innerHTML = '';
+            if (fullListContainer) fullListContainer.innerHTML = '<div style="text-align: center; color: var(--text-dim); padding: 30px 0; font-size: 0.9rem;">لا توجد أخبار مضافة حالياً</div>';
+            return;
+        }
+
+        const latest = clubNewsData[0];
+        if (homePreview) {
+            homePreview.innerHTML = `
+                <div class="news-preview-card" onclick="switchTab('news', event)">
+                    <div class="news-icon-box">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                    </div>
+                    <div class="news-preview-info">
+                        <div class="news-date">${latest.date}</div>
+                        <div class="news-title-text">${latest.title}</div>
+                        <div class="news-desc-text">${latest.description}</div>
+                    </div>
+                    <span style="color: var(--text-dim); font-size: 1.1rem;">›</span>
+                </div>
+            `;
+        }
+
+        if (fullListContainer) {
+            fullListContainer.innerHTML = '';
+            clubNewsData.forEach(item => {
+                fullListContainer.innerHTML += `
+                    <div class="news-preview-card" style="cursor: default;">
+                        <div class="news-icon-box">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                        </div>
+                        <div class="news-preview-info">
+                            <div class="news-date">${item.date}</div>
+                            <div class="news-title-text" style="white-space: normal;">${item.title}</div>
+                            <div class="news-desc-text" style="-webkit-line-clamp: unset;">${item.description}</div>
+                        </div>
+                    </div>
+                `;
+            });
+        }
+    }
+
+    // بيانات المباراة القادمة (محدثة لتكون يحدد قريبا)
     const nextMatch = {
-        opponent: "الصليبيخات",
-        day: "الجمعة",
-        date: "4/9",
-        time: "8:50pm",
-        stadium: "استاد صباح السالم"
+        opponent: "يحدد قريبا",
+        day: "يحدد قريبا",
+        date: "يحدد قريبا",
+        time: "يحدد قريبا",
+        stadium: "يحدد قريبا"
     };
 
-    // تعبئة بيانات المباراة القادمة تلقائياً في الصفحة عند التحميل
     document.addEventListener("DOMContentLoaded", () => {
         const opponentEl = document.getElementById("matchOpponentDisplay");
         const dayEl = document.getElementById("matchDayDisplay");
@@ -1195,8 +1723,11 @@
         if (dateEl) dateEl.textContent = nextMatch.date;
         if (timeEl) timeEl.textContent = nextMatch.time;
         if (stadiumEl) stadiumEl.textContent = nextMatch.stadium;
+
+        renderNewsSection();
     });
 
+    // Drawer functionality
     const hamburgerBtn = document.getElementById('hamburgerToggle');
     const closeDrawerBtn = document.getElementById('closeDrawer');
     const sideDrawer = document.getElementById('sideDrawer');
@@ -1218,27 +1749,26 @@
 
     window.switchTab = function(tabId, event) {
         if (event) event.preventDefault();
-        window.showTab(tabId, null);
-        document.querySelectorAll('.drawer-item').forEach(item => {
-            item.classList.remove('active');
-            if (item.getAttribute('data-tab') === tabId) {
-                item.classList.add('active');
-            }
-        });
-        toggleDrawer(false);
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    window.showTab = function(tabId, event) {
+        
         document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
-        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
+        document.querySelectorAll('.drawer-item').forEach(i => i.classList.remove('active'));
+        document.querySelectorAll('.dock-item').forEach(d => d.classList.remove('active'));
+
         const targetTab = document.getElementById(tabId);
         if (targetTab) targetTab.classList.add('active');
-        if (event && event.currentTarget) {
-            event.currentTarget.classList.add('active');
-        }
+
+        document.querySelectorAll(`.nav-pill[data-tab="${tabId}"]`).forEach(p => p.classList.add('active'));
+        document.querySelectorAll(`.drawer-item[data-tab="${tabId}"]`).forEach(i => i.classList.add('active'));
+        document.querySelectorAll(`.dock-item[data-tab="${tabId}"]`).forEach(d => d.classList.add('active'));
+
+        toggleDrawer(false);
+        
+        const appBody = document.querySelector('.app-body');
+        if (appBody) appBody.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
+    // Leaderboard Data
     const leaderboardData = [
         { rank: "01", name: "al3r.bawi", insta: "al3r.bawi", points: 14, badge: "🥇" },
         { rank: "02", name: "علي بدر", insta: "@Ali 💚💚💚💚", points: 12, badge: "" },
@@ -1260,7 +1790,7 @@
                     <div>
                         <span style="color: var(--card-accent); font-weight: 800; margin-left: 6px;">${item.badge ? item.badge + ' ' : ''}${item.rank}.</span>
                         <span style="font-weight: 700;">${item.name}</span>
-                        <span style="color: #94a3b8; font-size: 0.8rem; margin-right: 6px;">| ${item.insta}</span>
+                        <span style="color: #94a3b8; font-size: 0.78rem; margin-right: 6px;">| ${item.insta}</span>
                     </div>
                     <b style="color: #4ade80;">${item.points} نقطة</b>
                 </div>
@@ -1268,6 +1798,7 @@
         });
     }
 
+    // Prediction Form
     const form = document.getElementById("my-form");
     if (form) {
         form.addEventListener("submit", function(event) {
@@ -1309,409 +1840,6 @@
             });
         });
     }
-
-    const formationsCoords = {
-        "4-3-3": [
-            { x: 50, y: 88, role: "GK" },
-            { x: 20, y: 70, role: "LB" }, { x: 40, y: 72, role: "CB" }, { x: 60, y: 72, role: "CB" }, { x: 80, y: 70, role: "RB" },
-            { x: 35, y: 48, role: "CM" }, { x: 50, y: 52, role: "CDM" }, { x: 65, y: 48, role: "CM" },
-            { x: 20, y: 25, role: "LW" }, { x: 50, y: 20, role: "ST" }, { x: 80, y: 25, role: "RW" }
-        ],
-        "4-2-3-1": [
-            { x: 50, y: 88, role: "GK" },
-            { x: 20, y: 70, role: "LB" }, { x: 40, y: 72, role: "CB" }, { x: 60, y: 72, role: "CB" }, { x: 80, y: 70, role: "RB" },
-            { x: 38, y: 56, role: "CDM" }, { x: 62, y: 56, role: "CDM" },
-            { x: 20, y: 36, role: "LM" }, { x: 50, y: 40, role: "CAM" }, { x: 80, y: 36, role: "RM" },
-            { x: 50, y: 18, role: "ST" }
-        ],
-        "4-4-2": [
-            { x: 50, y: 88, role: "GK" },
-            { x: 20, y: 70, role: "LB" }, { x: 40, y: 72, role: "CB" }, { x: 60, y: 72, role: "CB" }, { x: 80, y: 70, role: "RB" },
-            { x: 18, y: 45, role: "LM" }, { x: 38, y: 48, role: "CM" }, { x: 62, y: 48, role: "CM" }, { x: 82, y: 45, role: "RM" },
-            { x: 40, y: 22, role: "ST" }, { x: 60, y: 22, role: "ST" }
-        ],
-        "4-3-1-2": [
-            { x: 50, y: 88, role: "GK" },
-            { x: 20, y: 70, role: "LB" }, { x: 40, y: 72, role: "CB" }, { x: 60, y: 72, role: "CB" }, { x: 80, y: 70, role: "RB" },
-            { x: 30, y: 52, role: "CM" }, { x: 50, y: 56, role: "CDM" }, { x: 70, y: 52, role: "CM" },
-            { x: 50, y: 36, role: "CAM" },
-            { x: 40, y: 20, role: "ST" }, { x: 60, y: 20, role: "ST" }
-        ],
-        "4-3-2-1": [
-            { x: 50, y: 88, role: "GK" },
-            { x: 20, y: 70, role: "LB" }, { x: 40, y: 72, role: "CB" }, { x: 60, y: 72, role: "CB" }, { x: 80, y: 70, role: "RB" },
-            { x: 35, y: 52, role: "CM" }, { x: 50, y: 55, role: "CM" }, { x: 65, y: 52, role: "CM" },
-            { x: 36, y: 34, role: "LAM" }, { x: 64, y: 34, role: "RAM" },
-            { x: 50, y: 20, role: "ST" }
-        ],
-        "3-4-3": [
-            { x: 50, y: 88, role: "GK" },
-            { x: 30, y: 72, role: "CB" }, { x: 50, y: 74, role: "CB" }, { x: 70, y: 72, role: "CB" },
-            { x: 18, y: 48, role: "LWB" }, { x: 40, y: 50, role: "CM" }, { x: 60, y: 50, role: "CM" }, { x: 82, y: 48, role: "RWB" },
-            { x: 20, y: 25, role: "LW" }, { x: 50, y: 20, role: "ST" }, { x: 80, y: 25, role: "RW" }
-        ],
-        "3-5-2": [
-            { x: 50, y: 88, role: "GK" },
-            { x: 30, y: 72, role: "CB" }, { x: 50, y: 74, role: "CB" }, { x: 70, y: 72, role: "CB" },
-            { x: 18, y: 48, role: "LWB" }, { x: 38, y: 52, role: "CM" }, { x: 50, y: 45, role: "CDM" }, { x: 62, y: 52, role: "CM" }, { x: 82, y: 48, role: "RWB" },
-            { x: 40, y: 22, role: "ST" }, { x: 60, y: 22, role: "ST" }
-        ],
-        "5-3-2": [
-            { x: 50, y: 88, role: "GK" },
-            { x: 15, y: 68, role: "LWB" }, { x: 32, y: 72, role: "CB" }, { x: 50, y: 74, role: "CB" }, { x: 68, y: 72, role: "CB" }, { x: 85, y: 68, role: "RWB" },
-            { x: 35, y: 48, role: "CM" }, { x: 50, y: 52, role: "CM" }, { x: 65, y: 48, role: "CM" },
-            { x: 40, y: 22, role: "ST" }, { x: 60, y: 22, role: "ST" }
-        ],
-        "5-4-1": [
-            { x: 50, y: 88, role: "GK" },
-            { x: 15, y: 68, role: "LWB" }, { x: 32, y: 72, role: "CB" }, { x: 50, y: 74, role: "CB" }, { x: 68, y: 72, role: "CB" }, { x: 85, y: 68, role: "RWB" },
-            { x: 22, y: 45, role: "LM" }, { x: 40, y: 48, role: "CM" }, { x: 60, y: 48, role: "CM" }, { x: 78, y: 45, role: "RM" },
-            { x: 50, y: 20, role: "ST" }
-        ]
-    };
-
-    let xiState = {
-        formation: "4-3-3",
-        kitColor: "#FF0000",
-        textColor: "WHITE",
-        teamName: "",
-        createdBy: "",
-        players: {}
-    };
-
-    function loadXiState() {
-        const hash = window.location.hash;
-        if (hash && hash.startsWith('#xi=')) {
-            try {
-                const decoded = JSON.parse(decodeURIComponent(hash.replace('#xi=', '')));
-                xiState = Object.assign(xiState, decoded);
-            } catch(e) {}
-        } else {
-            const saved = localStorage.getItem('alza3eem_xi_state');
-            if (saved) {
-                try { xiState = Object.assign(xiState, JSON.parse(saved)); } catch(e) {}
-            }
-        }
-    }
-
-    function saveXiState() {
-        localStorage.setItem('alza3eem_xi_state', JSON.stringify(xiState));
-    }
-
-    function updateXiUrlHash() {
-        const encoded = encodeURIComponent(JSON.stringify(xiState));
-        history.replaceState(null, '', `#xi=${encoded}`);
-    }
-
-    loadXiState();
-
-    const xiFormationSelect = document.getElementById('xiFormationSelect');
-    const xiTextColorSelect = document.getElementById('xiTextColorSelect');
-    const xiKitColorPicker = document.getElementById('xiKitColorPicker');
-    const xiTeamNameInput = document.getElementById('xiTeamNameInput');
-    const xiCreatedByInput = document.getElementById('xiCreatedByInput');
-    const xiPlayersContainer = document.getElementById('xiPlayersContainer');
-    const xiTeamNameDisplay = document.getElementById('xiTeamNameDisplay');
-    const xiCreatedByDisplay = document.getElementById('xiCreatedByDisplay');
-    const xiKitColorDots = document.querySelectorAll('.xi-color-dot');
-
-    if (xiFormationSelect) xiFormationSelect.value = xiState.formation;
-    if (xiTextColorSelect) xiTextColorSelect.value = xiState.textColor;
-    if (xiKitColorPicker) xiKitColorPicker.value = xiState.kitColor;
-    if (xiTeamNameInput) xiTeamNameInput.value = xiState.teamName;
-    if (xiCreatedByInput) xiCreatedByInput.value = xiState.createdBy;
-
-    xiKitColorDots.forEach(dot => {
-        if (dot.getAttribute('data-color').toLowerCase() === xiState.kitColor.toLowerCase()) {
-            xiKitColorDots.forEach(d => d.classList.remove('active'));
-            dot.classList.add('active');
-        }
-    });
-
-    function renderPitch() {
-        if (!xiPlayersContainer) return;
-        xiPlayersContainer.innerHTML = '';
-        xiTeamNameDisplay.textContent = xiState.teamName ? xiState.teamName : '';
-        xiCreatedByDisplay.textContent = xiState.createdBy ? `Created by: ${xiState.createdBy}` : '';
-
-        const coords = formationsCoords[xiState.formation] || formationsCoords["4-3-3"];
-        coords.forEach((pos, index) => {
-            const player = xiState.players[index] || null;
-            const node = document.createElement('div');
-            node.className = 'xi-player-node';
-            node.style.left = `${pos.x}%`;
-            node.style.top = `${pos.y}%`;
-
-            const textColorCode = xiState.textColor === 'BLACK' ? '#000000' : '#FFFFFF';
-            if (player) {
-                node.innerHTML = `
-                    <div class="xi-player-circle" style="background-color: ${xiState.kitColor}; color: ${textColorCode};">${player.number}</div>
-                    <div class="xi-player-name-badge" style="color: ${textColorCode};">${player.name}</div>
-                `;
-            } else {
-                node.innerHTML = `
-                    <div class="xi-player-circle" style="background-color: rgba(0,0,0,0.4); color: #FFFFFF;">+</div>
-                `;
-            }
-            node.addEventListener('click', () => openPlayerModal(index));
-            xiPlayersContainer.appendChild(node);
-        });
-    }
-
-    let activePlayerIndex = null;
-    const xiModalOverlay = document.getElementById('xiModalOverlay');
-    const xiModalTitle = document.getElementById('xiModalTitle');
-    const xiModalNameInput = document.getElementById('xiModalNameInput');
-    const xiModalNumberInput = document.getElementById('xiModalNumberInput');
-    const xiModalSaveBtn = document.getElementById('xiModalSaveBtn');
-    const xiModalCancelBtn = document.getElementById('xiModalCancelBtn');
-    const xiModalRemoveBtn = document.getElementById('xiModalRemoveBtn');
-
-    function openPlayerModal(index) {
-        activePlayerIndex = index;
-        const coords = formationsCoords[xiState.formation] || formationsCoords["4-3-3"];
-        const player = xiState.players[index];
-        xiModalTitle.textContent = player ? `EDIT PLAYER (${coords[index].role})` : `ADD PLAYER (${coords[index].role})`;
-        xiModalNameInput.value = player ? player.name : '';
-        xiModalNumberInput.value = player ? player.number : (index + 1);
-        xiModalRemoveBtn.style.display = player ? 'block' : 'none';
-        xiModalOverlay.classList.add('open');
-    }
-
-    function closePlayerModal() {
-        xiModalOverlay.classList.remove('open');
-        activePlayerIndex = null;
-    }
-
-    if (xiModalCancelBtn) xiModalCancelBtn.addEventListener('click', closePlayerModal);
-    if (xiModalOverlay) xiModalOverlay.addEventListener('click', (e) => { if (e.target === xiModalOverlay) closePlayerModal(); });
-
-    if (xiModalSaveBtn) xiModalSaveBtn.addEventListener('click', () => {
-        if (activePlayerIndex === null) return;
-        const nameVal = xiModalNameInput.value.trim() || formationsCoords[xiState.formation][activePlayerIndex].role;
-        let numVal = parseInt(xiModalNumberInput.value);
-        if (isNaN(numVal) || numVal < 1) numVal = 1;
-        if (numVal > 99) numVal = 99;
-
-        xiState.players[activePlayerIndex] = { name: nameVal, number: numVal };
-        saveXiState();
-        updateXiUrlHash();
-        renderPitch();
-        closePlayerModal();
-    });
-
-    if (xiModalRemoveBtn) xiModalRemoveBtn.addEventListener('click', () => {
-        if (activePlayerIndex === null) return;
-        delete xiState.players[activePlayerIndex];
-        saveXiState();
-        updateXiUrlHash();
-        renderPitch();
-        closePlayerModal();
-    });
-
-    if (xiFormationSelect) {
-        xiFormationSelect.addEventListener('change', (e) => {
-            xiState.formation = e.target.value;
-            saveXiState();
-            updateXiUrlHash();
-            renderPitch();
-        });
-    }
-
-    if (xiTextColorSelect) {
-        xiTextColorSelect.addEventListener('change', (e) => {
-            xiState.textColor = e.target.value;
-            saveXiState();
-            updateXiUrlHash();
-            renderPitch();
-        });
-    }
-
-    if (xiKitColorPicker) {
-        xiKitColorPicker.addEventListener('input', (e) => {
-            xiState.kitColor = e.target.value;
-            xiKitColorDots.forEach(d => d.classList.remove('active'));
-            saveXiState();
-            updateXiUrlHash();
-            renderPitch();
-        });
-    }
-
-    xiKitColorDots.forEach(dot => {
-        dot.addEventListener('click', () => {
-            xiKitColorDots.forEach(d => d.classList.remove('active'));
-            dot.classList.add('active');
-            xiState.kitColor = dot.getAttribute('data-color');
-            if (xiKitColorPicker) xiKitColorPicker.value = xiState.kitColor;
-            saveXiState();
-            updateXiUrlHash();
-            renderPitch();
-        });
-    });
-
-    if (xiTeamNameInput) {
-        xiTeamNameInput.addEventListener('input', (e) => {
-            xiState.teamName = e.target.value.slice(0, 30);
-            saveXiState();
-            updateXiUrlHash();
-            renderPitch();
-        });
-    }
-
-    if (xiCreatedByInput) {
-        xiCreatedByInput.addEventListener('input', (e) => {
-            xiState.createdBy = e.target.value.slice(0, 20);
-            saveXiState();
-            updateXiUrlHash();
-            renderPitch();
-        });
-    }
-
-    const xiResetBtn = document.getElementById('xiResetBtn');
-    const xiResetModalOverlay = document.getElementById('xiResetModalOverlay');
-    const xiResetCancelBtn = document.getElementById('xiResetCancelBtn');
-    const xiResetConfirmBtn = document.getElementById('xiResetConfirmBtn');
-
-    if (xiResetBtn) xiResetBtn.addEventListener('click', () => xiResetModalOverlay.classList.add('open'));
-    if (xiResetCancelBtn) xiResetCancelBtn.addEventListener('click', () => xiResetModalOverlay.classList.remove('open'));
-    if (xiResetModalOverlay) xiResetModalOverlay.addEventListener('click', (e) => { if (e.target === xiResetModalOverlay) xiResetModalOverlay.classList.remove('open'); });
-
-    if (xiResetConfirmBtn) {
-        xiResetConfirmBtn.addEventListener('click', () => {
-            xiState.players = {};
-            xiState.teamName = "";
-            xiState.createdBy = "";
-            if (xiTeamNameInput) xiTeamNameInput.value = "";
-            if (xiCreatedByInput) xiCreatedByInput.value = "";
-            saveXiState();
-            updateXiUrlHash();
-            renderPitch();
-            xiResetModalOverlay.classList.remove('open');
-        });
-    }
-
-    function generateXiCanvas() {
-        const canvas = document.createElement('canvas');
-        canvas.width = 1080;
-        canvas.height = 1350;
-        const ctx = canvas.getContext('2d');
-        const bgGrad = ctx.createLinearGradient(0, 0, 1080, 1350);
-        bgGrad.addColorStop(0, '#134e2e');
-        bgGrad.addColorStop(1, '#0d381f');
-        ctx.fillStyle = bgGrad;
-        ctx.fillRect(0, 0, 1080, 1350);
-
-        ctx.strokeStyle = 'rgba(255,255,255,0.3)';
-        ctx.lineWidth = 6;
-        ctx.strokeRect(60, 60, 960, 1230);
-        ctx.beginPath();
-        ctx.moveTo(60, 675);
-        ctx.lineTo(1020, 675);
-        ctx.stroke();
-        ctx.beginPath();
-        ctx.arc(540, 675, 135, 0, Math.PI * 2);
-        ctx.stroke();
-
-        if (xiState.teamName) {
-            ctx.fillStyle = '#FFFFFF';
-            ctx.font = 'bold 44px "Cairo", sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText(xiState.teamName, 540, 120);
-        }
-        if (xiState.createdBy) {
-            ctx.fillStyle = 'rgba(255,255,255,0.8)';
-            ctx.font = 'bold 28px "Cairo", sans-serif';
-            ctx.textAlign = 'center';
-            ctx.fillText(`Created by: ${xiState.createdBy}`, 540, 1315);
-        }
-
-        const coords = formationsCoords[xiState.formation] || formationsCoords["4-3-3"];
-        const textColorCode = xiState.textColor === 'BLACK' ? '#000000' : '#FFFFFF';
-
-        coords.forEach((pos, index) => {
-            const player = xiState.players[index] || null;
-            const px = (pos.x / 100) * 1080;
-            const py = (pos.y / 100) * 1350;
-
-            if (player) {
-                ctx.beginPath();
-                ctx.arc(px, py - 18, 44, 0, Math.PI * 2);
-                ctx.fillStyle = xiState.kitColor;
-                ctx.fill();
-                ctx.lineWidth = 4;
-                ctx.strokeStyle = 'rgba(255,255,255,0.9)';
-                ctx.stroke();
-
-                ctx.fillStyle = textColorCode;
-                ctx.font = '900 32px "Cairo", sans-serif';
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(player.number, px, py - 18);
-
-                ctx.font = '700 22px "Cairo", sans-serif';
-                const textMetrics = ctx.measureText(player.name);
-                const badgeWidth = Math.max(textMetrics.width + 24, 70);
-                const badgeHeight = 34;
-                const badgeX = px - badgeWidth / 2;
-                const badgeY = py + 30;
-
-                ctx.fillStyle = 'rgba(0, 0, 0, 0.75)';
-                ctx.beginPath();
-                ctx.roundRect(badgeX, badgeY, badgeWidth, badgeHeight, 8);
-                ctx.fill();
-                ctx.lineWidth = 2;
-                ctx.strokeStyle = 'rgba(255, 255, 255, 0.2)';
-                ctx.stroke();
-
-                ctx.fillStyle = textColorCode;
-                ctx.textAlign = 'center';
-                ctx.textBaseline = 'middle';
-                ctx.fillText(player.name, px, badgeY + badgeHeight / 2);
-            }
-        });
-        return canvas;
-    }
-
-    let toastTimeout;
-    function showShareToast() {
-        const toast = document.getElementById('shareToast');
-        if (!toast) return;
-        toast.classList.add('show');
-        clearTimeout(toastTimeout);
-        toastTimeout = setTimeout(() => {
-            toast.classList.remove('show');
-        }, 3000);
-    }
-
-    const xiShareBtn = document.getElementById('xiShareBtn');
-    if (xiShareBtn) {
-        xiShareBtn.addEventListener('click', () => {
-            showShareToast();
-
-            updateXiUrlHash();
-            requestAnimationFrame(() => {
-                const canvas = generateXiCanvas();
-                canvas.toBlob(async (blob) => {
-                    if (!blob) return;
-                    const file = new File([blob], 'Build-Your-XI.png', { type: 'image/png' });
-                    if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                        try {
-                            await navigator.share({ title: xiState.teamName || 'BUILD YOUR XI', files: [file] });
-                        } catch(err) {}
-                    } else {
-                        const dataUrl = canvas.toDataURL('image/png');
-                        const link = document.createElement('a');
-                        link.download = 'Build-Your-XI.png';
-                        link.href = dataUrl;
-                        link.click();
-                    }
-                }, 'image/png');
-            });
-        });
-    }
-
-    renderPitch();
 </script>
-
 </body>
 </html>
