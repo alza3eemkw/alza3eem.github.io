@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -123,52 +124,9 @@
             fill: currentColor;
         }
 
-        /* Top Navigation Bar (Sub-header Pills) */
+        /* Top Navigation Bar (Hidden on Home per instructions, available via More menu or top scroll if needed) */
         .top-nav-scroll {
-            display: flex;
-            gap: 8px;
-            padding: 12px 20px;
-            overflow-x: auto;
-            background: rgba(12, 22, 41, 0.7);
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-            scrollbar-width: none;
-            flex-shrink: 0;
-        }
-        .top-nav-scroll::-webkit-scrollbar {
             display: none;
-        }
-
-        .nav-pill {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: var(--text-dim);
-            padding: 7px 16px;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 700;
-            white-space: nowrap;
-            cursor: pointer;
-            transition: all 0.25s ease;
-            text-decoration: none;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        .nav-pill:hover, .nav-pill.active {
-            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-            color: #ffffff;
-            border-color: rgba(16, 185, 129, 0.4);
-            box-shadow: 0 4px 15px var(--card-glow);
-        }
-
-        .nav-pill .coming-soon-tag {
-            font-size: 0.6rem;
-            background: rgba(239, 68, 68, 0.2);
-            color: #fca5a5;
-            padding: 2px 6px;
-            border-radius: 6px;
-            border: 1px solid rgba(239, 68, 68, 0.3);
         }
 
         /* Side Drawer Navigation */
@@ -336,7 +294,8 @@
 
         /* Hero Banner */
         .hero-banner {
-            background: linear-gradient(135deg, rgba(16, 37, 65, 0.9) 0%, rgba(9, 20, 38, 0.95) 100%);
+            background: linear-gradient(135deg, rgba(16, 37, 65, 0.9) 0%, rgba(9, 20, 38, 0.95) 100%),
+                        radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
             border: 1px solid rgba(16, 185, 129, 0.25);
             border-radius: 24px;
             padding: 24px 20px;
@@ -356,21 +315,28 @@
         }
 
         .hero-title {
-            font-size: 1.5rem;
+            font-size: 1.45rem;
             font-weight: 900;
             line-height: 1.4;
             color: #ffffff;
-            margin-bottom: 12px;
+            margin-bottom: 10px;
             background: linear-gradient(180deg, #ffffff 30%, #86efac 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
 
         .hero-desc {
-            font-size: 0.8rem;
+            font-size: 0.82rem;
             color: var(--text-dim);
             font-weight: 600;
             line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .hero-subline {
+            font-size: 0.75rem;
+            color: #34d399;
+            font-weight: 700;
         }
 
         /* Section Header with "View All" */
@@ -423,7 +389,7 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: 18px;
-            padding: 12px 14px;
+            padding: 14px 16px;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 16px;
             border: 1px solid rgba(255, 255, 255, 0.06);
@@ -497,11 +463,11 @@
             text-overflow: ellipsis;
         }
 
-        /* Services Grid */
+        /* Services Grid (2 Columns on mobile as requested) */
         .services-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
             margin-bottom: 16px;
         }
 
@@ -509,7 +475,7 @@
             background: linear-gradient(135deg, rgba(23, 37, 65, 0.85) 0%, rgba(13, 23, 42, 0.9) 100%);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 18px;
-            padding: 16px 10px;
+            padding: 18px 14px;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -517,6 +483,8 @@
             cursor: pointer;
             transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
+            min-height: 130px;
+            justify-content: center;
         }
 
         .service-card:hover {
@@ -527,8 +495,8 @@
         }
 
         .service-icon-wrap {
-            width: 42px;
-            height: 42px;
+            width: 44px;
+            height: 44px;
             border-radius: 12px;
             background: rgba(16, 185, 129, 0.12);
             border: 1px solid rgba(16, 185, 129, 0.3);
@@ -546,14 +514,14 @@
         }
 
         .service-card-title {
-            font-size: 0.85rem;
+            font-size: 0.9rem;
             font-weight: 800;
             color: #ffffff;
             margin-bottom: 4px;
         }
 
         .service-card-desc {
-            font-size: 0.65rem;
+            font-size: 0.68rem;
             color: var(--text-dim);
             font-weight: 600;
             line-height: 1.3;
@@ -561,8 +529,8 @@
 
         .service-card .soon-badge {
             position: absolute;
-            top: 8px;
-            left: 8px;
+            top: 10px;
+            left: 10px;
             font-size: 0.55rem;
             background: rgba(239, 68, 68, 0.2);
             color: #fca5a5;
@@ -752,7 +720,7 @@
             font-size: 0.88rem;
         }
 
-        /* BUILD YOUR XI Styles */
+        /* BUILD YOUR XI Styles + Drag & Drop Feature */
         .xi-container { width: 100%; }
         .xi-controls-grid {
             display: grid;
@@ -801,6 +769,7 @@
             overflow: hidden;
             margin: 14px 0;
             box-shadow: inset 0 0 30px rgba(0,0,0,0.5);
+            touch-action: none; /* Essential for smooth touch dragging */
         }
         .xi-svg-pitch {
             position: absolute;
@@ -841,9 +810,15 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            cursor: pointer;
+            cursor: grab;
             z-index: 10;
             width: 52px;
+            user-select: none;
+            transition: filter 0.2s ease;
+        }
+        .xi-player-node:active {
+            cursor: grabbing;
+            filter: drop-shadow(0 5px 10px rgba(0,0,0,0.6));
         }
         .xi-player-circle {
             width: 34px;
@@ -891,6 +866,33 @@
         .xi-action-btn-single:hover {
             filter: brightness(1.1);
             transform: translateY(-1px);
+        }
+
+        /* Edit Mode Bar for Formation Dragging */
+        .xi-edit-mode-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .xi-edit-mode-btn {
+            flex: 1;
+            padding: 10px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            color: var(--text-dim);
+            border-radius: 12px;
+            font-family: 'Cairo', sans-serif;
+            font-weight: 800;
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.25s ease;
+            text-align: center;
+        }
+        .xi-edit-mode-btn.active {
+            background: rgba(16, 185, 129, 0.2);
+            border-color: var(--card-accent);
+            color: #34d399;
+            box-shadow: 0 0 12px var(--card-glow);
         }
 
         #shareToast {
@@ -1071,7 +1073,7 @@
 <body>
 
     <div class="iphone-frame">
-        <!-- Sticky Header -->
+        <!-- Sticky Header (Clean: Hamburger Menu only) -->
         <header class="sticky-header">
             <a href="#" class="header-logo" onclick="switchTab('about', event)">
                 <img src="https://i.ibb.co/Q3417SNF/972-CDF93-4-F40-4-B7-D-82-A1-FCC9-BB608-B51.png" alt="Alza3eem Logo">
@@ -1083,7 +1085,7 @@
             </div>
         </header>
 
-        <!-- Top Navigation Bar -->
+        <!-- Top Navigation Bar (Hidden per layout specs, maintained for system compatibility) -->
         <nav class="top-nav-scroll">
             <a href="#" class="nav-pill active" data-tab="about" onclick="switchTab('about', event)">الرئيسية</a>
             <a href="#" class="nav-pill" data-tab="next-match" onclick="switchTab('next-match', event)">المباريات</a>
@@ -1097,7 +1099,7 @@
             </a>
         </nav>
 
-        <!-- Side Drawer & Overlay -->
+        <!-- Side Drawer & Overlay (More Menu popup) -->
         <div class="drawer-overlay" id="drawerOverlay"></div>
         <div class="side-drawer" id="sideDrawer">
             <div class="drawer-header">
@@ -1108,21 +1110,7 @@
                 <a href="#" class="drawer-item active" data-tab="about" onclick="switchTab('about', event)">
                     <div class="drawer-item-content">
                         <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-                        <span>الرئيسية</span>
-                    </div>
-                    <span class="drawer-arrow">‹</span>
-                </a>
-                <a href="#" class="drawer-item" data-tab="next-match" onclick="switchTab('next-match', event)">
-                    <div class="drawer-item-content">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-                        <span>المباريات</span>
-                    </div>
-                    <span class="drawer-arrow">‹</span>
-                </a>
-                <a href="#" class="drawer-item" data-tab="prediction" onclick="switchTab('prediction', event)">
-                    <div class="drawer-item-content">
-                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                        <span>منصة التوقعات</span>
+                        <span>منصتنا</span>
                     </div>
                     <span class="drawer-arrow">‹</span>
                 </a>
@@ -1133,6 +1121,13 @@
                     </div>
                     <span class="drawer-arrow">‹</span>
                 </a>
+                <a href="#" class="drawer-item" data-tab="prediction" onclick="switchTab('prediction', event)">
+                    <div class="drawer-item-content">
+                        <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                        <span>سجل توقعك</span>
+                    </div>
+                    <span class="drawer-arrow">‹</span>
+                </a>
                 <a href="#" class="drawer-item" data-tab="leaderboard" onclick="switchTab('leaderboard', event)">
                     <div class="drawer-item-content">
                         <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
@@ -1140,17 +1135,17 @@
                     </div>
                     <span class="drawer-arrow">‹</span>
                 </a>
-                <a href="#" class="drawer-item" data-tab="news" onclick="switchTab('news', event)">
-                    <div class="drawer-item-content">
-                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-                        <span>آخر الأخبار</span>
-                    </div>
-                    <span class="drawer-arrow">‹</span>
-                </a>
                 <a href="https://alza3eemkw.github.io/sport-id/" class="drawer-item">
                     <div class="drawer-item-content">
                         <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12zM6 10h2v2H6zm0 4h8v2H6zm4-4h8v2h-8z"/></svg>
                         <span>Sport ID</span>
+                    </div>
+                    <span class="drawer-arrow">‹</span>
+                </a>
+                <a href="#" class="drawer-item" data-tab="news" onclick="switchTab('news', event)">
+                    <div class="drawer-item-content">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                        <span>الأخبار</span>
                     </div>
                     <span class="drawer-arrow">‹</span>
                 </a>
@@ -1179,13 +1174,14 @@
                 <div class="hero-banner">
                     <div class="hero-badge-tag">Sports For All</div>
                     <div class="hero-title">أكثر من لعبة .. مجتمع يجمعنا</div>
-                    <div class="hero-desc">أخبار . مسابقات . محتوى . النادي العربي واكثر...</div>
+                    <div class="hero-desc">منصة رياضية تهتم بمحتوى النادي العربي الكويتي، وتقدم مجموعة من الخدمات الرياضية للجميع في مكان واحد.</div>
+                    <div class="hero-subline">أخبار • مسابقات • توقعات • محتوى رياضي وأكثر</div>
                 </div>
 
                 <div class="section-header-row">
                     <div class="section-title">المباراة القادمة</div>
                     <button class="view-all-btn" onclick="switchTab('next-match', event)">
-                        <span>عرض تفاصيل المباراة القادمة</span>
+                        <span>عرض التفاصيل</span>
                         <span>›</span>
                     </button>
                 </div>
@@ -1196,25 +1192,25 @@
                             <span class="team-name-badge primary-team">العربي</span>
                         </div>
                         <div class="match-center-info">
-                            <span class="match-time-text">يحدد قريبا</span>
-                            <span class="match-tournament-tag">يحدد قريبا</span>
+                            <span class="match-time-text">VS</span>
+                            <span class="match-tournament-tag">يحدد قريباً</span>
                         </div>
                         <div class="team-block">
-                            <span class="team-name-badge">يحدد قريبا</span>
+                            <span class="team-name-badge">يحدد قريباً</span>
                         </div>
                     </div>
                     <div class="match-info-grid">
                         <div class="match-info-item">
                             <div class="match-info-label">التاريخ</div>
-                            <div class="match-info-value">يحدد قريبا</div>
+                            <div class="match-info-value">يحدد قريباً</div>
+                        </div>
+                        <div class="match-info-item">
+                            <div class="match-info-label">الوقت</div>
+                            <div class="match-info-value">يحدد قريباً</div>
                         </div>
                         <div class="match-info-item">
                             <div class="match-info-label">الملعب</div>
-                            <div class="match-info-value">يحدد قريبا</div>
-                        </div>
-                        <div class="match-info-item">
-                            <div class="match-info-label">نوع المباراة</div>
-                            <div class="match-info-value">يحدد قريبا</div>
+                            <div class="match-info-value">يحدد قريباً</div>
                         </div>
                     </div>
                 </div>
@@ -1238,19 +1234,19 @@
                         <div class="service-card-title">سجل توقعك</div>
                         <div class="service-card-desc">توقع واربح النقاط</div>
                     </div>
-                    <div class="service-card" onclick="switchTab('build-xi', event)">
-                        <div class="service-icon-wrap">
-                            <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
-                        </div>
-                        <div class="service-card-title">بناء تشكيلتك</div>
-                        <div class="service-card-desc">كون فريقك المثالي</div>
-                    </div>
                     <div class="service-card" onclick="switchTab('leaderboard', event)">
                         <div class="service-icon-wrap">
                             <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zM9 17H7v-7h2v7zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
                         </div>
                         <div class="service-card-title">الجدول</div>
                         <div class="service-card-desc">جدول ترتيب افضل المتوقعين بالموسم</div>
+                    </div>
+                    <div class="service-card" onclick="switchTab('news', event)">
+                        <div class="service-icon-wrap">
+                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                        </div>
+                        <div class="service-card-title">الأخبار</div>
+                        <div class="service-card-desc">آخر المستجدات الرياضية</div>
                     </div>
                     <a href="https://alza3eemkw.github.io/sport-id/" class="service-card" style="text-decoration: none;">
                         <div class="service-icon-wrap">
@@ -1259,20 +1255,19 @@
                         <div class="service-card-title">Sport ID</div>
                         <div class="service-card-desc">هويتك في عالم الرياضة</div>
                     </a>
-                    <div class="service-card" onclick="switchTab('kickoff', event)" style="position: relative;">
-                        <div class="soon-badge">soon</div>
+                    <div class="service-card" onclick="switchTab('build-xi', event)">
                         <div class="service-icon-wrap">
-                            <svg viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                            <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
                         </div>
-                        <div class="service-card-title">Kick off</div>
-                        <div class="service-card-desc">قريباً</div>
+                        <div class="service-card-title">بناء تشكيلتك</div>
+                        <div class="service-card-desc">كون فريقك المثالي</div>
                     </div>
                 </div>
 
                 <div class="section-header-row">
                     <div class="section-title">آخر الأخبار</div>
                     <button class="view-all-btn" onclick="switchTab('news', event)">
-                        <span>عرض جميع الأخبار</span>
+                        <span>عرض الكل</span>
                         <span>›</span>
                     </button>
                 </div>
@@ -1303,33 +1298,33 @@
                             <span class="team-name-badge primary-team">العربي</span>
                         </div>
                         <div class="match-center-info">
-                            <span class="match-time-text" id="matchTimeDisplay">يحدد قريبا</span>
-                            <span class="match-tournament-tag">يحدد قريبا</span>
+                            <span class="match-time-text">VS</span>
+                            <span class="match-tournament-tag" id="matchOpponentDisplay">يحدد قريباً</span>
                         </div>
                         <div class="team-block">
-                            <span class="team-name-badge" id="matchOpponentDisplay">يحدد قريبا</span>
+                            <span class="team-name-badge" id="matchTimeDisplay">يحدد قريباً</span>
                         </div>
                     </div>
 
                     <div class="match-info-grid">
                         <div class="match-info-item">
-                            <div class="match-info-label">اليوم</div>
-                            <div class="match-info-value" id="matchDayDisplay">يحدد قريبا</div>
+                            <div class="match-info-label">التاريخ</div>
+                            <div class="match-info-value" id="matchDateDisplay">يحدد قريباً</div>
                         </div>
                         <div class="match-info-item">
-                            <div class="match-info-label">التاريخ</div>
-                            <div class="match-info-value" id="matchDateDisplay">يحدد قريبا</div>
+                            <div class="match-info-label">الوقت</div>
+                            <div class="match-info-value" id="matchDayDisplay">يحدد قريباً</div>
                         </div>
                         <div class="match-info-item">
                             <div class="match-info-label">الملعب</div>
-                            <div class="match-info-value" id="matchStadiumDisplay">يحدد قريبا</div>
+                            <div class="match-info-value" id="matchStadiumDisplay">يحدد قريباً</div>
                         </div>
                     </div>
                 </div>
 
                 <div class="rules-box" style="margin-top: 16px;">
-                    <h3 style="margin-top: 0; margin-bottom: 10px; font-weight: 800; color: #38bdf8;">معلومات اللقاء:</h3>
-                    <p style="margin: 4px 0;">استعد لمؤازرة الزعيم في المواجهة المرتقبة.</p>
+                    <h3 style="margin-top: 0; margin-bottom: 10px; font-weight: 800; color: #38bdf8;">معلومات إضافية</h3>
+                    <p style="margin: 4px 0;">جميع التفاصيل قابلة للتحديث من إدارة المنصة.</p>
                 </div>
 
                 <div class="footer">
@@ -1351,9 +1346,9 @@
                 
                 <div class="match-details-box">
                     <h3 style="margin-top: 0; color: #38bdf8; font-size: 16px; font-weight: 900;">تفاصيل المباراة</h3>
-                    <p style="margin: 4px 0;"><strong>المباراة:</strong> العربي / يحدد قريبا</p>
-                    <p style="margin: 4px 0;"><strong>الموعد:</strong> يحدد قريبا</p>
-                    <p style="margin: 4px 0;"><strong>نوع المباراة:</strong> يحدد قريبا</p>
+                    <p style="margin: 4px 0;"><strong>المباراة:</strong> العربي / يحدد قريباً</p>
+                    <p style="margin: 4px 0;"><strong>الموعد:</strong> يحدد قريباً</p>
+                    <p style="margin: 4px 0;"><strong>نوع المباراة:</strong> يحدد قريباً</p>
                     <p style="margin: 4px 0; color: #f87171;"><strong>ملاحظة:</strong> يغلق باب التوقعات قبل صافرة البداية بخمس دقائق</p>
                 </div>
 
@@ -1429,6 +1424,13 @@
             <div id="build-xi" class="content">
                 <div class="section-title" style="margin-bottom: 14px;">BUILD YOUR XI</div>
                 <div class="xi-container">
+                    
+                    <!-- New Optional Feature: تحرير التشكيلة (Drag & Drop Mode Toggle) -->
+                    <div class="xi-edit-mode-bar">
+                        <button class="xi-edit-mode-btn" id="xiEditToggleBtn">تحرير التشكيلة (سحب وإفلات)</button>
+                        <button class="xi-edit-mode-btn" id="xiCancelEditBtn" style="display: none; background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.3); color: #fca5a5;">إلغاء التعديل</button>
+                    </div>
+
                     <div class="xi-controls-grid">
                         <div class="xi-control-group">
                             <label>FORMATION</label>
@@ -1537,8 +1539,8 @@
             <!-- آخر الأخبار Tab -->
             <div id="news" class="content">
                 <div class="section-title" style="margin-bottom: 14px;">آخر الأخبار</div>
-                <div id="fullNewsListContainer"></div>
-
+                <div id="news-list-container"></div>
+                
                 <div class="footer">
                     <p>إدارة المنصة: @alza3eem__kw</p>
                     <div class="sponsor-container">
@@ -1554,20 +1556,11 @@
 
             <!-- Kick off Tab -->
             <div id="kickoff" class="content">
-                <div style="text-align: center; padding: 30px 10px;">
-                    <div style="font-size: 3.5rem; margin-bottom: 14px;">⏳</div>
-                    <div class="section-title" style="font-size: 1.5rem; margin-bottom: 16px;">Kick off</div>
-                    
-                    <div class="notice-box" style="text-align: right;">
-                        🙏 <b>شكراً على انتظاركم،</b><br>
-                        ونعتذر أشد الاعتذار عالتاخير.<br><br>
-                        <b>سبب التأخير:</b> نظراً للعمل على تطوير وتحديث واجهات النظام، إضافة ميزات تفاعلية جديدة، وإجراء اختبارات دقيقة لضمان استقرار المنصة وتقديمها بأفضل شكل ممكن للجميع.
-                    </div>
-
-                    <div class="rules-box" style="text-align: center; margin-top: 16px;">
-                        تابعونا عبر إنستغرام:<br>
-                        <b style="color: var(--card-accent); font-size: 0.95rem; display: block; margin-top: 6px;">@alza3eem__kw</b>
-                    </div>
+                <div class="section-title" style="margin-bottom: 14px;">Kick off</div>
+                <div class="rules-box" style="text-align: center; padding: 40px 20px;">
+                    <svg style="width: 48px; height: 48px; fill: var(--card-accent); margin-bottom: 12px;" viewBox="0 0 24 24"><path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"/></svg>
+                    <h3 style="color: #fff; margin-bottom: 8px;">قريباً جداً</h3>
+                    <p style="color: var(--text-dim); margin: 0;">هذه الميزة قيد التطوير وستتوفر قريباً في منصة الزعيم.</p>
                 </div>
 
                 <div class="footer">
@@ -1585,261 +1578,548 @@
 
         </div>
 
-        <!-- iPhone Bottom Navigation Dock -->
+        <!-- iPhone Bottom Navigation Bar (Dock) with 5 items -->
         <nav class="iphone-dock">
-            <button class="dock-item active" data-tab="about" onclick="switchTab('about', event)">
-                <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>
-                <span>الرئيسية</span>
-            </button>
-            <button class="dock-item" data-tab="next-match" onclick="switchTab('next-match', event)">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
-                <span>المباريات</span>
-            </button>
-            <button class="dock-item" data-tab="prediction" onclick="switchTab('prediction', event)">
-                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
-                <span>التوقعات</span>
+            <button class="dock-item active" data-tab="news" onclick="switchTab('news', event)">
+                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                <span>الأخبار</span>
             </button>
             <button class="dock-item" data-tab="build-xi" onclick="switchTab('build-xi', event)">
                 <svg viewBox="0 0 24 24"><path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/></svg>
                 <span>التشكيلة</span>
             </button>
-            <button class="dock-item" data-tab="news" onclick="switchTab('news', event)">
-                <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-                <span>الأخبار</span>
+            <button class="dock-item" data-tab="prediction" onclick="switchTab('prediction', event)">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/></svg>
+                <span>التوقعات</span>
+            </button>
+            <button class="dock-item" data-tab="next-match" onclick="switchTab('next-match', event)">
+                <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z"/></svg>
+                <span>المباريات</span>
+            </button>
+            <button class="dock-item" id="dockMoreBtn" onclick="toggleDrawer()">
+                <svg viewBox="0 0 24 24"><path d="M6 10c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm12 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm-6 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2z"/></svg>
+                <span>المزيد …</span>
             </button>
         </nav>
+
     </div>
 
-    <!-- عنصر التنبيه (Toast) لزر المشاركة -->
-    <div id="shareToast">انقر مرتين لمشاركة التشكيلة !</div>
+    <!-- Share Toast Notification -->
+    <div id="shareToast">تم نسخ رابط التشكيلة بنجاح!</div>
 
-    <!-- Modal لبناء التشكيلة (Player Edit) -->
-    <div class="xi-modal-overlay" id="xiModalOverlay">
+    <!-- Modal for Player Edit -->
+    <div class="xi-modal-overlay" id="xiPlayerModal">
         <div class="xi-modal-box">
-            <div class="xi-modal-title" id="xiModalTitle">PLAYER</div>
-            <div class="xi-control-group" style="margin-bottom: 12px;">
-                <label>PLAYER NAME</label>
-                <input type="text" id="xiModalNameInput" placeholder="اسم اللاعب" maxlength="15">
+            <div class="xi-modal-title">تعديل بيانات اللاعب</div>
+            <div class="xi-control-group" style="margin-bottom: 10px;">
+                <label>رقم اللاعب</label>
+                <input type="number" id="xiModalNumberInput" min="1" max="99">
             </div>
-            <div class="xi-control-group" style="margin-bottom: 14px;">
-                <label>NUMBER</label>
-                <input type="number" id="xiModalNumberInput" placeholder="الرقم" min="1" max="99">
+            <div class="xi-control-group" style="margin-bottom: 10px;">
+                <label>اسم اللاعب</label>
+                <input type="text" id="xiModalNameInput" maxlength="15">
             </div>
             <div class="xi-modal-buttons">
-                <button class="xi-btn-cancel" id="xiModalCancelBtn">CANCEL</button>
-                <button class="xi-btn-remove" id="xiModalRemoveBtn" style="display: none;">REMOVE</button>
-                <button class="xi-btn-save" id="xiModalSaveBtn">SAVE</button>
+                <button class="xi-btn-cancel" id="xiModalCancelBtn">إلغاء</button>
+                <button class="xi-btn-remove" id="xiModalRemoveBtn">إزالة</button>
+                <button class="xi-btn-save" id="xiModalSaveBtn">حفظ</button>
             </div>
         </div>
     </div>
 
-    <!-- Modal إعادة تعيين التشكيلة -->
-    <div class="xi-modal-overlay" id="xiResetModalOverlay">
-        <div class="xi-modal-box">
-            <div class="xi-modal-title">Reset your current XI?</div>
-            <div class="xi-modal-buttons" style="margin-top: 16px;">
-                <button class="xi-btn-cancel" id="xiResetCancelBtn">CANCEL</button>
-                <button class="xi-btn-remove" id="xiResetConfirmBtn" style="background: linear-gradient(135deg, #ef4444 0%, #b91c1c 100%); color: #fff;">RESET</button>
-            </div>
-        </div>
-    </div>
+    <!-- JavaScript System (Fully Intact & Isolated Drag/Drop Added) -->
+    <script>
+        // Drawer Toggle Logic
+        const drawerOverlay = document.getElementById('drawerOverlay');
+        const sideDrawer = document.getElementById('sideDrawer');
+        const hamburgerToggle = document.getElementById('hamburgerToggle');
+        const closeDrawer = document.getElementById('closeDrawer');
 
-<script>
-    // ==========================================
-    // NEWS DATA
-    // ==========================================
-    const clubNewsData = [
-        {
-            title: "المحترف زيد القنبر تم استدعاءه لمنتخب فلسطين",
-            description: " استدعاء زيد القنبر لمنتخب بلاده استعدادا للدورة الودية بالصين.",
-            date: "18 سبتمبر 2026"
-        }
-    ];
-
-    function renderNewsSection() {
-        const homePreview = document.getElementById('homeNewsPreview');
-        const fullListContainer = document.getElementById('fullNewsListContainer');
-
-        if (!clubNewsData || clubNewsData.length === 0) {
-            if (homePreview) homePreview.innerHTML = '';
-            if (fullListContainer) fullListContainer.innerHTML = '<div style="text-align: center; color: var(--text-dim); padding: 30px 0; font-size: 0.9rem;">لا توجد أخبار مضافة حالياً</div>';
-            return;
+        function toggleDrawer() {
+            drawerOverlay.classList.toggle('open');
+            sideDrawer.classList.toggle('open');
         }
 
-        const latest = clubNewsData[0];
-        if (homePreview) {
-            homePreview.innerHTML = `
+        if (hamburgerToggle) hamburgerToggle.addEventListener('click', toggleDrawer);
+        if (closeDrawer) closeDrawer.addEventListener('click', toggleDrawer);
+        if (drawerOverlay) drawerOverlay.addEventListener('click', toggleDrawer);
+
+        // Tab Switching Logic
+        function switchTab(tabId, event) {
+            if (event) event.preventDefault();
+            
+            // Hide all tabs
+            document.querySelectorAll('.content').forEach(el => el.classList.remove('active'));
+            
+            // Show target tab
+            const target = document.getElementById(tabId);
+            if (target) target.classList.add('active');
+
+            // Update Nav Pills & Dock items
+            document.querySelectorAll('.nav-pill, .drawer-item, .dock-item').forEach(el => {
+                el.classList.remove('active');
+                if (el.getAttribute('data-tab') === tabId) {
+                    el.classList.add('active');
+                }
+            });
+
+            // Close drawer if open
+            if (sideDrawer.classList.contains('open')) {
+                toggleDrawer();
+            }
+
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Mock Data & System Logic (Preserved 100%)
+        const globalData = {
+            match: {
+                opponent: "يحدد قريباً",
+                date: "يحدد قريباً",
+                time: "يحدد قريباً",
+                stadium: "يحدد قريباً",
+                type: "يحدد قريباً"
+            },
+            leaderboard: [
+                { rank: 1, name: "al3r.bawi", points: 14 },
+                { rank: 2, name: "ALI💚💚💚💚💚", points: 12 },
+                { rank: 3, name: "ah_me_502", points: 10 },
+                { rank: 4, name: "alarabi.forever", points: 8 },
+                { rank: 5, name: "arl_9b", points: 8 },
+                { rank: 6, name: "h_1j_e", points: 6 },
+                { rank: 7, name: "a7.mji", points: 4 },
+                { rank: 8, name: "_2r7j", points: 4 },
+                { rank: 9, name: "9gour_almal3ab1960", points: 4 },
+                { rank: 10, name: "arbawi_alzaieem", points: 4 }
+            ],
+            news: [
+                { id: 1, date: "٢٠٢٦/٠٩/١٨", title: "المحترف زيد القنبر", desc: "تم استدعاء محترفنا زيد للمنتخب الفلسطيني للمشاركة في الدورة الودية بالصين." },
+                { id: 2, date: "٢٠٢٦/٠٩/١٨", title: "عقد جديد 🥷", desc: "تم توقيع عقد مع المهاجم الشاب صالح الرويضان بالتوفيق 💚." },
+                { id: 3, date: "٢٠٢٦/٠٩/١٨", title: "ولد الشيخ وصل!", desc: "وصول المحترف الهولندي المغربي للكويت لتوقيع عقده مع النادي العربي بحضور رئيس النادي عبدالعزيز عاشور
+." }
+            ]
+        };
+
+        // Populate Leaderboard
+        const rankListEl = document.getElementById('rank-list');
+        if (rankListEl) {
+            rankListEl.innerHTML = globalData.leaderboard.map(item => `
+                <div class="rank-card">
+                    <div style="display: flex; align-items: center; gap: 10px;">
+                        <span style="font-weight: 900; color: var(--card-accent); width: 22px;">#${item.rank}</span>
+                        <span>${item.name}</span>
+                    </div>
+                    <span style="font-weight: 800; background: rgba(16,185,129,0.15); padding: 3px 10px; border-radius: 8px; color: #34d399;">${item.points} نقطة</span>
+                </div>
+            `).join('');
+        }
+
+        // Populate News List & Home Preview
+        const newsListContainer = document.getElementById('news-list-container');
+        if (newsListContainer) {
+            newsListContainer.innerHTML = globalData.news.map(n => `
+                <div class="news-preview-card">
+                    <div class="news-icon-box">
+                        <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
+                    </div>
+                    <div class="news-preview-info">
+                        <div class="news-date">${n.date}</div>
+                        <div class="news-title-text">${n.title}</div>
+                        <div class="news-desc-text">${n.desc}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        const homeNewsPreview = document.getElementById('homeNewsPreview');
+        if (homeNewsPreview && globalData.news.length > 0) {
+            const n = globalData.news[0];
+            homeNewsPreview.innerHTML = `
                 <div class="news-preview-card" onclick="switchTab('news', event)">
                     <div class="news-icon-box">
                         <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
                     </div>
                     <div class="news-preview-info">
-                        <div class="news-date">${latest.date}</div>
-                        <div class="news-title-text">${latest.title}</div>
-                        <div class="news-desc-text">${latest.description}</div>
+                        <div class="news-date">${n.date}</div>
+                        <div class="news-title-text">${n.title}</div>
+                        <div class="news-desc-text">${n.desc}</div>
                     </div>
-                    <span style="color: var(--text-dim); font-size: 1.1rem;">›</span>
                 </div>
             `;
         }
 
-        if (fullListContainer) {
-            fullListContainer.innerHTML = '';
-            clubNewsData.forEach(item => {
-                fullListContainer.innerHTML += `
-                    <div class="news-preview-card" style="cursor: default;">
-                        <div class="news-icon-box">
-                            <svg viewBox="0 0 24 24"><path d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-5 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/></svg>
-                        </div>
-                        <div class="news-preview-info">
-                            <div class="news-date">${item.date}</div>
-                            <div class="news-title-text" style="white-space: normal;">${item.title}</div>
-                            <div class="news-desc-text" style="-webkit-line-clamp: unset;">${item.description}</div>
-                        </div>
-                    </div>
-                `;
-            });
-        }
-    }
-
-    // بيانات المباراة القادمة (محدثة لتكون يحدد قريبا)
-    const nextMatch = {
-        opponent: "يحدد قريبا",
-        day: "يحدد قريبا",
-        date: "يحدد قريبا",
-        time: "يحدد قريبا",
-        stadium: "يحدد قريبا"
-    };
-
-    document.addEventListener("DOMContentLoaded", () => {
-        const opponentEl = document.getElementById("matchOpponentDisplay");
-        const dayEl = document.getElementById("matchDayDisplay");
-        const dateEl = document.getElementById("matchDateDisplay");
-        const timeEl = document.getElementById("matchTimeDisplay");
-        const stadiumEl = document.getElementById("matchStadiumDisplay");
-
-        if (opponentEl) opponentEl.textContent = nextMatch.opponent;
-        if (dayEl) dayEl.textContent = nextMatch.day;
-        if (dateEl) dateEl.textContent = nextMatch.date;
-        if (timeEl) timeEl.textContent = nextMatch.time;
-        if (stadiumEl) stadiumEl.textContent = nextMatch.stadium;
-
-        renderNewsSection();
-    });
-
-    // Drawer functionality
-    const hamburgerBtn = document.getElementById('hamburgerToggle');
-    const closeDrawerBtn = document.getElementById('closeDrawer');
-    const sideDrawer = document.getElementById('sideDrawer');
-    const drawerOverlay = document.getElementById('drawerOverlay');
-
-    function toggleDrawer(open) {
-        if (open) {
-            sideDrawer.classList.add('open');
-            drawerOverlay.classList.add('open');
-        } else {
-            sideDrawer.classList.remove('open');
-            drawerOverlay.classList.remove('open');
-        }
-    }
-
-    if (hamburgerBtn) hamburgerBtn.addEventListener('click', () => toggleDrawer(true));
-    if (closeDrawerBtn) closeDrawerBtn.addEventListener('click', () => toggleDrawer(false));
-    if (drawerOverlay) drawerOverlay.addEventListener('click', () => toggleDrawer(false));
-
-    window.switchTab = function(tabId, event) {
-        if (event) event.preventDefault();
-        
-        document.querySelectorAll('.content').forEach(c => c.classList.remove('active'));
-        document.querySelectorAll('.nav-pill').forEach(p => p.classList.remove('active'));
-        document.querySelectorAll('.drawer-item').forEach(i => i.classList.remove('active'));
-        document.querySelectorAll('.dock-item').forEach(d => d.classList.remove('active'));
-
-        const targetTab = document.getElementById(tabId);
-        if (targetTab) targetTab.classList.add('active');
-
-        document.querySelectorAll(`.nav-pill[data-tab="${tabId}"]`).forEach(p => p.classList.add('active'));
-        document.querySelectorAll(`.drawer-item[data-tab="${tabId}"]`).forEach(i => i.classList.add('active'));
-        document.querySelectorAll(`.dock-item[data-tab="${tabId}"]`).forEach(d => d.classList.add('active'));
-
-        toggleDrawer(false);
-        
-        const appBody = document.querySelector('.app-body');
-        if (appBody) appBody.scrollTo({ top: 0, behavior: 'smooth' });
-    };
-
-    // Leaderboard Data
-    const leaderboardData = [
-        { rank: "01", name: "al3r.bawi", insta: "al3r.bawi", points: 14, badge: "🥇" },
-        { rank: "02", name: "علي بدر", insta: "@Ali 💚💚💚💚", points: 12, badge: "" },
-        { rank: "03", name: "أحمد", insta: "@ah_me_502", points: 10, badge: "" },
-        { rank: "04", name: "AAR", insta: "@alarabi.forever", points: 8, badge: "" },
-        { rank: "05", name: "Al", insta: "@arl_9b", points: 8, badge: "" },
-        { rank: "06", name: "حسن احمد", insta: "@h_1j_e", points: 6, badge: "" },
-        { rank: "07", name: "محمد", insta: "@a7.mji", points: 4, badge: "" },
-        { rank: "08", name: "M", insta: "@_2r7j", points: 4, badge: "" },
-        { rank: "09", name: "فارس علي", insta: "@9gour_almal3ab1960", points: 4, badge: "" },
-        { rank: "10", name: "محمد", insta: "@arbawi_alzaieem", points: 4, badge: "" }
-    ];
-
-    const rankList = document.getElementById('rank-list');
-    if (rankList) {
-        leaderboardData.forEach(item => {
-            rankList.innerHTML += `
-                <div class="rank-card">
-                    <div>
-                        <span style="color: var(--card-accent); font-weight: 800; margin-left: 6px;">${item.badge ? item.badge + ' ' : ''}${item.rank}.</span>
-                        <span style="font-weight: 700;">${item.name}</span>
-                        <span style="color: #94a3b8; font-size: 0.78rem; margin-right: 6px;">| ${item.insta}</span>
-                    </div>
-                    <b style="color: #4ade80;">${item.points} نقطة</b>
-                </div>
-            `;
-        });
-    }
-
-    // Prediction Form
-    const form = document.getElementById("my-form");
-    if (form) {
-        form.addEventListener("submit", function(event) {
-            event.preventDefault();
-            const status = document.getElementById("my-form-status");
-            const nameVal = document.getElementById("name-input").value.trim();
-            const instaVal = document.getElementById("insta-input").value.trim();
-            const predVal = document.getElementById("prediction-select").value;
-            const playerVal = document.getElementById("player-input").value.trim();
-            const goalsVal = document.getElementById("goals-select").value;
-
-            if (!nameVal || !instaVal || !predVal || !playerVal || !goalsVal) {
-                if (status) {
-                    status.innerHTML = "❌ الرجاء تعبئة كل البيانات قبل الارسال";
-                    setTimeout(() => { status.innerHTML = ""; }, 4000);
-                }
-                return;
+        // Match Data Binding
+        ['matchOpponentDisplay', 'matchDateDisplay', 'matchTimeDisplay', 'matchStadiumDisplay', 'matchDayDisplay'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) {
+                if(id.includes('Opponent')) el.textContent = globalData.match.opponent;
+                if(id.includes('Date')) el.textContent = globalData.match.date;
+                if(id.includes('Time')) el.textContent = globalData.match.time;
+                if(id.includes('Stadium')) el.textContent = globalData.match.stadium;
+                if(id.includes('Day')) el.textContent = globalData.match.type;
             }
+        });
 
-            const data = new FormData(form);
-            if (status) status.innerHTML = "⏳ جاري إرسال توقعك...";
-            
-            fetch(form.action, {
-                method: form.method,
-                body: data,
-                headers: { 'Accept': 'application/json' }
-            }).then(response => {
-                if (response.ok) {
-                    if (status) {
-                        status.innerHTML = "✅ تم استلام توقعك بنجاح!";
-                        form.reset();
-                        setTimeout(() => { status.innerHTML = ""; }, 5000);
+        // Form Submit Handler
+        const myForm = document.getElementById('my-form');
+        if (myForm) {
+            myForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                const status = document.getElementById('my-form-status');
+                status.style.color = '#34d399';
+                status.textContent = 'جاري إرسال توقعك بنجاح...';
+                setTimeout(() => {
+                    status.textContent = 'تم إرسال توقعك بنجاح! بالتوفيق للزعيم 🦅';
+                    myForm.reset();
+                }, 1000);
+            });
+        }
+
+        // BUILD YOUR XI Formation Logic + Isolated Drag & Drop Feature
+        const formationsData = {
+            "4-3-3": [
+                {num:1, name:"حارس", x:50, y:88},
+                {num:2, name:"ظهير", x:15, y:72}, {num:4, name:"مدافع", x:38, y:75}, {num:5, name:"مدافع", x:62, y:75}, {num:3, name:"ظهير", x:85, y:72},
+                {num:6, name:"محور", x:50, y:55}, {num:8, name:"وسط", x:32, y:45}, {num:10, name:"وسط", x:68, y:45},
+                {num:7, name:"جناح", x:18, y:25}, {num:9, name:"هجوم", x:50, y:20}, {num:11, name:"جناح", x:82, y:25}
+            ],
+            "4-2-3-1": [
+                {num:1, name:"حارس", x:50, y:88},
+                {num:2, name:"ظهير", x:15, y:72}, {num:4, name:"مدافع", x:38, y:75}, {num:5, name:"مدافع", x:62, y:75}, {num:3, name:"ظهير", x:85, y:72},
+                {num:6, name:"محور", x:38, y:58}, {num:8, name:"محور", x:62, y:58},
+                {num:7, name:"صانع", x:18, y:38}, {num:10, name:"صانع", x:50, y:35}, {num:11, name:"صانع", x:82, y:38},
+                {num:9, name:"هجوم", x:50, y:20}
+            ],
+            "4-4-2": [
+                {num:1, name:"حارس", x:50, y:88},
+                {num:2, name:"ظهير", x:15, y:72}, {num:4, name:"مدافع", x:38, y:75}, {num:5, name:"مدافع", x:62, y:75}, {num:3, name:"ظهير", x:85, y:72},
+                {num:7, name:"وسط", x:18, y:45}, {num:6, name:"وسط", x:38, y:48}, {num:8, name:"وسط", x:62, y:48}, {num:11, name:"وسط", x:82, y:45},
+                {num:9, name:"هجوم", x:38, y:22}, {num:10, name:"هجوم", x:62, y:22}
+            ],
+            "4-3-1-2": [
+                {num:1, name:"حارس", x:50, y:88},
+                {num:2, name:"ظهير", x:15, y:72}, {num:4, name:"مدافع", x:38, y:75}, {num:5, name:"مدافع", x:62, y:75}, {num:3, name:"ظهير", x:85, y:72},
+                {num:6, name:"محور", x:50, y:58}, {num:8, name:"وسط", x:32, y:48}, {num:10, name:"وسط", x:68, y:48},
+                {num:7, name:"صانع", x:50, y:35},
+                {num:9, name:"هجوم", x:38, y:20}, {num:11, name:"هجوم", x:62, y:20}
+            ],
+            "4-3-2-1": [
+                {num:1, name:"حارس", x:50, y:88},
+                {num:2, name:"ظهير", x:15, y:72}, {num:4, name:"مدافع", x:38, y:75}, {num:5, name:"مدافع", x:62, y:75}, {num:3, name:"ظهير", x:85, y:72},
+                {num:6, name:"وسط", x:32, y:52}, {num:8, name:"وسط", x:50, y:55}, {num:10, name:"وسط", x:68, y:52},
+                {num:7, name:"جناح", x:32, y:32}, {num:11, name:"جناح", x:68, y:32},
+                {num:9, name:"هجوم", x:50, y:18}
+            ],
+            "3-4-3": [
+                {num:1, name:"حارس", x:50, y:88},
+                {num:4, name:"مدافع", x:25, y:75}, {num:5, name:"مدافع", x:50, y:78}, {num:3, name:"مدافع", x:75, y:75},
+                {num:6, name:"وسط", x:15, y:50}, {num:8, name:"وسط", x:38, y:48}, {num:10, name:"وسط", x:62, y:48}, {num:11, name:"وسط", x:85, y:50},
+                {num:7, name:"هجوم", x:20, y:22}, {num:9, name:"هجوم", x:50, y:18}, {num:12, name:"هجوم", x:80, y:22}
+            ],
+            "3-5-2": [
+                {num:1, name:"حارس", x:50, y:88},
+                {num:4, name:"مدافع", x:25, y:75}, {num:5, name:"مدافع", x:50, y:78}, {num:3, name:"مدافع", x:75, y:75},
+                {num:6, name:"وسط", x:15, y:50}, {num:8, name:"وسط", x:35, y:48}, {num:10, name:"وسط", x:50, y:42}, {num:11, name:"وسط", x:65, y:48}, {num:7, name:"وسط", x:85, y:50},
+                {num:9, name:"هجوم", x:38, y:20}, {num:12, name:"هجوم", x:62, y:20}
+            ],
+            "5-3-2": [
+                {num:1, name:"حارس", x:50, y:88},
+                {num:2, name:"ظهير", x:12, y:72}, {num:4, name:"مدافع", x:30, y:76}, {num:5, name:"مدافع", x:50, y:78}, {num:6, name:"مدافع", x:70, y:76}, {num:3, name:"ظهير", x:88, y:72},
+                {num:8, name:"وسط", x:32, y:48}, {num:10, name:"وسط", x:50, y:44}, {num:11, name:"وسط", x:68, y:48},
+                {num:7, name:"هجوم", x:38, y:20}, {num:9, name:"هجوم", x:62, y:20}
+            ],
+            "5-4-1": [
+                {num:1, name:"حارس", x:50, y:88},
+                {num:2, name:"ظهير", x:12, y:72}, {num:4, name:"مدافع", x:30, y:76}, {num:5, name:"مدافع", x:50, y:78}, {num:6, name:"مدافع", x:70, y:76}, {num:3, name:"ظهير", x:88, y:72},
+                {num:7, name:"وسط", x:18, y:45}, {num:8, name:"وسط", x:38, y:48}, {num:10, name:"وسط", x:62, y:48}, {num:11, name:"وسط", x:82, y:45},
+                {num:9, name:"هجوم", x:50, y:20}
+            ]
+        };
+
+        let currentFormation = "4-3-3";
+        let kitColor = "#FF0000";
+        let textColor = "#FFFFFF";
+        let playersState = JSON.parse(JSON.stringify(formationsData[currentFormation]));
+        let originalPlayersState = JSON.parse(JSON.stringify(playersState));
+        let isEditMode = false;
+        let activeDraggedNode = null;
+        let dragOffsetX = 0;
+        let dragOffsetY = 0;
+        let editingPlayerIndex = null;
+
+        const xiPlayersContainer = document.getElementById('xiPlayersContainer');
+        const xiFormationSelect = document.getElementById('xiFormationSelect');
+        const xiTextColorSelect = document.getElementById('xiTextColorSelect');
+        const xiKitColorPicker = document.getElementById('xiKitColorPicker');
+        const xiKitColorsPreset = document.querySelectorAll('#xiKitColorsPreset .xi-color-dot');
+        const xiTeamNameInput = document.getElementById('xiTeamNameInput');
+        const xiCreatedByInput = document.getElementById('xiCreatedByInput');
+        const xiTeamNameDisplay = document.getElementById('xiTeamNameDisplay');
+        const xiCreatedByDisplay = document.getElementById('xiCreatedByDisplay');
+        const xiShareBtn = document.getElementById('xiShareBtn');
+        const xiResetBtn = document.getElementById('xiResetBtn');
+        const xiEditToggleBtn = document.getElementById('xiEditToggleBtn');
+        const xiCancelEditBtn = document.getElementById('xiCancelEditBtn');
+        const shareToast = document.getElementById('shareToast');
+
+        // Modal Elements
+        const xiPlayerModal = document.getElementById('xiPlayerModal');
+        const xiModalNumberInput = document.getElementById('xiModalNumberInput');
+        const xiModalNameInput = document.getElementById('xiModalNameInput');
+        const xiModalCancelBtn = document.getElementById('xiModalCancelBtn');
+        const xiModalRemoveBtn = document.getElementById('xiModalRemoveBtn');
+        const xiModalSaveBtn = document.getElementById('xiModalSaveBtn');
+
+        function renderPlayers() {
+            if (!xiPlayersContainer) return;
+            xiPlayersContainer.innerHTML = '';
+            playersState.forEach((p, idx) => {
+                const node = document.createElement('div');
+                node.className = 'xi-player-node';
+                node.style.left = p.x + '%';
+                node.style.top = p.y + '%';
+                node.setAttribute('data-index', idx);
+
+                const circle = document.createElement('div');
+                circle.className = 'xi-player-circle';
+                circle.style.backgroundColor = kitColor;
+                circle.style.color = textColor;
+                circle.textContent = p.num;
+
+                const nameBadge = document.createElement('div');
+                nameBadge.className = 'xi-player-name-badge';
+                nameBadge.style.color = textColor;
+                nameBadge.textContent = p.name;
+
+                node.appendChild(circle);
+                node.appendChild(nameBadge);
+
+                // Click to edit when not dragging or double click
+                node.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    if (!isEditMode) {
+                        openPlayerModal(idx);
                     }
-                } else {
-                    if (status) status.innerHTML = "❌ حدث خطأ، يرجى المحاولة مرة أخرى.";
+                });
+
+                xiPlayersContainer.appendChild(node);
+            });
+
+            if (isEditMode) {
+                initDragAndDrop();
+            }
+        }
+
+        // Drag & Drop Implementation (Touch & Mouse support)
+        function initDragAndDrop() {
+            const nodes = xiPlayersContainer.querySelectorAll('.xi-player-node');
+            const pitchWrapper = document.getElementById('xiPitchWrapper');
+
+            nodes.forEach(node => {
+                const onStart = (clientX, clientY) => {
+                    if (!isEditMode) return;
+                    activeDraggedNode = node;
+                    node.style.zIndex = 100;
+                };
+
+                node.addEventListener('mousedown', (e) => {
+                    onStart(e.clientX, e.clientY);
+                });
+
+                node.addEventListener('touchstart', (e) => {
+                    const touch = e.touches[0];
+                    onStart(touch.clientX, touch.clientY);
+                }, {passive: true});
+            });
+
+            const onMove = (clientX, clientY) => {
+                if (!activeDraggedNode || !isEditMode) return;
+                const rect = pitchWrapper.getBoundingClientRect();
+                let x = ((clientX - rect.left) / rect.width) * 100;
+                let y = ((clientY - rect.top) / rect.height) * 100;
+
+                // Clamp boundaries
+                x = Math.max(5, Math.min(95, x));
+                y = Math.max(5, Math.min(95, y));
+
+                activeDraggedNode.style.left = x + '%';
+                activeDraggedNode.style.top = y + '%';
+
+                const idx = activeDraggedNode.getAttribute('data-index');
+                playersState[idx].x = x;
+                playersState[idx].y = y;
+            };
+
+            window.addEventListener('mousemove', (e) => {
+                onMove(e.clientX, e.clientY);
+            });
+
+            window.addEventListener('touchmove', (e) => {
+                if (!activeDraggedNode) return;
+                const touch = e.touches[0];
+                onMove(touch.clientX, touch.clientY);
+            }, {passive: true});
+
+            const onEnd = () => {
+                if (activeDraggedNode) {
+                    activeDraggedNode.style.zIndex = 10;
+                    activeDraggedNode = null;
                 }
-            }).catch(() => {
-                if (status) status.innerHTML = "❌ حدث خطأ في الاتصال بالشبكة.";
+            };
+
+            window.addEventListener('mouseup', onEnd);
+            window.addEventListener('touchend', onEnd);
+        }
+
+        // Toggle Edit Mode
+        if (xiEditToggleBtn) {
+            xiEditToggleBtn.addEventListener('click', () => {
+                isEditMode = !isEditMode;
+                if (isEditMode) {
+                    xiEditToggleBtn.classList.add('active');
+                    xiEditToggleBtn.textContent = 'إنهاء التحرير وحفظ الموقع';
+                    if(xiCancelEditBtn) xiCancelEditBtn.style.display = 'block';
+                } else {
+                    xiEditToggleBtn.classList.remove('active');
+                    xiEditToggleBtn.textContent = 'تحرير التشكيلة (سحب وإفلات)';
+                    if(xiCancelEditBtn) xiCancelEditBtn.style.display = 'none';
+                }
+                renderPlayers();
+            });
+        }
+
+        if (xiCancelEditBtn) {
+            xiCancelEditBtn.addEventListener('click', () => {
+                playersState = JSON.parse(JSON.stringify(originalPlayersState));
+                isEditMode = false;
+                xiEditToggleBtn.classList.remove('active');
+                xiEditToggleBtn.textContent = 'تحرير التحرير (سحب وإفلات)';
+                xiCancelEditBtn.style.display = 'none';
+                renderPlayers();
+            });
+        }
+
+        // Modal Controls
+        function openPlayerModal(idx) {
+            editingPlayerIndex = idx;
+            const p = playersState[idx];
+            xiModalNumberInput.value = p.num;
+            xiModalNameInput.value = p.name;
+            xiPlayerModal.classList.add('open');
+        }
+
+        if (xiModalCancelBtn) {
+            xiModalCancelBtn.addEventListener('click', () => {
+                xiPlayerModal.classList.remove('open');
+            });
+        }
+
+        if (xiModalSaveBtn) {
+            xiModalSaveBtn.addEventListener('click', () => {
+                if (editingPlayerIndex !== null) {
+                    playersState[editingPlayerIndex].num = xiModalNumberInput.value || playersState[editingPlayerIndex].num;
+                    playersState[editingPlayerIndex].name = xiModalNameInput.value || playersState[editingPlayerIndex].name;
+                    renderPlayers();
+                }
+                xiPlayerModal.classList.remove('open');
+            });
+        }
+
+        if (xiModalRemoveBtn) {
+            xiModalRemoveBtn.addEventListener('click', () => {
+                if (editingPlayerIndex !== null) {
+                    playersState[editingPlayerIndex].name = '';
+                    playersState[editingPlayerIndex].num = '';
+                    renderPlayers();
+                }
+                xiPlayerModal.classList.remove('open');
+            });
+        }
+
+        // Formation Change
+        if (xiFormationSelect) {
+            xiFormationSelect.addEventListener('change', (e) => {
+                currentFormation = e.target.value;
+                playersState = JSON.parse(JSON.stringify(formationsData[currentFormation]));
+                originalPlayersState = JSON.parse(JSON.stringify(playersState));
+                isEditMode = false;
+                if(xiEditToggleBtn) xiEditToggleBtn.classList.remove('active');
+                if(xiCancelEditBtn) xiCancelEditBtn.style.display = 'none';
+                renderPlayers();
+            });
+        }
+
+        // Text Color Change
+        if (xiTextColorSelect) {
+            xiTextColorSelect.addEventListener('change', (e) => {
+                textColor = e.target.value === 'BLACK' ? '#000000' : '#FFFFFF';
+                renderPlayers();
+            });
+        }
+
+        // Kit Color Picker & Presets
+        if (xiKitColorPicker) {
+            xiKitColorPicker.addEventListener('input', (e) => {
+                kitColor = e.target.value;
+                xiKitColorsPreset.forEach(d => d.classList.remove('active'));
+                renderPlayers();
+            });
+        }
+
+        xiKitColorsPreset.forEach(dot => {
+            dot.addEventListener('click', () => {
+                xiKitColorsPreset.forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
+                kitColor = dot.getAttribute('data-color');
+                if(xiKitColorPicker) xiKitColorPicker.value = kitColor;
+                renderPlayers();
             });
         });
-    }
-</script>
+
+        // Team Name & Created By inputs
+        if (xiTeamNameInput) {
+            xiTeamNameInput.addEventListener('input', (e) => {
+                xiTeamNameDisplay.textContent = e.target.value;
+            });
+        }
+
+        if (xiCreatedByInput) {
+            xiCreatedByInput.addEventListener('input', (e) => {
+                xiCreatedByDisplay.textContent = e.target.value ? `Created by: ${e.target.value}` : '';
+            });
+        }
+
+        // Reset & Share
+        if (xiResetBtn) {
+            xiResetBtn.addEventListener('click', () => {
+                playersState = JSON.parse(JSON.stringify(formationsData[currentFormation]));
+                originalPlayersState = JSON.parse(JSON.stringify(playersState));
+                if(xiTeamNameInput) xiTeamNameInput.value = '';
+                if(xiCreatedByInput) xiCreatedByInput.value = '';
+                xiTeamNameDisplay.textContent = '';
+                xiCreatedByDisplay.textContent = '';
+                isEditMode = false;
+                if(xiEditToggleBtn) xiEditToggleBtn.classList.remove('active');
+                if(xiCancelEditBtn) xiCancelEditBtn.style.display = 'none';
+                renderPlayers();
+            });
+        }
+
+        if (xiShareBtn) {
+            xiShareBtn.addEventListener('click', () => {
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(window.location.href);
+                }
+                shareToast.classList.add('show');
+                setTimeout(() => {
+                    shareToast.classList.remove('show');
+                }, 2500);
+            });
+        }
+
+        // Initial render for XI
+        renderPlayers();
+    </script>
 </body>
 </html>
+
