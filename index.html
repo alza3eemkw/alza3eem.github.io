@@ -2132,7 +2132,18 @@
 
         // Initial render for XI
         renderPlayers();
+   
     </script>
+<script>
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('./service-worker.js')
+                .catch(error => {
+                    console.log('PWA service worker registration failed:', error);
+                });
+        });
+    }
+</script>
 </body>
 </html>
 
