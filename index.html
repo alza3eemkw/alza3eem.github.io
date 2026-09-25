@@ -10,6 +10,8 @@
     <meta name="theme-color" content="#0c1629">
     <title>منصة الزعيم الرياضية</title>
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- مكتبة html2canvas لالتقاط صورة التشكيلة وحفظها -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
             --primary: #008000;
@@ -46,7 +48,6 @@
             color: var(--text-light);
         }
 
-        /* Responsive App Container Framework */
         .iphone-frame {
             width: 100%;
             max-width: 600px;
@@ -74,7 +75,6 @@
             }
         }
 
-        /* Sticky Header */
         .sticky-header {
             position: sticky;
             top: 0;
@@ -137,12 +137,10 @@
             fill: currentColor;
         }
 
-        /* Top Navigation Bar */
         .top-nav-scroll {
             display: none;
         }
 
-        /* Side Drawer Navigation */
         .drawer-overlay {
             position: fixed;
             top: 0;
@@ -187,9 +185,10 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             padding-bottom: 14px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            flex-shrink: 0;
         }
 
         .drawer-title {
@@ -218,14 +217,29 @@
             border-color: rgba(239, 68, 68, 0.4);
         }
 
+        /* تحسين السكرول داخل قائمة الـ ثلاث خطوط لتجربة اسلس */
         .drawer-nav-container {
             flex: 1;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
             gap: 8px;
+            padding-left: 4px;
+            padding-right: 4px;
             scrollbar-width: thin;
             scrollbar-color: rgba(16, 185, 129, 0.3) transparent;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .drawer-nav-container::-webkit-scrollbar {
+            width: 4px;
+        }
+        .drawer-nav-container::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        .drawer-nav-container::-webkit-scrollbar-thumb {
+            background: rgba(16, 185, 129, 0.3);
+            border-radius: 4px;
         }
 
         .drawer-item {
@@ -283,6 +297,7 @@
             font-weight: 800;
             text-decoration: none;
             transition: all 0.25s ease;
+            flex-shrink: 0;
         }
 
         .drawer-footer-link:hover {
@@ -290,7 +305,6 @@
             box-shadow: 0 4px 15px var(--card-glow);
         }
 
-        /* Main App Body Content Area */
         .app-body {
             flex: 1;
             padding: 20px 16px 110px 16px;
@@ -306,7 +320,6 @@
             to { opacity: 1; transform: translateY(0); }
         }
 
-        /* Hero Banner */
         .hero-banner {
             background: linear-gradient(135deg, rgba(16, 37, 65, 0.9) 0%, rgba(9, 20, 38, 0.95) 100%),
                         radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
@@ -353,7 +366,6 @@
             font-weight: 700;
         }
 
-        /* Section Header with "View All" */
         .section-header-row {
             display: flex;
             justify-content: space-between;
@@ -388,7 +400,6 @@
             background: rgba(16, 185, 129, 0.2);
         }
 
-        /* Next Match Card */
         .next-match-card {
             background: linear-gradient(135deg, rgba(18, 30, 53, 0.9) 0%, rgba(10, 18, 35, 0.95) 100%);
             border: 1px solid rgba(16, 185, 129, 0.3);
@@ -477,7 +488,6 @@
             text-overflow: ellipsis;
         }
 
-        /* Services Grid */
         .services-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -547,7 +557,6 @@
             line-height: 1.3;
         }
 
-        /* News Preview Card */
         .news-preview-card {
             background: linear-gradient(135deg, rgba(18, 30, 53, 0.85) 0%, rgba(10, 18, 35, 0.9) 100%);
             border: 1px solid rgba(255, 255, 255, 0.08);
@@ -989,7 +998,6 @@
         #halha-logo { width: 70px; height: 70px; object-fit: contain; }
         #samar-logo { width: 75px; height: 75px; object-fit: contain; transform: scale(1.3); margin: 0 4px; }
 
-        /* Modern Floating Glass Dock (iOS Style) */
         .iphone-dock {
             position: fixed;
             bottom: 16px;
@@ -1046,24 +1054,6 @@
         .dock-item.active svg {
             transform: translateY(-2px);
             filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.4));
-        }
-
-        /* Side Drawer Custom Scroll inside the three dots list */
-        .drawer-nav-container {
-            max-height: calc(100vh - 180px);
-            overflow-y: auto;
-            padding-left: 4px;
-            padding-right: 4px;
-        }
-        .drawer-nav-container::-webkit-scrollbar {
-            width: 4px;
-        }
-        .drawer-nav-container::-webkit-scrollbar-track {
-            background: transparent;
-        }
-        .drawer-nav-container::-webkit-scrollbar-thumb {
-            background: rgba(16, 185, 129, 0.3);
-            border-radius: 4px;
         }
     </style>
 </head>
@@ -1713,7 +1703,6 @@
             `;
         }
 
-        // Build Your XI Logic & Native Share implementation
         const formations = {
             "4-3-3": [
                 {no:1, name:"حارس", x:50, y:88},
@@ -1823,13 +1812,15 @@
                 `;
 
                 if (!isEditMode) {
-                    node.addEventListener('click', () => openPlayerModal(index));
+                    node.addEventListener('click', () => {
+                        editingPlayerIndex = index;
+                        xiModalNumberInput.value = p.no;
+                        xiModalNameInput.value = p.name;
+                        xiPlayerModal.classList.add('open');
+                    });
                 }
                 xiPlayersContainer.appendChild(node);
             });
-
-            xiTeamNameDisplay.textContent = teamName;
-            xiCreatedByDisplay.textContent = createdBy ? `Created by: ${createdBy}` : '';
         }
 
         if (xiFormationSelect) {
@@ -1857,13 +1848,13 @@
 
         if (xiKitColorsPreset) {
             xiKitColorsPreset.addEventListener('click', (e) => {
-                if (e.target.classList.contains('xi-color-dot')) {
-                    document.querySelectorAll('.xi-color-dot').forEach(d => d.classList.remove('active'));
-                    e.target.classList.add('active');
-                    kitColor = e.target.getAttribute('data-color');
-                    if (xiKitColorPicker) xiKitColorPicker.value = kitColor;
-                    renderPlayers();
-                }
+                const dot = e.target.closest('.xi-color-dot');
+                if (!dot) return;
+                document.querySelectorAll('.xi-color-dot').forEach(d => d.classList.remove('active'));
+                dot.classList.add('active');
+                kitColor = dot.getAttribute('data-color');
+                if (xiKitColorPicker) xiKitColorPicker.value = kitColor;
+                renderPlayers();
             });
         }
 
@@ -1877,32 +1868,24 @@
         if (xiCreatedByInput) {
             xiCreatedByInput.addEventListener('input', (e) => {
                 createdBy = e.target.value;
-                xiCreatedByDisplay.textContent = createdBy ? `Created by: ${createdBy}` : '';
+                xiCreatedByDisplay.textContent = createdBy ? 'By: ' + createdBy : '';
             });
         }
 
         if (xiResetBtn) {
             xiResetBtn.addEventListener('click', () => {
                 currentPlayers = JSON.parse(JSON.stringify(formations[currentFormation]));
+                teamName = '';
+                createdBy = '';
+                if (xiTeamNameInput) xiTeamNameInput.value = '';
+                if (xiCreatedByInput) xiCreatedByInput.value = '';
+                xiTeamNameDisplay.textContent = '';
+                xiCreatedByDisplay.textContent = '';
                 renderPlayers();
             });
         }
 
-        function openPlayerModal(index) {
-            if (isEditMode) return;
-            editingPlayerIndex = index;
-            const p = currentPlayers[index];
-            xiModalNumberInput.value = p.no || '';
-            xiModalNameInput.value = p.name || '';
-            xiPlayerModal.classList.add('open');
-        }
-
-        if (xiModalCancelBtn) {
-            xiModalCancelBtn.addEventListener('click', () => {
-                xiPlayerModal.classList.remove('open');
-            });
-        }
-
+        if (xiModalCancelBtn) xiModalCancelBtn.addEventListener('click', () => xiPlayerModal.classList.remove('open'));
         if (xiModalRemoveBtn) {
             xiModalRemoveBtn.addEventListener('click', () => {
                 if (editingPlayerIndex !== null) {
@@ -1913,7 +1896,6 @@
                 xiPlayerModal.classList.remove('open');
             });
         }
-
         if (xiModalSaveBtn) {
             xiModalSaveBtn.addEventListener('click', () => {
                 if (editingPlayerIndex !== null) {
@@ -1925,87 +1907,133 @@
             });
         }
 
-        // Drag & Drop functionality for Edit mode
+        // تحرير السحب والإفلات للتشكيلة
         let activeDragNode = null;
-        let dragStartIndex = null;
-        const xiPitchWrapper = document.getElementById('xiPitchWrapper');
+        let dragOffsetX = 0;
+        let dragOffsetY = 0;
 
         if (xiEditToggleBtn) {
             xiEditToggleBtn.addEventListener('click', () => {
                 isEditMode = true;
-                xiEditToggleBtn.classList.add('active');
-                if (xiCancelEditBtn) xiCancelEditBtn.style.display = 'block';
-                xiEditToggleBtn.textContent = 'وضع التعديل مفعل (اسحب اللاعبين)';
-                renderPlayers();
-                initDragAndDrop();
+                xiEditToggleBtn.style.display = 'none';
+                xiCancelEditBtn.style.display = 'block';
+                setupDragAndDrop();
             });
         }
 
         if (xiCancelEditBtn) {
             xiCancelEditBtn.addEventListener('click', () => {
                 isEditMode = false;
-                xiEditToggleBtn.classList.remove('active');
-                xiEditToggleBtn.textContent = 'تحرير التشكيلة (سحب وإفلات)';
-                if (xiCancelEditBtn) xiCancelEditBtn.style.display = 'none';
+                xiEditToggleBtn.style.display = 'block';
+                xiCancelEditBtn.style.display = 'none';
                 renderPlayers();
             });
         }
 
-        function initDragAndDrop() {
-            if (!xiPitchWrapper) return;
-            const nodes = xiPitchWrapper.querySelectorAll('.xi-player-node');
+        function setupDragAndDrop() {
+            renderPlayers();
+            const pitchWrapper = document.getElementById('xiPitchWrapper');
+            if (!pitchWrapper) return;
+
+            const nodes = xiPlayersContainer.querySelectorAll('.xi-player-node');
             nodes.forEach(node => {
-                const onStart = (e) => {
+                const onStart = (clientX, clientY) => {
                     if (!isEditMode) return;
-                    e.preventDefault();
                     activeDragNode = node;
-                    dragStartIndex = parseInt(node.getAttribute('data-index'));
+                    const rect = pitchWrapper.getBoundingClientRect();
+                    // السماح بالسحب الطبيعي
                 };
 
-                node.addEventListener('touchstart', onStart, { passive: false });
-                node.addEventListener('mousedown', onStart);
+                node.addEventListener('touchstart', (e) => {
+                    onStart(e.touches[0].clientX, e.touches[0].clientY);
+                }, {passive: true});
+
+                node.addEventListener('mousedown', (e) => {
+                    onStart(e.clientX, e.clientY);
+                });
             });
+
+            const onMove = (clientX, clientY) => {
+                if (!activeDragNode || !isEditMode) return;
+                const rect = pitchWrapper.getBoundingClientRect();
+                let x = ((clientX - rect.left) / rect.width) * 100;
+                let y = ((clientY - rect.top) / rect.height) * 100;
+                x = Math.max(5, Math.min(95, x));
+                y = Math.max(5, Math.min(95, y));
+
+                activeDragNode.style.left = x + '%';
+                activeDragNode.style.top = y + '%';
+                const index = activeDragNode.getAttribute('data-index');
+                currentPlayers[index].x = x;
+                currentPlayers[index].y = y;
+            };
+
+            window.addEventListener('touchmove', (e) => {
+                if (activeDragNode) onMove(e.touches[0].clientX, e.touches[0].clientY);
+            }, {passive: true});
+
+            window.addEventListener('mousemove', (e) => {
+                if (activeDragNode) onMove(e.clientX, e.clientY);
+            });
+
+            const onEnd = () => {
+                activeDragNode = null;
+            };
+
+            window.addEventListener('touchend', onEnd);
+            window.addEventListener('mouseup', onEnd);
         }
 
-        function onMove(clientX, clientY) {
-            if (!activeDragNode || !xiPitchWrapper) return;
-            const rect = xiPitchWrapper.getBoundingClientRect();
-            let x = ((clientX - rect.left) / rect.width) * 100;
-            let y = ((clientY - rect.top) / rect.height) * 100;
-
-            x = Math.max(5, Math.min(95, x));
-            y = Math.max(5, Math.min(95, y));
-
-            activeDragNode.style.left = x + '%';
-            activeDragNode.style.top = y + '%';
-
-            if (dragStartIndex !== null) {
-                currentPlayers[dragStartIndex].x = Math.round(x);
-                currentPlayers[dragStartIndex].y = Math.round(y);
-            }
-        }
-
-        window.addEventListener('mousemove', (e) => {
-            if (activeDragNode) onMove(e.clientX, e.clientY);
-        });
-
-        window.addEventListener('touchmove', (e) => {
-            if (activeDragNode && e.touches.length > 0) {
-                onMove(e.touches[0].clientX, e.touches[0].clientY);
-            }
-        }, { passive: false });
-
-        function onEnd() {
-            activeDragNode = null;
-            dragStartIndex = null;
-        }
-
-        window.addEventListener('mouseup', onEnd);
-        window.addEventListener('touchend', onEnd);
-
+        // تفعيل زر المشاركة والحفظ (SHARE) ليعمل بشكل كامل وطبيعي
         if (xiShareBtn) {
-            xiShareBtn.addEventListener('click', () => {
-                alert('جاهز للمشاركة! تم تطبيق إعدادات التشكيلة الخاصة بك.');
+            xiShareBtn.addEventListener('click', async () => {
+                const pitchWrapper = document.getElementById('xiPitchWrapper');
+                if (!pitchWrapper) return;
+
+                // إظهار تنبيه بسيط أو تغيير حالة الزر أثناء المعالجة
+                xiShareBtn.textContent = 'جاري تجهيز الصورة...';
+                xiShareBtn.disabled = true;
+
+                try {
+                    const canvas = await html2canvas(pitchWrapper, {
+                        scale: 2,
+                        useCORS: true,
+                        backgroundColor: null
+                    });
+
+                    canvas.toBlob(async (blob) => {
+                        xiShareBtn.textContent = 'SHARE';
+                        xiShareBtn.disabled = false;
+
+                        if (!blob) return;
+                        const file = new File([blob], "Alza3eem-Lineup.png", { type: "image/png" });
+
+                        // محاولة المشاركة عبر واجهة المشاركة الأصلية للمتصفح (Web Share API)
+                        if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                            try {
+                                await navigator.share({
+                                    title: 'تشكيلة النادي العربي',
+                                    text: 'تشكيلتي عبر منصة الزعيم الرياضية ⚽️💚',
+                                    files: [file]
+                                });
+                                return;
+                            } catch (err) {
+                                if (err.name !== 'AbortError') console.log(err);
+                            }
+                        }
+
+                        // الحل البديل: تحميل الصورة مباشرة للأجهزة التي لا تدعم المشاركة المباشرة
+                        const link = document.createElement('a');
+                        link.download = 'Alza3eem-Lineup.png';
+                        link.href = URL.createObjectURL(blob);
+                        link.click();
+                    }, 'image/png');
+
+                } catch (error) {
+                    xiShareBtn.textContent = 'SHARE';
+                    xiShareBtn.disabled = false;
+                    alert('تعذر حفظ الصورة، يرجى المحاولة مرة أخرى.');
+                }
             });
         }
 
