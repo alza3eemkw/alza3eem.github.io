@@ -2112,5 +2112,830 @@
     setInterval(updateNextMatch, 30000);
 })();
     </script>
+    <!-- =========================================================
+     ALZAEEM LIVE MATCH CENTER
+     ADD-ONLY BLOCK — لا يحذف أو يعدل أي شيء موجود
+========================================================= -->
+
+<style>
+#azLiveCenter {
+    margin: 18px 0 90px;
+    direction: rtl;
+    font-family: 'Cairo', sans-serif;
+}
+
+#azLiveCenter .az-live-card {
+    background: linear-gradient(145deg, rgba(15,23,42,.96), rgba(7,18,34,.98));
+    border: 1px solid rgba(74,222,128,.16);
+    border-radius: 22px;
+    padding: 18px;
+    box-shadow: 0 15px 45px rgba(0,0,0,.25);
+    overflow: hidden;
+}
+
+#azLiveCenter .az-live-title {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:10px;
+    margin-bottom:16px;
+}
+
+#azLiveCenter .az-live-title strong {
+    font-size:1rem;
+    font-weight:900;
+}
+
+#azLiveCenter .az-live-badge {
+    display:inline-flex;
+    align-items:center;
+    gap:6px;
+    padding:5px 10px;
+    border-radius:999px;
+    background:rgba(148,163,184,.10);
+    color:#cbd5e1;
+    font-size:.68rem;
+    font-weight:800;
+}
+
+#azLiveCenter .az-live-badge.live {
+    background:rgba(239,68,68,.12);
+    color:#f87171;
+}
+
+#azLiveCenter .az-live-badge.live::before {
+    content:"";
+    width:7px;
+    height:7px;
+    border-radius:50%;
+    background:#ef4444;
+    box-shadow:0 0 10px rgba(239,68,68,.8);
+}
+
+#azLiveCenter .az-score {
+    display:grid;
+    grid-template-columns:1fr auto 1fr;
+    align-items:center;
+    gap:12px;
+    text-align:center;
+    padding:14px 0 18px;
+}
+
+#azLiveCenter .az-team {
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    gap:7px;
+}
+
+#azLiveCenter .az-team-name {
+    font-size:.88rem;
+    font-weight:900;
+}
+
+#azLiveCenter .az-team-label {
+    font-size:.62rem;
+    color:#94a3b8;
+}
+
+#azLiveCenter .az-score-number {
+    font-size:2.1rem;
+    line-height:1;
+    font-weight:1000;
+    letter-spacing:2px;
+}
+
+#azLiveCenter .az-match-status {
+    margin-top:7px;
+    font-size:.68rem;
+    color:#94a3b8;
+    font-weight:800;
+}
+
+#azLiveCenter .az-divider {
+    height:1px;
+    background:rgba(255,255,255,.07);
+    margin:2px 0 16px;
+}
+
+#azLiveCenter .az-section-heading {
+    font-size:.78rem;
+    font-weight:900;
+    margin:0 0 10px;
+    color:#e2e8f0;
+}
+
+#azLiveCenter .az-events {
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+    margin-bottom:18px;
+}
+
+#azLiveCenter .az-event {
+    display:flex;
+    align-items:center;
+    gap:9px;
+    background:rgba(255,255,255,.035);
+    border-radius:12px;
+    padding:9px 11px;
+    font-size:.69rem;
+}
+
+#azLiveCenter .az-event-minute {
+    min-width:32px;
+    font-weight:900;
+    color:#4ade80;
+}
+
+#azLiveCenter .az-event-icon {
+    width:24px;
+    text-align:center;
+    font-size:1rem;
+}
+
+#azLiveCenter .az-event-text {
+    flex:1;
+    font-weight:700;
+}
+
+#azLiveCenter .az-event-team {
+    color:#94a3b8;
+    font-size:.6rem;
+}
+
+#azLiveCenter .az-empty {
+    padding:13px;
+    border-radius:12px;
+    background:rgba(255,255,255,.035);
+    color:#94a3b8;
+    text-align:center;
+    font-size:.68rem;
+}
+
+#azLiveCenter .az-stats {
+    display:grid;
+    grid-template-columns:1fr;
+    gap:7px;
+}
+
+#azLiveCenter .az-stat {
+    background:rgba(255,255,255,.035);
+    border-radius:12px;
+    padding:9px 11px;
+}
+
+#azLiveCenter .az-stat-row {
+    display:grid;
+    grid-template-columns:42px 1fr 42px;
+    align-items:center;
+    gap:8px;
+    text-align:center;
+}
+
+#azLiveCenter .az-stat-home,
+#azLiveCenter .az-stat-away {
+    font-weight:900;
+    font-size:.72rem;
+}
+
+#azLiveCenter .az-stat-name {
+    color:#94a3b8;
+    font-size:.6rem;
+    font-weight:800;
+}
+
+#azLiveCenter .az-loading {
+    text-align:center;
+    color:#94a3b8;
+    font-size:.7rem;
+    padding:15px 5px;
+}
+
+#azLiveCenter .az-error {
+    color:#fca5a5;
+    background:rgba(239,68,68,.08);
+    border-radius:12px;
+    padding:12px;
+    font-size:.68rem;
+    text-align:center;
+}
+
+#azLiveCenter .az-last-update {
+    margin-top:13px;
+    text-align:center;
+    color:#64748b;
+    font-size:.55rem;
+}
+</style>
+
+<div id="azLiveCenter">
+    <div class="section-title" style="margin-bottom:16px;">
+        مركز المباراة
+    </div>
+
+    <div class="az-live-card">
+
+        <div class="az-live-title">
+            <strong>العربي × كاظمة</strong>
+            <span id="azLiveBadge" class="az-live-badge">
+                لم تبدأ
+            </span>
+        </div>
+
+        <div class="az-score">
+
+            <div class="az-team">
+                <div class="az-team-name" id="azHomeTeam">
+                    كاظمة
+                </div>
+                <div class="az-team-label">
+                    المضيف
+                </div>
+            </div>
+
+            <div>
+                <div class="az-score-number" id="azScore">
+                    - : -
+                </div>
+
+                <div class="az-match-status" id="azMinute">
+                    بانتظار المباراة
+                </div>
+            </div>
+
+            <div class="az-team">
+                <div class="az-team-name" id="azAwayTeam">
+                    العربي
+                </div>
+                <div class="az-team-label">
+                    الضيف
+                </div>
+            </div>
+
+        </div>
+
+        <div class="az-divider"></div>
+
+        <div class="az-section-heading">
+            أحداث المباراة
+        </div>
+
+        <div id="azEvents" class="az-events">
+            <div class="az-loading">
+                جاري انتظار بيانات المباراة...
+            </div>
+        </div>
+
+        <div class="az-section-heading">
+            إحصائيات المباراة
+        </div>
+
+        <div id="azStats" class="az-stats">
+            <div class="az-empty">
+                الإحصائيات تظهر أثناء المباراة
+            </div>
+        </div>
+
+        <div id="azLastUpdate" class="az-last-update">
+            —
+        </div>
+
+    </div>
+</div>
+
+<script>
+(function () {
+
+    "use strict";
+
+    const AZ_API =
+        "https://alzaeem-anysport.vercel.app/api/anysport";
+
+    const AZ_MATCH_ID =
+        "as_7bf8b2f511a6438ca2619014b95338ee";
+
+    const homeTeamEl =
+        document.getElementById("azHomeTeam");
+
+    const awayTeamEl =
+        document.getElementById("azAwayTeam");
+
+    const scoreEl =
+        document.getElementById("azScore");
+
+    const minuteEl =
+        document.getElementById("azMinute");
+
+    const badgeEl =
+        document.getElementById("azLiveBadge");
+
+    const eventsEl =
+        document.getElementById("azEvents");
+
+    const statsEl =
+        document.getElementById("azStats");
+
+    const updateEl =
+        document.getElementById("azLastUpdate");
+
+    if (!homeTeamEl || !awayTeamEl || !scoreEl) {
+        return;
+    }
+
+    function escapeHTML(value) {
+        return String(value ?? "")
+            .replace(/&/g, "&amp;")
+            .replace(/</g, "&lt;")
+            .replace(/>/g, "&gt;")
+            .replace(/"/g, "&quot;")
+            .replace(/'/g, "&#039;");
+    }
+
+    function setBadge(text, live) {
+        badgeEl.textContent = text;
+
+        if (live) {
+            badgeEl.classList.add("live");
+        } else {
+            badgeEl.classList.remove("live");
+        }
+    }
+
+    function getStatusText(data) {
+
+        const phase =
+            String(data?.phase || "").toLowerCase();
+
+        const minute =
+            data?.minute;
+
+        if (phase === "finished") {
+            return {
+                text: "انتهت",
+                live: false
+            };
+        }
+
+        if (phase === "extra_time") {
+            return {
+                text: "أشواط إضافية",
+                live: true
+            };
+        }
+
+        if (phase === "penalty") {
+            return {
+                text: "ركلات الترجيح",
+                live: true
+            };
+        }
+
+        if (
+            minute !== undefined &&
+            minute !== null &&
+            minute !== ""
+        ) {
+            return {
+                text: `${minute}'`,
+                live: true
+            };
+        }
+
+        return {
+            text: "مباشرة",
+            live: true
+        };
+    }
+
+    async function getJSON(url) {
+
+        const response =
+            await fetch(
+                url,
+                {
+                    method: "GET",
+                    cache: "no-store"
+                }
+            );
+
+        const data =
+            await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data?.error?.message ||
+                "API Error"
+            );
+        }
+
+        return data;
+    }
+
+    function renderLive(data) {
+
+        const match =
+            data?.data?.match ||
+            data?.data ||
+            data?.match ||
+            {};
+
+        const home =
+            match?.home;
+
+        const away =
+            match?.away;
+
+        const homeName =
+            typeof home === "object"
+                ? home?.name
+                : home;
+
+        const awayName =
+            typeof away === "object"
+                ? away?.name
+                : away;
+
+        if (homeName) {
+            homeTeamEl.textContent =
+                homeName;
+        }
+
+        if (awayName) {
+            awayTeamEl.textContent =
+                awayName;
+        }
+
+        const homeScore =
+            match?.home_score ??
+            match?.homeScore ??
+            match?.score?.home ??
+            0;
+
+        const awayScore =
+            match?.away_score ??
+            match?.awayScore ??
+            match?.score?.away ??
+            0;
+
+        scoreEl.textContent =
+            `${homeScore} : ${awayScore}`;
+
+        const status =
+            getStatusText(match);
+
+        minuteEl.textContent =
+            status.text;
+
+        setBadge(
+            status.live
+                ? "مباشرة"
+                : status.text,
+            status.live
+        );
+    }
+
+    function normalizeEvents(data) {
+
+        const events =
+            data?.data?.events ||
+            data?.data?.situation ||
+            data?.events ||
+            [];
+
+        return Array.isArray(events)
+            ? events
+            : [];
+    }
+
+    function eventIcon(type) {
+
+        const value =
+            String(type || "").toLowerCase();
+
+        if (value.includes("goal")) {
+            return "⚽";
+        }
+
+        if (value.includes("yellow")) {
+            return "🟨";
+        }
+
+        if (value.includes("red")) {
+            return "🟥";
+        }
+
+        if (value.includes("corner")) {
+            return "🚩";
+        }
+
+        if (value.includes("penalty")) {
+            return "⚽";
+        }
+
+        if (value.includes("substitution")) {
+            return "🔄";
+        }
+
+        return "•";
+    }
+
+    function eventName(type) {
+
+        const value =
+            String(type || "").toLowerCase();
+
+        if (value.includes("goal")) {
+            return "هدف";
+        }
+
+        if (value.includes("yellow")) {
+            return "بطاقة صفراء";
+        }
+
+        if (value.includes("red")) {
+            return "بطاقة حمراء";
+        }
+
+        if (value.includes("corner")) {
+            return "ركنية";
+        }
+
+        if (value.includes("penalty")) {
+            return "ركلة جزاء";
+        }
+
+        if (value.includes("substitution")) {
+            return "تبديل";
+        }
+
+        return "حدث";
+    }
+
+    function renderEvents(data) {
+
+        const events =
+            normalizeEvents(data);
+
+        if (!events.length) {
+
+            eventsEl.innerHTML =
+                `<div class="az-empty">
+                    لا توجد أحداث حتى الآن
+                </div>`;
+
+            return;
+        }
+
+        eventsEl.innerHTML =
+            events.map(event => {
+
+                const type =
+                    event?.type ||
+                    event?.event_type ||
+                    event?.kind ||
+                    "event";
+
+                const minute =
+                    event?.minute ??
+                    event?.time ??
+                    "";
+
+                const player =
+                    event?.player_name ||
+                    event?.player ||
+                    event?.name ||
+                    "";
+
+                const team =
+                    event?.team_name ||
+                    event?.team ||
+                    "";
+
+                return `
+                    <div class="az-event">
+
+                        <div class="az-event-minute">
+                            ${escapeHTML(minute)}
+                        </div>
+
+                        <div class="az-event-icon">
+                            ${eventIcon(type)}
+                        </div>
+
+                        <div class="az-event-text">
+                            ${escapeHTML(
+                                player ||
+                                eventName(type)
+                            )}
+                        </div>
+
+                        <div class="az-event-team">
+                            ${escapeHTML(team)}
+                        </div>
+
+                    </div>
+                `;
+
+            }).join("");
+    }
+
+    function statLabel(key) {
+
+        const labels = {
+
+            c: "الركنيات",
+            corners: "الركنيات",
+
+            possession: "الاستحواذ",
+
+            shots: "التسديدات",
+            shots_on_target:
+                "التسديدات على المرمى",
+
+            fouls: "الأخطاء",
+
+            offsides: "التسلل",
+
+            yellow_cards:
+                "البطاقات الصفراء",
+
+            red_cards:
+                "البطاقات الحمراء",
+
+            penalties:
+                "ركلات الجزاء",
+
+            attacks: "الهجمات",
+
+            dangerous_attacks:
+                "الهجمات الخطرة"
+        };
+
+        return labels[key] ||
+            String(key)
+                .replace(/_/g, " ");
+    }
+
+    function renderStats(data) {
+
+        const stats =
+            data?.data?.stats ||
+            data?.stats ||
+            {};
+
+        const entries =
+            Object.entries(stats);
+
+        if (!entries.length) {
+
+            statsEl.innerHTML =
+                `<div class="az-empty">
+                    لا توجد إحصائيات متاحة حتى الآن
+                </div>`;
+
+            return;
+        }
+
+        statsEl.innerHTML =
+            entries.map(([key, value]) => {
+
+                let home = "-";
+                let away = "-";
+
+                if (Array.isArray(value)) {
+
+                    home =
+                        value[0] ?? "-";
+
+                    away =
+                        value[1] ?? "-";
+
+                } else if (
+                    typeof value === "object" &&
+                    value !== null
+                ) {
+
+                    home =
+                        value.home ??
+                        value.home_value ??
+                        "-";
+
+                    away =
+                        value.away ??
+                        value.away_value ??
+                        "-";
+                }
+
+                return `
+                    <div class="az-stat">
+
+                        <div class="az-stat-row">
+
+                            <div class="az-stat-home">
+                                ${escapeHTML(home)}
+                            </div>
+
+                            <div class="az-stat-name">
+                                ${escapeHTML(
+                                    statLabel(key)
+                                )}
+                            </div>
+
+                            <div class="az-stat-away">
+                                ${escapeHTML(away)}
+                            </div>
+
+                        </div>
+
+                    </div>
+                `;
+
+            }).join("");
+    }
+
+    async function updateLive() {
+
+        try {
+
+            const live =
+                await getJSON(
+                    `${AZ_API}?action=live&match_id=${encodeURIComponent(AZ_MATCH_ID)}`
+                );
+
+            renderLive(live);
+
+            updateEl.textContent =
+                "آخر تحديث: " +
+                new Date().toLocaleTimeString(
+                    "ar-KW",
+                    {
+                        hour: "2-digit",
+                        minute: "2-digit"
+                    }
+                );
+
+        } catch (error) {
+
+            console.warn(
+                "Alzaeem Live Score:",
+                error
+            );
+        }
+    }
+
+    async function updateSituation() {
+
+        try {
+
+            const situation =
+                await getJSON(
+                    `${AZ_API}?action=situation&match_id=${encodeURIComponent(AZ_MATCH_ID)}`
+                );
+
+            renderEvents(situation);
+            renderStats(situation);
+
+        } catch (error) {
+
+            console.warn(
+                "Alzaeem Situation:",
+                error
+            );
+        }
+    }
+
+    async function initialLoad() {
+
+        await updateLive();
+
+        await new Promise(
+            resolve =>
+                setTimeout(resolve, 1200)
+        );
+
+        await updateSituation();
+    }
+
+    initialLoad();
+
+    /*
+      تجربة Free Trial:
+      تحديث كل 60 ثانية.
+      WebSocket غير مستخدم هنا.
+    */
+
+    setInterval(
+        updateLive,
+        60000
+    );
+
+    setInterval(
+        updateSituation,
+        60000
+    );
+
+})();
+</script>
 </body>
 </html>
