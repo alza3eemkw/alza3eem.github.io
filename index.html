@@ -1113,6 +1113,12 @@
 .azm-live-stat-name { font-size:.51rem; color:#64748b; font-weight:800; }
 .azm-live-updated { margin-top:8px; text-align:center; color:#475569; font-size:.48rem; }
 
+    
+/* MATCH CENTER VISUAL OVERRIDE */
+.next-match-card{background:linear-gradient(180deg,#111d35 0%,#0b1529 100%) !important;border:1px solid rgba(74,222,128,.25) !important;border-radius:24px !important;padding:14px !important;box-shadow:0 14px 35px rgba(0,0,0,.28) !important;overflow:hidden}
+.azm-fm-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:12px;direction:rtl}.azm-fm-league{font-size:.68rem;color:#a8b6cc;font-weight:800}.azm-fm-status{font-size:.62rem;font-weight:900;color:#cbd5e1;background:rgba(148,163,184,.09);border:1px solid rgba(148,163,184,.12);padding:5px 9px;border-radius:999px;white-space:nowrap}.azm-fm-status.live{color:#f87171;background:rgba(239,68,68,.1)}.azm-fm-status.finished{color:#4ade80;background:rgba(74,222,128,.08)}
+.azm-fm-teams{display:grid;grid-template-columns:1fr 96px 1fr;align-items:center;gap:8px;text-align:center;direction:ltr;padding:16px 8px 18px;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.06);border-radius:19px}.azm-fm-team{min-width:0;display:flex;flex-direction:column;align-items:center;gap:8px}.azm-fm-badge{width:48px;height:48px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(74,222,128,.12);border:1px solid rgba(74,222,128,.25);color:#4ade80;font-size:1rem;font-weight:1000}.azm-fm-team.opponent .azm-fm-badge{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1);color:#e2e8f0}.azm-fm-name{font-size:.9rem;font-weight:950;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}.azm-fm-center{display:flex;flex-direction:column;align-items:center;justify-content:center;direction:rtl}.azm-fm-center-main{font-size:1.55rem;line-height:1;font-weight:1000;color:#fff}.azm-fm-center-sub{margin-top:7px;font-size:.58rem;color:#94a3b8;font-weight:800}.azm-fm-meta{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:10px;direction:rtl}.azm-fm-meta-item{padding:9px 6px;text-align:center;background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.055);border-radius:13px;min-width:0}.azm-fm-meta-label{font-size:.56rem;color:#71809a;font-weight:800;margin-bottom:4px}.azm-fm-meta-value{font-size:.68rem;color:#fff;font-weight:900;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.azm-fm-tabs{display:grid;grid-template-columns:repeat(3,1fr);gap:5px;margin-top:10px;direction:rtl}.azm-fm-tab{padding:8px 4px;text-align:center;border-radius:10px;background:rgba(255,255,255,.025);color:#94a3b8;font-size:.57rem;font-weight:900;border:1px solid rgba(255,255,255,.04)}.azm-fm-tab.active{color:#4ade80;background:rgba(74,222,128,.07)}.azm-fm-livebox{margin-top:10px;padding:11px;border-radius:15px;background:rgba(0,0,0,.13);border:1px solid rgba(255,255,255,.05)}.azm-fm-livebox[hidden]{display:none!important}.azm-fm-live-row{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:7px;text-align:center;direction:ltr}.azm-fm-live-team{font-size:.68rem;font-weight:900;color:#e2e8f0}.azm-fm-live-score{font-size:1.35rem;font-weight:1000;color:#fff}.azm-fm-live-minute{font-size:.55rem;color:#94a3b8;font-weight:800;margin-top:3px}.azm-fm-note{margin-top:9px;text-align:center;color:#64748b;font-size:.52rem;font-weight:800}
+
     </style>
 </head>
 <body>
@@ -1226,45 +1232,7 @@
                     </button>
                 </div>
 
-                <div class="next-match-card">
-                    <div class="next-match-teams">
-                        <div class="team-block">
-                            <span class="team-name-badge primary-team">العربي</span>
-                        </div>
-                        <div class="match-center-info">
-                            <span class="match-time-text">VS</span>
-                            <span class="match-tournament-tag">دوري زين الجولة 4</span>
-                        </div>
-                        <div class="team-block">
-                            <span class="team-name-badge">كاظمة</span>
-                        </div>
-                    </div>
-
-                    <div class="azm-live-strip" id="azmHomeLiveStrip">
-                        <div class="azm-live-strip-main">
-                            <span class="azm-live-dot"></span>
-                            <span class="azm-live-strip-label" id="azmHomeStatus">بعد 7 أيام</span>
-                        </div>
-                        <span class="azm-live-strip-score" id="azmHomeScore">8:05pm</span>
-                        <span class="azm-live-strip-note" id="azmHomeCountdown">9/10/2026</span>
-                    </div>
-
-                    <div class="match-info-grid">
-                        <div class="match-info-item">
-                            <div class="match-info-label">التاريخ</div>
-                            <div class="match-info-value">9/10/2026</div>
-                        </div>
-                        <div class="match-info-item">
-                            <div class="match-info-label">الوقت</div>
-                            <div class="match-info-value">8:05pm</div>
-                        </div>
-                        <div class="match-info-item">
-                            <div class="match-info-label">الملعب</div>
-                            <div class="match-info-value">الصداقة والسلام</div>
-                        </div>
-                    </div>
-                </div>
-
+                <div class="next-match-card"><div class="azm-fm-head"><span class="azm-fm-league" id="azmHomeTournament">دوري زين · الجولة 4</span><span class="azm-fm-status" id="azmHomeStatus">بعد 7 أيام</span></div><div class="azm-fm-teams"><div class="azm-fm-team"><div class="azm-fm-badge">ع</div><div class="azm-fm-name">العربي</div></div><div class="azm-fm-center"><div class="azm-fm-center-main" id="azmHomeScore">8:05pm</div><div class="azm-fm-center-sub" id="azmHomeCountdown">9/10/2026</div></div><div class="azm-fm-team opponent"><div class="azm-fm-badge">ك</div><div class="azm-fm-name" id="azmHomeOpponent">كاظمة</div></div></div><div class="azm-fm-meta"><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">التاريخ</div><div class="azm-fm-meta-value" id="azmHomeDate">9/10/2026</div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الملعب</div><div class="azm-fm-meta-value" id="azmHomeVenue">الصداقة والسلام</div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الوقت</div><div class="azm-fm-meta-value" id="azmHomeTime">8:05pm</div></div></div><div class="azm-fm-tabs"><div class="azm-fm-tab active">نظرة عامة</div><div class="azm-fm-tab">الأحداث</div><div class="azm-fm-tab">الإحصائيات</div></div><div class="azm-fm-livebox" id="azmHomeLiveBox" hidden><div class="azm-fm-live-row"><div class="azm-fm-live-team" id="azmHomeLiveHome">كاظمة</div><div><div class="azm-fm-live-score" id="azmHomeLiveScore">- : -</div><div class="azm-fm-live-minute" id="azmHomeLiveMinute">—</div></div><div class="azm-fm-live-team">العربي</div></div><div class="azm-fm-note" id="azmHomeLiveNote">آخر تحديث —</div></div></div>
                 <div class="section-header-row">
                     <div class="section-title">خدمات المنصة</div>
                 </div>
@@ -1340,74 +1308,7 @@
             <div id="next-match" class="content">
                 <div class="section-title" style="margin-bottom: 16px;">المباراة القادمة</div>
 
-                <div class="next-match-card">
-                    <div class="next-match-teams">
-                        <div class="team-block">
-                            <span class="team-name-badge primary-team">العربي</span>
-                        </div>
-                        <div class="match-center-info">
-                            <span class="match-time-text">VS</span>
-                            <span class="match-tournament-tag" id="matchOpponentDisplay">دوري زين الجولة 4</span>
-                        </div>
-                        <div class="team-block">
-                            <span class="team-name-badge" id="matchTimeDisplay">كاظمة</span>
-                        </div>
-                    </div>
-
-                    <div class="azm-live-strip" id="azmDetailLiveStrip">
-                        <div class="azm-live-strip-main">
-                            <span class="azm-live-dot"></span>
-                            <span class="azm-live-strip-label" id="azmDetailStatus">بعد 7 أيام</span>
-                        </div>
-                        <span class="azm-live-strip-score" id="azmDetailScore">8:05pm</span>
-                        <span class="azm-live-strip-note" id="azmDetailCountdown">9/10/2026</span>
-                    </div>
-
-                    <div class="match-info-grid">
-                        <div class="match-info-item">
-                            <div class="match-info-label">التاريخ</div>
-                            <div class="match-info-value" id="matchDateDisplay">9/10/2026</div>
-                        </div>
-                        <div class="match-info-item">
-                            <div class="match-info-label">الوقت</div>
-                            <div class="match-info-value" id="matchDayDisplay">8:05pm</div>
-                        </div>
-                        <div class="match-info-item">
-                            <div class="match-info-label">الملعب</div>
-                            <div class="match-info-value" id="matchStadiumDisplay">الصداقة والسلام</div>
-                        </div>
-                    </div>
-
-                    <div class="azm-live-panel" id="azmLivePanel" hidden>
-                        <div class="azm-live-status" id="azmLiveStatus">لم تبدأ</div>
-
-                        <div class="azm-live-top">
-                            <div class="azm-live-team" id="azmLiveHome">كاظمة</div>
-                            <div>
-                                <div class="azm-live-score" id="azmLiveScore">- : -</div>
-                                <div class="azm-live-minute" id="azmLiveMinute">—</div>
-                            </div>
-                            <div class="azm-live-team" id="azmLiveAway">العربي</div>
-                        </div>
-
-                        <div class="azm-live-divider"></div>
-
-                        <div class="azm-live-heading">أحداث المباراة</div>
-                        <div class="azm-live-events" id="azmLiveEvents">
-                            <div class="azm-live-empty">لا توجد أحداث حتى الآن</div>
-                        </div>
-
-                        <div class="azm-live-divider"></div>
-
-                        <div class="azm-live-heading">إحصائيات المباراة</div>
-                        <div class="azm-live-stats" id="azmLiveStats">
-                            <div class="azm-live-empty">لا توجد إحصائيات حتى الآن</div>
-                        </div>
-
-                        <div class="azm-live-updated" id="azmLiveUpdated">—</div>
-                    </div>
-                </div>
-
+                <div class="next-match-card"><div class="azm-fm-head"><span class="azm-fm-league" id="matchOpponentDisplay">دوري زين · الجولة 4</span><span class="azm-fm-status" id="azmDetailStatus">بعد 7 أيام</span></div><div class="azm-fm-teams"><div class="azm-fm-team"><div class="azm-fm-badge">ع</div><div class="azm-fm-name">العربي</div></div><div class="azm-fm-center"><div class="azm-fm-center-main" id="azmDetailScore">8:05pm</div><div class="azm-fm-center-sub" id="azmDetailCountdown">9/10/2026</div></div><div class="azm-fm-team opponent"><div class="azm-fm-badge">ك</div><div class="azm-fm-name" id="matchTimeDisplay">كاظمة</div></div></div><div class="azm-fm-meta"><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">التاريخ</div><div class="azm-fm-meta-value" id="matchDateDisplay">9/10/2026</div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الملعب</div><div class="azm-fm-meta-value" id="matchStadiumDisplay">الصداقة والسلام</div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الوقت</div><div class="azm-fm-meta-value" id="matchDayDisplay">8:05pm</div></div></div><div class="azm-fm-tabs"><div class="azm-fm-tab active">نظرة عامة</div><div class="azm-fm-tab">الأحداث</div><div class="azm-fm-tab">الإحصائيات</div></div><div class="azm-fm-livebox" id="azmDetailLiveBox" hidden><div class="azm-fm-live-row"><div class="azm-fm-live-team" id="azmLiveHome">كاظمة</div><div><div class="azm-fm-live-score" id="azmLiveScore">- : -</div><div class="azm-fm-live-minute" id="azmLiveMinute">—</div></div><div class="azm-fm-live-team" id="azmLiveAway">العربي</div></div><div class="azm-fm-note" id="azmLiveUpdated">آخر تحديث —</div></div><div class="azm-live-panel" id="azmLivePanel" hidden><div class="azm-live-status" id="azmLiveStatus">لم تبدأ</div><div class="azm-live-divider"></div><div class="azm-live-heading">أحداث المباراة</div><div class="azm-live-events" id="azmLiveEvents"><div class="azm-live-empty">بانتظار بداية المباراة</div></div><div class="azm-live-divider"></div><div class="azm-live-heading">إحصائيات المباراة</div><div class="azm-live-stats" id="azmLiveStats"><div class="azm-live-empty">الإحصائيات تظهر أثناء المباراة</div></div></div></div>
                 <div class="rules-box" style="margin-top: 16px;">
                     <h3 style="margin-top: 0; margin-bottom: 10px; font-weight: 800; color: #38bdf8;">معلومات إضافية</h3>
                     <p style="margin: 4px 0;">جميع التفاصيل قابلة للتحديث من إدارة المنصة.</p>
@@ -2199,11 +2100,22 @@
         stats: $('azmLiveStats'),
         updated: $('azmLiveUpdated'),
         tournament: $('matchOpponentDisplay'),
-        mainArabi: document.querySelector('#next-match .primary-team'),
+        mainArabi: document.querySelector('#next-match .azm-fm-name'),
         mainOpponent: $('matchTimeDisplay'),
         date: $('matchDateDisplay'),
         time: $('matchDayDisplay'),
-        stadium: $('matchStadiumDisplay')
+        stadium: $('matchStadiumDisplay'),
+        homeOpponent: $('azmHomeOpponent'),
+        homeTournament: $('azmHomeTournament'),
+        homeDate: $('azmHomeDate'),
+        homeTime: $('azmHomeTime'),
+        homeVenue: $('azmHomeVenue'),
+        homeLiveBox: $('azmHomeLiveBox'),
+        detailLiveBox: $('azmDetailLiveBox'),
+        homeLiveHome: $('azmHomeLiveHome'),
+        homeLiveScore: $('azmHomeLiveScore'),
+        homeLiveMinute: $('azmHomeLiveMinute'),
+        homeLiveNote: $('azmHomeLiveNote')
     };
 
     let currentMatch = { ...FALLBACK_MATCH };
@@ -2345,18 +2257,21 @@
         const awayDisplay = displayTeamName(away);
         const arabiIsHome = /al\s*arabi/i.test(home);
         const opponent = arabiIsHome ? homeDisplay : awayDisplay;
-
+        const tournament = currentMatch.round ? `${currentMatch.league || 'دوري زين'} ${currentMatch.round}` : (currentMatch.league === 'Premier League' ? 'دوري زين' : (currentMatch.league || 'المباراة'));
+        const date = formatDate(currentMatch.date) || '—';
+        const time = formatTime(currentMatch.time) || '—';
+        const venue = currentMatch.venue || 'الصداقة والسلام';
         if (els.mainArabi) els.mainArabi.textContent = 'العربي';
         if (els.mainOpponent) els.mainOpponent.textContent = opponent || '—';
-        if (els.tournament) {
-            els.tournament.textContent = currentMatch.round
-                ? `${currentMatch.league || 'دوري زين'} ${currentMatch.round}`
-                : (currentMatch.league === 'Premier League' ? 'دوري زين' : (currentMatch.league || 'المباراة'));
-        }
-        if (els.date) els.date.textContent = formatDate(currentMatch.date) || '—';
-        if (els.time) els.time.textContent = formatTime(currentMatch.time) || '—';
-        if (els.stadium) els.stadium.textContent = currentMatch.venue || 'يحدد لاحقًا';
-
+        if (els.tournament) els.tournament.textContent = tournament;
+        if (els.date) els.date.textContent = date;
+        if (els.time) els.time.textContent = time;
+        if (els.stadium) els.stadium.textContent = venue;
+        if (els.homeOpponent) els.homeOpponent.textContent = opponent || '—';
+        if (els.homeTournament) els.homeTournament.textContent = tournament;
+        if (els.homeDate) els.homeDate.textContent = date;
+        if (els.homeTime) els.homeTime.textContent = time;
+        if (els.homeVenue) els.homeVenue.textContent = venue;
         if (els.home) els.home.textContent = homeDisplay;
         if (els.away) els.away.textContent = awayDisplay;
     }
@@ -2373,6 +2288,14 @@
             const label = preMatchLabel(remaining);
             setStrip(els.homeStrip, els.homeStatus, els.homeScore, els.homeCountdown, 'pre', label, timeText, dateText);
             setStrip(els.detailStrip, els.detailStatus, els.detailScore, els.detailCountdown, 'pre', label, timeText, dateText);
+            if (els.homeStatus) { els.homeStatus.classList.remove('live','finished'); els.homeStatus.textContent = label; }
+            if (els.detailStatus) { els.detailStatus.classList.remove('live','finished'); els.detailStatus.textContent = label; }
+            if (els.homeScore) els.homeScore.textContent = timeText;
+            if (els.homeCountdown) els.homeCountdown.textContent = dateText;
+            if (els.detailScore) els.detailScore.textContent = timeText;
+            if (els.detailCountdown) els.detailCountdown.textContent = dateText;
+            if (els.homeLiveBox) els.homeLiveBox.hidden = true;
+            if (els.detailLiveBox) els.detailLiveBox.hidden = true;
             if (els.panel) els.panel.hidden = true;
             matchState = 'pre';
             return;
@@ -2402,10 +2325,16 @@
         if (finished) matchState = 'finished';
 
         if (els.panel) els.panel.hidden = !(live || finished);
+        if (els.homeLiveBox) els.homeLiveBox.hidden = !(live || finished);
+        if (els.detailLiveBox) els.detailLiveBox.hidden = !(live || finished);
         if (els.home) els.home.textContent = home;
         if (els.away) els.away.textContent = away;
         if (els.score) els.score.textContent = score;
         if (els.minute) els.minute.textContent = minute;
+        if (els.homeLiveHome) els.homeLiveHome.textContent = home;
+        if (els.homeLiveScore) els.homeLiveScore.textContent = score;
+        if (els.homeLiveMinute) els.homeLiveMinute.textContent = minute;
+        if (els.homeLiveNote) els.homeLiveNote.textContent = 'آخر تحديث: ' + new Date().toLocaleTimeString('ar-KW', { hour: '2-digit', minute: '2-digit' });
         if (els.status) {
             els.status.textContent = label;
             els.status.classList.toggle('live', live);
