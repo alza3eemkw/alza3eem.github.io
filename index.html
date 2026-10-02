@@ -1055,6 +1055,64 @@
             transform: translateY(-2px);
             filter: drop-shadow(0 0 8px rgba(74, 222, 128, 0.4));
         }
+
+
+/* =========================================================
+   ALZAEEM + ANYSPORT LIVE MATCH UI
+   Additive update — existing platform styles remain intact
+========================================================= */
+.azm-live-strip {
+    margin-top: 12px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    background: rgba(15, 23, 42, 0.58);
+    border: 1px solid rgba(74, 222, 128, 0.14);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    direction: rtl;
+}
+.azm-live-strip[hidden], .azm-live-panel[hidden] { display: none !important; }
+.azm-live-strip-main { display:flex; align-items:center; gap:8px; min-width:0; }
+.azm-live-dot { width:7px; height:7px; border-radius:50%; background:#64748b; flex:0 0 auto; }
+.azm-live-strip.live .azm-live-dot { background:#ef4444; box-shadow:0 0 10px rgba(239,68,68,.75); }
+.azm-live-strip.finished .azm-live-dot { background:#4ade80; }
+.azm-live-strip-label { font-size:.68rem; font-weight:900; color:#cbd5e1; }
+.azm-live-strip-score { font-size:.78rem; font-weight:1000; color:#f8fafc; white-space:nowrap; }
+.azm-live-strip-note { font-size:.58rem; color:#94a3b8; font-weight:800; white-space:nowrap; }
+
+.azm-live-panel {
+    margin-top: 12px;
+    padding: 12px;
+    border-radius: 16px;
+    background: linear-gradient(145deg, rgba(15,23,42,.78), rgba(7,18,34,.82));
+    border: 1px solid rgba(74,222,128,.13);
+    direction: rtl;
+}
+.azm-live-top { display:grid; grid-template-columns:1fr auto 1fr; align-items:center; gap:8px; text-align:center; }
+.azm-live-team { font-size:.72rem; font-weight:900; color:#e2e8f0; }
+.azm-live-score { font-size:1.55rem; line-height:1; font-weight:1000; letter-spacing:1px; color:#f8fafc; }
+.azm-live-minute { margin-top:5px; font-size:.58rem; color:#94a3b8; font-weight:800; }
+.azm-live-status { display:inline-flex; align-items:center; justify-content:center; margin:0 auto 8px; padding:4px 9px; border-radius:999px; background:rgba(148,163,184,.10); color:#cbd5e1; font-size:.57rem; font-weight:900; }
+.azm-live-status.live { background:rgba(239,68,68,.12); color:#f87171; }
+.azm-live-status.live::before { content:""; width:6px; height:6px; border-radius:50%; background:#ef4444; margin-left:5px; box-shadow:0 0 8px rgba(239,68,68,.8); }
+.azm-live-divider { height:1px; background:rgba(255,255,255,.06); margin:10px 0; }
+.azm-live-heading { font-size:.67rem; font-weight:900; color:#e2e8f0; margin:0 0 7px; }
+.azm-live-events { display:flex; flex-direction:column; gap:5px; }
+.azm-live-event { display:grid; grid-template-columns:32px 22px 1fr auto; align-items:center; gap:5px; padding:7px 8px; border-radius:9px; background:rgba(255,255,255,.035); font-size:.58rem; }
+.azm-live-event-minute { color:#4ade80; font-weight:900; }
+.azm-live-event-icon { text-align:center; }
+.azm-live-event-text { color:#e2e8f0; font-weight:800; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
+.azm-live-event-team { color:#64748b; font-size:.5rem; white-space:nowrap; }
+.azm-live-empty { padding:9px; border-radius:9px; background:rgba(255,255,255,.03); color:#64748b; text-align:center; font-size:.58rem; }
+.azm-live-stats { display:grid; gap:5px; }
+.azm-live-stat { padding:7px 8px; border-radius:9px; background:rgba(255,255,255,.03); }
+.azm-live-stat-row { display:grid; grid-template-columns:38px 1fr 38px; align-items:center; gap:6px; text-align:center; }
+.azm-live-stat-val { font-size:.61rem; font-weight:900; color:#e2e8f0; }
+.azm-live-stat-name { font-size:.51rem; color:#64748b; font-weight:800; }
+.azm-live-updated { margin-top:8px; text-align:center; color:#475569; font-size:.48rem; }
+
     </style>
 </head>
 <body>
@@ -1181,6 +1239,16 @@
                             <span class="team-name-badge">كاظمة</span>
                         </div>
                     </div>
+
+                    <div class="azm-live-strip" id="azmHomeLiveStrip">
+                        <div class="azm-live-strip-main">
+                            <span class="azm-live-dot"></span>
+                            <span class="azm-live-strip-label" id="azmHomeStatus">بعد 7 أيام</span>
+                        </div>
+                        <span class="azm-live-strip-score" id="azmHomeScore">8:05pm</span>
+                        <span class="azm-live-strip-note" id="azmHomeCountdown">9/10/2026</span>
+                    </div>
+
                     <div class="match-info-grid">
                         <div class="match-info-item">
                             <div class="match-info-label">التاريخ</div>
@@ -1286,6 +1354,15 @@
                         </div>
                     </div>
 
+                    <div class="azm-live-strip" id="azmDetailLiveStrip">
+                        <div class="azm-live-strip-main">
+                            <span class="azm-live-dot"></span>
+                            <span class="azm-live-strip-label" id="azmDetailStatus">بعد 7 أيام</span>
+                        </div>
+                        <span class="azm-live-strip-score" id="azmDetailScore">8:05pm</span>
+                        <span class="azm-live-strip-note" id="azmDetailCountdown">9/10/2026</span>
+                    </div>
+
                     <div class="match-info-grid">
                         <div class="match-info-item">
                             <div class="match-info-label">التاريخ</div>
@@ -1299,6 +1376,35 @@
                             <div class="match-info-label">الملعب</div>
                             <div class="match-info-value" id="matchStadiumDisplay">الصداقة والسلام</div>
                         </div>
+                    </div>
+
+                    <div class="azm-live-panel" id="azmLivePanel" hidden>
+                        <div class="azm-live-status" id="azmLiveStatus">لم تبدأ</div>
+
+                        <div class="azm-live-top">
+                            <div class="azm-live-team" id="azmLiveHome">كاظمة</div>
+                            <div>
+                                <div class="azm-live-score" id="azmLiveScore">- : -</div>
+                                <div class="azm-live-minute" id="azmLiveMinute">—</div>
+                            </div>
+                            <div class="azm-live-team" id="azmLiveAway">العربي</div>
+                        </div>
+
+                        <div class="azm-live-divider"></div>
+
+                        <div class="azm-live-heading">أحداث المباراة</div>
+                        <div class="azm-live-events" id="azmLiveEvents">
+                            <div class="azm-live-empty">لا توجد أحداث حتى الآن</div>
+                        </div>
+
+                        <div class="azm-live-divider"></div>
+
+                        <div class="azm-live-heading">إحصائيات المباراة</div>
+                        <div class="azm-live-stats" id="azmLiveStats">
+                            <div class="azm-live-empty">لا توجد إحصائيات حتى الآن</div>
+                        </div>
+
+                        <div class="azm-live-updated" id="azmLiveUpdated">—</div>
                     </div>
                 </div>
 
@@ -2038,904 +2144,325 @@
         }
 
         renderPlayers();
-        /* ===== ALZAEEM ANYSPORT LIVE UPDATE ===== */
-(async function () {
-    const API_URL = "https://alzaeem-anysport.vercel.app/api/anysport?action=next";
-
-    async function updateNextMatch() {
-        try {
-            const response = await fetch(API_URL, {
-                cache: "no-store"
-            });
-
-            const result = await response.json();
-
-            if (!result.success || !result.data || !result.data.match) {
-                return;
-            }
-
-            const match = result.data.match;
-
-            /* تحديث الخصم */
-            const opponent = document.querySelector(
-                ".next-match-teams .team-block:last-child .team-name-badge"
-            );
-
-            if (opponent && match.home && match.away) {
-                const isArabiHome =
-                    match.home.team_id === "ast_566fae55a8ae4bef9529b3692fc1bebe";
-
-                opponent.textContent = isArabiHome
-                    ? match.away.name
-                    : match.home.name;
-            }
-
-            /* تحديث التاريخ */
-            const dateElement = document.getElementById("matchDateDisplay");
-
-            if (dateElement && match.date) {
-                const parts = match.date.split("-");
-                dateElement.textContent =
-                    `${parseInt(parts[2])}/${parseInt(parts[1])}/${parts[0]}`;
-            }
-
-            /* تحديث الوقت */
-            const timeElement = document.getElementById("matchDayDisplay");
-
-            if (timeElement && match.time) {
-                const [hourString, minute] = match.time.split(":");
-                let hour = parseInt(hourString);
-
-                const suffix = hour >= 12 ? "pm" : "am";
-
-                if (hour > 12) {
-                    hour -= 12;
-                }
-
-                if (hour === 0) {
-                    hour = 12;
-                }
-
-                timeElement.textContent = `${hour}:${minute}${suffix}`;
-            }
-
-            console.log("AnySport updated:", match);
-
-        } catch (error) {
-            console.log("AnySport update error:", error);
-        }
-    }
-
-    updateNextMatch();
-
-    /* تحديث البيانات كل 30 ثانية */
-    setInterval(updateNextMatch, 30000);
-})();
     </script>
-    <!-- =========================================================
-     ALZAEEM LIVE MATCH CENTER
-     ADD-ONLY BLOCK — لا يحذف أو يعدل أي شيء موجود
-========================================================= -->
-
-<style>
-#azLiveCenter {
-    margin: 18px 0 90px;
-    direction: rtl;
-    font-family: 'Cairo', sans-serif;
-}
-
-#azLiveCenter .az-live-card {
-    background: linear-gradient(145deg, rgba(15,23,42,.96), rgba(7,18,34,.98));
-    border: 1px solid rgba(74,222,128,.16);
-    border-radius: 22px;
-    padding: 18px;
-    box-shadow: 0 15px 45px rgba(0,0,0,.25);
-    overflow: hidden;
-}
-
-#azLiveCenter .az-live-title {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:10px;
-    margin-bottom:16px;
-}
-
-#azLiveCenter .az-live-title strong {
-    font-size:1rem;
-    font-weight:900;
-}
-
-#azLiveCenter .az-live-badge {
-    display:inline-flex;
-    align-items:center;
-    gap:6px;
-    padding:5px 10px;
-    border-radius:999px;
-    background:rgba(148,163,184,.10);
-    color:#cbd5e1;
-    font-size:.68rem;
-    font-weight:800;
-}
-
-#azLiveCenter .az-live-badge.live {
-    background:rgba(239,68,68,.12);
-    color:#f87171;
-}
-
-#azLiveCenter .az-live-badge.live::before {
-    content:"";
-    width:7px;
-    height:7px;
-    border-radius:50%;
-    background:#ef4444;
-    box-shadow:0 0 10px rgba(239,68,68,.8);
-}
-
-#azLiveCenter .az-score {
-    display:grid;
-    grid-template-columns:1fr auto 1fr;
-    align-items:center;
-    gap:12px;
-    text-align:center;
-    padding:14px 0 18px;
-}
-
-#azLiveCenter .az-team {
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    gap:7px;
-}
-
-#azLiveCenter .az-team-name {
-    font-size:.88rem;
-    font-weight:900;
-}
-
-#azLiveCenter .az-team-label {
-    font-size:.62rem;
-    color:#94a3b8;
-}
-
-#azLiveCenter .az-score-number {
-    font-size:2.1rem;
-    line-height:1;
-    font-weight:1000;
-    letter-spacing:2px;
-}
-
-#azLiveCenter .az-match-status {
-    margin-top:7px;
-    font-size:.68rem;
-    color:#94a3b8;
-    font-weight:800;
-}
-
-#azLiveCenter .az-divider {
-    height:1px;
-    background:rgba(255,255,255,.07);
-    margin:2px 0 16px;
-}
-
-#azLiveCenter .az-section-heading {
-    font-size:.78rem;
-    font-weight:900;
-    margin:0 0 10px;
-    color:#e2e8f0;
-}
-
-#azLiveCenter .az-events {
-    display:flex;
-    flex-direction:column;
-    gap:8px;
-    margin-bottom:18px;
-}
-
-#azLiveCenter .az-event {
-    display:flex;
-    align-items:center;
-    gap:9px;
-    background:rgba(255,255,255,.035);
-    border-radius:12px;
-    padding:9px 11px;
-    font-size:.69rem;
-}
-
-#azLiveCenter .az-event-minute {
-    min-width:32px;
-    font-weight:900;
-    color:#4ade80;
-}
-
-#azLiveCenter .az-event-icon {
-    width:24px;
-    text-align:center;
-    font-size:1rem;
-}
-
-#azLiveCenter .az-event-text {
-    flex:1;
-    font-weight:700;
-}
-
-#azLiveCenter .az-event-team {
-    color:#94a3b8;
-    font-size:.6rem;
-}
-
-#azLiveCenter .az-empty {
-    padding:13px;
-    border-radius:12px;
-    background:rgba(255,255,255,.035);
-    color:#94a3b8;
-    text-align:center;
-    font-size:.68rem;
-}
-
-#azLiveCenter .az-stats {
-    display:grid;
-    grid-template-columns:1fr;
-    gap:7px;
-}
-
-#azLiveCenter .az-stat {
-    background:rgba(255,255,255,.035);
-    border-radius:12px;
-    padding:9px 11px;
-}
-
-#azLiveCenter .az-stat-row {
-    display:grid;
-    grid-template-columns:42px 1fr 42px;
-    align-items:center;
-    gap:8px;
-    text-align:center;
-}
-
-#azLiveCenter .az-stat-home,
-#azLiveCenter .az-stat-away {
-    font-weight:900;
-    font-size:.72rem;
-}
-
-#azLiveCenter .az-stat-name {
-    color:#94a3b8;
-    font-size:.6rem;
-    font-weight:800;
-}
-
-#azLiveCenter .az-loading {
-    text-align:center;
-    color:#94a3b8;
-    font-size:.7rem;
-    padding:15px 5px;
-}
-
-#azLiveCenter .az-error {
-    color:#fca5a5;
-    background:rgba(239,68,68,.08);
-    border-radius:12px;
-    padding:12px;
-    font-size:.68rem;
-    text-align:center;
-}
-
-#azLiveCenter .az-last-update {
-    margin-top:13px;
-    text-align:center;
-    color:#64748b;
-    font-size:.55rem;
-}
-</style>
-
-<div id="azLiveCenter">
-    <div class="section-title" style="margin-bottom:16px;">
-        مركز المباراة
-    </div>
-
-    <div class="az-live-card">
-
-        <div class="az-live-title">
-            <strong>العربي × كاظمة</strong>
-            <span id="azLiveBadge" class="az-live-badge">
-                لم تبدأ
-            </span>
-        </div>
-
-        <div class="az-score">
-
-            <div class="az-team">
-                <div class="az-team-name" id="azHomeTeam">
-                    كاظمة
-                </div>
-                <div class="az-team-label">
-                    المضيف
-                </div>
-            </div>
-
-            <div>
-                <div class="az-score-number" id="azScore">
-                    - : -
-                </div>
-
-                <div class="az-match-status" id="azMinute">
-                    بانتظار المباراة
-                </div>
-            </div>
-
-            <div class="az-team">
-                <div class="az-team-name" id="azAwayTeam">
-                    العربي
-                </div>
-                <div class="az-team-label">
-                    الضيف
-                </div>
-            </div>
-
-        </div>
-
-        <div class="az-divider"></div>
-
-        <div class="az-section-heading">
-            أحداث المباراة
-        </div>
-
-        <div id="azEvents" class="az-events">
-            <div class="az-loading">
-                جاري انتظار بيانات المباراة...
-            </div>
-        </div>
-
-        <div class="az-section-heading">
-            إحصائيات المباراة
-        </div>
-
-        <div id="azStats" class="az-stats">
-            <div class="az-empty">
-                الإحصائيات تظهر أثناء المباراة
-            </div>
-        </div>
-
-        <div id="azLastUpdate" class="az-last-update">
-            —
-        </div>
-
-    </div>
-</div>
 
 <script>
+/* =========================================================
+   ALZAEEM + ANYSPORT LIVE MATCH ENGINE
+   - Before kickoff: countdown only
+   - During match: score/minute/events/stats
+   - Does NOT show "مباشرة" before kickoff
+   - Uses REST polling suitable for the current AnySport trial
+========================================================= */
 (function () {
+    'use strict';
 
-    "use strict";
+    const AZM_API = 'https://alzaeem-anysport.vercel.app/api/anysport';
+    const FALLBACK_MATCH_ID = 'as_7bf8b2f511a6438ca2619014b95338ee';
+    const FALLBACK_MATCH = {
+        match_id: FALLBACK_MATCH_ID,
+        date: '2026-10-09',
+        time: '20:05',
+        league: 'Premier League',
+        season: '2026/2027',
+        home: { name: 'Kazma SC', team_id: 'ast_f4f6640b193344d2a0e3dabaa6c7ba34' },
+        away: { name: 'Al Arabi', team_id: 'ast_566fae55a8ae4bef9529b3692fc1bebe' },
+        venue: 'الصداقة والسلام'
+    };
 
-    const AZ_API =
-        "https://alzaeem-anysport.vercel.app/api/anysport";
+    const $ = (id) => document.getElementById(id);
 
-    const AZ_MATCH_ID =
-        "as_7bf8b2f511a6438ca2619014b95338ee";
+    const els = {
+        homeStrip: $('azmHomeLiveStrip'),
+        homeStatus: $('azmHomeStatus'),
+        homeScore: $('azmHomeScore'),
+        homeCountdown: $('azmHomeCountdown'),
+        detailStrip: $('azmDetailLiveStrip'),
+        detailStatus: $('azmDetailStatus'),
+        detailScore: $('azmDetailScore'),
+        detailCountdown: $('azmDetailCountdown'),
+        panel: $('azmLivePanel'),
+        status: $('azmLiveStatus'),
+        home: $('azmLiveHome'),
+        away: $('azmLiveAway'),
+        score: $('azmLiveScore'),
+        minute: $('azmLiveMinute'),
+        events: $('azmLiveEvents'),
+        stats: $('azmLiveStats'),
+        updated: $('azmLiveUpdated'),
+        opponent: $('matchOpponentDisplay'),
+        rightTeam: $('matchTimeDisplay'),
+        date: $('matchDateDisplay'),
+        time: $('matchDayDisplay'),
+        stadium: $('matchStadiumDisplay')
+    };
 
-    const homeTeamEl =
-        document.getElementById("azHomeTeam");
+    let currentMatch = { ...FALLBACK_MATCH };
+    let liveStarted = false;
+    let lastLiveAt = 0;
+    let lastSituationAt = 0;
 
-    const awayTeamEl =
-        document.getElementById("azAwayTeam");
-
-    const scoreEl =
-        document.getElementById("azScore");
-
-    const minuteEl =
-        document.getElementById("azMinute");
-
-    const badgeEl =
-        document.getElementById("azLiveBadge");
-
-    const eventsEl =
-        document.getElementById("azEvents");
-
-    const statsEl =
-        document.getElementById("azStats");
-
-    const updateEl =
-        document.getElementById("azLastUpdate");
-
-    if (!homeTeamEl || !awayTeamEl || !scoreEl) {
-        return;
+    function esc(value) {
+        return String(value ?? '')
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
     }
 
-    function escapeHTML(value) {
-        return String(value ?? "")
-            .replace(/&/g, "&amp;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-            .replace(/"/g, "&quot;")
-            .replace(/'/g, "&#039;");
-    }
-
-    function setBadge(text, live) {
-        badgeEl.textContent = text;
-
-        if (live) {
-            badgeEl.classList.add("live");
-        } else {
-            badgeEl.classList.remove("live");
-        }
-    }
-
-    function getStatusText(data) {
-
-        const phase =
-            String(data?.phase || "").toLowerCase();
-
-        const minute =
-            data?.minute;
-
-        if (phase === "finished") {
-            return {
-                text: "انتهت",
-                live: false
-            };
-        }
-
-        if (phase === "extra_time") {
-            return {
-                text: "أشواط إضافية",
-                live: true
-            };
-        }
-
-        if (phase === "penalty") {
-            return {
-                text: "ركلات الترجيح",
-                live: true
-            };
-        }
-
-        if (
-            minute !== undefined &&
-            minute !== null &&
-            minute !== ""
-        ) {
-            return {
-                text: `${minute}'`,
-                live: true
-            };
-        }
-
-        return {
-            text: "مباشرة",
-            live: true
-        };
+    function apiUrl(action, matchId) {
+        const url = new URL(AZM_API);
+        url.searchParams.set('action', action);
+        if (matchId) url.searchParams.set('match_id', matchId);
+        return url.toString();
     }
 
     async function getJSON(url) {
-
-        const response =
-            await fetch(
-                url,
-                {
-                    method: "GET",
-                    cache: "no-store"
-                }
-            );
-
-        const data =
-            await response.json();
-
-        if (!response.ok) {
-            throw new Error(
-                data?.error?.message ||
-                "API Error"
-            );
-        }
-
+        const response = await fetch(url, { cache: 'no-store' });
+        let data = {};
+        try { data = await response.json(); } catch (_) {}
+        if (!response.ok) throw new Error(data?.error?.message || `HTTP ${response.status}`);
         return data;
     }
 
-    function renderLive(data) {
-
-        const match =
-            data?.data?.match ||
-            data?.data ||
-            data?.match ||
-            {};
-
-        const home =
-            match?.home;
-
-        const away =
-            match?.away;
-
-        const homeName =
-            typeof home === "object"
-                ? home?.name
-                : home;
-
-        const awayName =
-            typeof away === "object"
-                ? away?.name
-                : away;
-
-        if (homeName) {
-            homeTeamEl.textContent =
-                homeName;
-        }
-
-        if (awayName) {
-            awayTeamEl.textContent =
-                awayName;
-        }
-
-        const homeScore =
-            match?.home_score ??
-            match?.homeScore ??
-            match?.score?.home ??
-            0;
-
-        const awayScore =
-            match?.away_score ??
-            match?.awayScore ??
-            match?.score?.away ??
-            0;
-
-        scoreEl.textContent =
-            `${homeScore} : ${awayScore}`;
-
-        const status =
-            getStatusText(match);
-
-        minuteEl.textContent =
-            status.text;
-
-        setBadge(
-            status.live
-                ? "مباشرة"
-                : status.text,
-            status.live
-        );
+    function teamName(team) {
+        if (!team) return '';
+        return typeof team === 'object' ? (team.name || '') : String(team);
     }
 
-    function normalizeEvents(data) {
+    function formatDate(dateString) {
+        if (!dateString) return '';
+        const p = String(dateString).split('-');
+        if (p.length !== 3) return dateString;
+        return `${Number(p[2])}/${Number(p[1])}/${p[0]}`;
+    }
 
-        const events =
-            data?.data?.events ||
-            data?.data?.situation ||
-            data?.events ||
-            [];
+    function formatTime(timeString) {
+        if (!timeString) return '';
+        const m = String(timeString).match(/^(\d{1,2}):(\d{2})/);
+        if (!m) return timeString;
+        let h = Number(m[1]);
+        const min = m[2];
+        const suffix = h >= 12 ? 'pm' : 'am';
+        h = h % 12 || 12;
+        return `${h}:${min}${suffix}`;
+    }
 
-        return Array.isArray(events)
-            ? events
-            : [];
+    /* AnySport's current match record is treated as Kuwait local time here,
+       matching the 20:05 value already confirmed for this fixture. */
+    function kickoffDate(match) {
+        const date = match?.date;
+        const time = match?.time;
+        if (!date || !time) return null;
+        const m = String(time).match(/^(\d{1,2}):(\d{2})/);
+        if (!m) return null;
+        return new Date(`${date}T${String(m[1]).padStart(2, '0')}:${m[2]}:00+03:00`);
+    }
+
+    function diffParts(ms) {
+        const total = Math.max(0, Math.floor(ms / 1000));
+        const days = Math.floor(total / 86400);
+        const hours = Math.floor((total % 86400) / 3600);
+        const minutes = Math.floor((total % 3600) / 60);
+        return { days, hours, minutes };
+    }
+
+    function preMatchLabel(ms) {
+        const p = diffParts(ms);
+        if (p.days >= 1) return `بعد ${p.days} يوم${p.days === 1 ? '' : 'ًا'}`;
+        if (p.hours >= 1) return `بعد ${p.hours} ساعة`;
+        if (p.minutes >= 1) return `بعد ${p.minutes} دقيقة`;
+        return 'تبدأ الآن';
+    }
+
+    function isClearlyLive(liveMatch) {
+        const phase = String(liveMatch?.phase || '').toLowerCase();
+        if (['regular', 'extra_time', 'penalty'].includes(phase)) return true;
+        const minute = liveMatch?.minute;
+        return minute !== undefined && minute !== null && minute !== '' && /^\d+/.test(String(minute));
+    }
+
+    function isFinished(liveMatch) {
+        const phase = String(liveMatch?.phase || '').toLowerCase();
+        return phase === 'finished';
+    }
+
+    function statusText(liveMatch) {
+        const phase = String(liveMatch?.phase || '').toLowerCase();
+        if (phase === 'finished') return 'انتهت';
+        if (phase === 'extra_time') return 'أشواط إضافية';
+        if (phase === 'penalty') return 'ركلات الترجيح';
+        if (liveMatch?.minute !== undefined && liveMatch?.minute !== null && liveMatch?.minute !== '') return `${liveMatch.minute}'`;
+        return 'مباشرة';
+    }
+
+    function applyMatchDetails(match) {
+        currentMatch = { ...currentMatch, ...match };
+
+        const home = teamName(currentMatch.home) || 'Kazma SC';
+        const away = teamName(currentMatch.away) || 'Al Arabi';
+        const opponent = home.toLowerCase().includes('arabi') ? away : home;
+        const rightTeam = home.toLowerCase().includes('arabi') ? away : home;
+
+        if (els.opponent && currentMatch.league) {
+            els.opponent.textContent = currentMatch.league === 'Premier League' ? 'دوري زين الجولة 4' : currentMatch.league;
+        }
+        if (els.rightTeam) els.rightTeam.textContent = rightTeam.replace(' SC', '');
+        if (els.date) els.date.textContent = formatDate(currentMatch.date) || els.date.textContent;
+        if (els.time) els.time.textContent = formatTime(currentMatch.time) || els.time.textContent;
+        if (els.stadium && currentMatch.venue) els.stadium.textContent = currentMatch.venue;
+
+        if (els.home) els.home.textContent = home.replace(' SC', '');
+        if (els.away) els.away.textContent = away.replace('Al Arabi', 'العربي');
+    }
+
+    function setStrip(el, statusEl, scoreEl, countdownEl, kind, label, score, note) {
+        if (!el) return;
+        el.classList.remove('live', 'finished');
+        if (kind === 'live') el.classList.add('live');
+        if (kind === 'finished') el.classList.add('finished');
+        if (statusEl) statusEl.textContent = label;
+        if (scoreEl) scoreEl.textContent = score;
+        if (countdownEl) countdownEl.textContent = note;
+    }
+
+    function renderPreMatch() {
+        const kick = kickoffDate(currentMatch);
+        if (!kick) return;
+        const remaining = kick.getTime() - Date.now();
+        const dateText = formatDate(currentMatch.date);
+        const timeText = formatTime(currentMatch.time);
+
+        if (remaining > 0) {
+            const label = preMatchLabel(remaining);
+            setStrip(els.homeStrip, els.homeStatus, els.homeScore, els.homeCountdown, 'pre', label, timeText, dateText);
+            setStrip(els.detailStrip, els.detailStatus, els.detailScore, els.detailCountdown, 'pre', label, timeText, dateText);
+            if (els.panel) els.panel.hidden = true;
+            liveStarted = false;
+            return;
+        }
+
+        if (!liveStarted) {
+            setStrip(els.homeStrip, els.homeStatus, els.homeScore, els.homeCountdown, 'pre', 'تبدأ الآن', timeText, dateText);
+            setStrip(els.detailStrip, els.detailStatus, els.detailScore, els.detailCountdown, 'pre', 'تبدأ الآن', timeText, dateText);
+        }
+    }
+
+    function renderLive(liveData) {
+        const match = liveData?.data?.match || liveData?.data || liveData?.match || {};
+        if (!match || Object.keys(match).length === 0) return false;
+
+        const live = isClearlyLive(match);
+        const finished = isFinished(match);
+        const home = teamName(match.home) || teamName(currentMatch.home) || 'كاظمة';
+        const away = teamName(match.away) || teamName(currentMatch.away) || 'العربي';
+        const homeScore = match.home_score ?? match.homeScore ?? match.score?.home ?? 0;
+        const awayScore = match.away_score ?? match.awayScore ?? match.score?.away ?? 0;
+        const score = `${homeScore} : ${awayScore}`;
+        const label = finished ? 'انتهت' : (live ? 'مباشرة' : 'تبدأ الآن');
+        const minute = statusText(match);
+
+        liveStarted = live || finished;
+        if (els.panel) els.panel.hidden = !(live || finished);
+        if (els.home) els.home.textContent = home.replace(' SC', '');
+        if (els.away) els.away.textContent = away.replace('Al Arabi', 'العربي');
+        if (els.score) els.score.textContent = score;
+        if (els.minute) els.minute.textContent = minute;
+        if (els.status) {
+            els.status.textContent = label;
+            els.status.classList.toggle('live', live);
+        }
+
+        setStrip(els.homeStrip, els.homeStatus, els.homeScore, els.homeCountdown, finished ? 'finished' : 'live', label, score, minute);
+        setStrip(els.detailStrip, els.detailStatus, els.detailScore, els.detailCountdown, finished ? 'finished' : 'live', label, score, minute);
+
+        if (els.updated) {
+            els.updated.textContent = 'آخر تحديث: ' + new Date().toLocaleTimeString('ar-KW', { hour: '2-digit', minute: '2-digit' });
+        }
+        return live || finished;
     }
 
     function eventIcon(type) {
-
-        const value =
-            String(type || "").toLowerCase();
-
-        if (value.includes("goal")) {
-            return "⚽";
-        }
-
-        if (value.includes("yellow")) {
-            return "🟨";
-        }
-
-        if (value.includes("red")) {
-            return "🟥";
-        }
-
-        if (value.includes("corner")) {
-            return "🚩";
-        }
-
-        if (value.includes("penalty")) {
-            return "⚽";
-        }
-
-        if (value.includes("substitution")) {
-            return "🔄";
-        }
-
-        return "•";
+        const t = String(type || '').toLowerCase();
+        if (t.includes('goal')) return '⚽';
+        if (t.includes('yellow')) return '🟨';
+        if (t.includes('red')) return '🟥';
+        if (t.includes('corner')) return '🚩';
+        if (t.includes('penalty')) return '⚽';
+        if (t.includes('substitution')) return '🔄';
+        return '•';
     }
 
-    function eventName(type) {
+    function eventLabel(type) {
+        const t = String(type || '').toLowerCase();
+        if (t.includes('goal')) return 'هدف';
+        if (t.includes('yellow')) return 'بطاقة صفراء';
+        if (t.includes('red')) return 'بطاقة حمراء';
+        if (t.includes('corner')) return 'ركنية';
+        if (t.includes('penalty')) return 'ركلة جزاء';
+        if (t.includes('substitution')) return 'تبديل';
+        return 'حدث';
+    }
 
-        const value =
-            String(type || "").toLowerCase();
-
-        if (value.includes("goal")) {
-            return "هدف";
-        }
-
-        if (value.includes("yellow")) {
-            return "بطاقة صفراء";
-        }
-
-        if (value.includes("red")) {
-            return "بطاقة حمراء";
-        }
-
-        if (value.includes("corner")) {
-            return "ركنية";
-        }
-
-        if (value.includes("penalty")) {
-            return "ركلة جزاء";
-        }
-
-        if (value.includes("substitution")) {
-            return "تبديل";
-        }
-
-        return "حدث";
+    function normalizeEvents(data) {
+        const list = data?.data?.events || data?.data?.situation || data?.events || [];
+        return Array.isArray(list) ? list : [];
     }
 
     function renderEvents(data) {
-
-        const events =
-            normalizeEvents(data);
-
+        if (!els.events) return;
+        const events = normalizeEvents(data);
         if (!events.length) {
-
-            eventsEl.innerHTML =
-                `<div class="az-empty">
-                    لا توجد أحداث حتى الآن
-                </div>`;
-
+            els.events.innerHTML = '<div class="azm-live-empty">لا توجد أحداث حتى الآن</div>';
             return;
         }
-
-        eventsEl.innerHTML =
-            events.map(event => {
-
-                const type =
-                    event?.type ||
-                    event?.event_type ||
-                    event?.kind ||
-                    "event";
-
-                const minute =
-                    event?.minute ??
-                    event?.time ??
-                    "";
-
-                const player =
-                    event?.player_name ||
-                    event?.player ||
-                    event?.name ||
-                    "";
-
-                const team =
-                    event?.team_name ||
-                    event?.team ||
-                    "";
-
-                return `
-                    <div class="az-event">
-
-                        <div class="az-event-minute">
-                            ${escapeHTML(minute)}
-                        </div>
-
-                        <div class="az-event-icon">
-                            ${eventIcon(type)}
-                        </div>
-
-                        <div class="az-event-text">
-                            ${escapeHTML(
-                                player ||
-                                eventName(type)
-                            )}
-                        </div>
-
-                        <div class="az-event-team">
-                            ${escapeHTML(team)}
-                        </div>
-
-                    </div>
-                `;
-
-            }).join("");
+        els.events.innerHTML = events.map(e => {
+            const type = e?.type || e?.event_type || e?.kind || 'event';
+            const minute = e?.minute ?? e?.time ?? '';
+            const player = e?.player_name || e?.player || e?.name || eventLabel(type);
+            const team = e?.team_name || e?.team || '';
+            return `<div class="azm-live-event"><span class="azm-live-event-minute">${esc(minute)}</span><span class="azm-live-event-icon">${eventIcon(type)}</span><span class="azm-live-event-text">${esc(player)}</span><span class="azm-live-event-team">${esc(team)}</span></div>`;
+        }).join('');
     }
 
     function statLabel(key) {
-
         const labels = {
-
-            c: "الركنيات",
-            corners: "الركنيات",
-
-            possession: "الاستحواذ",
-
-            shots: "التسديدات",
-            shots_on_target:
-                "التسديدات على المرمى",
-
-            fouls: "الأخطاء",
-
-            offsides: "التسلل",
-
-            yellow_cards:
-                "البطاقات الصفراء",
-
-            red_cards:
-                "البطاقات الحمراء",
-
-            penalties:
-                "ركلات الجزاء",
-
-            attacks: "الهجمات",
-
-            dangerous_attacks:
-                "الهجمات الخطرة"
+            c: 'الركنيات', corners: 'الركنيات', possession: 'الاستحواذ', shots: 'التسديدات',
+            shots_on_target: 'على المرمى', fouls: 'الأخطاء', offsides: 'التسلل',
+            yellow_cards: 'الصفراء', red_cards: 'الحمراء', penalties: 'ركلات الجزاء',
+            attacks: 'الهجمات', dangerous_attacks: 'الهجمات الخطرة'
         };
-
-        return labels[key] ||
-            String(key)
-                .replace(/_/g, " ");
+        return labels[key] || String(key).replace(/_/g, ' ');
     }
 
     function renderStats(data) {
-
-        const stats =
-            data?.data?.stats ||
-            data?.stats ||
-            {};
-
-        const entries =
-            Object.entries(stats);
-
+        if (!els.stats) return;
+        const stats = data?.data?.stats || data?.stats || {};
+        const entries = Object.entries(stats);
         if (!entries.length) {
-
-            statsEl.innerHTML =
-                `<div class="az-empty">
-                    لا توجد إحصائيات متاحة حتى الآن
-                </div>`;
-
+            els.stats.innerHTML = '<div class="azm-live-empty">لا توجد إحصائيات حتى الآن</div>';
             return;
         }
-
-        statsEl.innerHTML =
-            entries.map(([key, value]) => {
-
-                let home = "-";
-                let away = "-";
-
-                if (Array.isArray(value)) {
-
-                    home =
-                        value[0] ?? "-";
-
-                    away =
-                        value[1] ?? "-";
-
-                } else if (
-                    typeof value === "object" &&
-                    value !== null
-                ) {
-
-                    home =
-                        value.home ??
-                        value.home_value ??
-                        "-";
-
-                    away =
-                        value.away ??
-                        value.away_value ??
-                        "-";
-                }
-
-                return `
-                    <div class="az-stat">
-
-                        <div class="az-stat-row">
-
-                            <div class="az-stat-home">
-                                ${escapeHTML(home)}
-                            </div>
-
-                            <div class="az-stat-name">
-                                ${escapeHTML(
-                                    statLabel(key)
-                                )}
-                            </div>
-
-                            <div class="az-stat-away">
-                                ${escapeHTML(away)}
-                            </div>
-
-                        </div>
-
-                    </div>
-                `;
-
-            }).join("");
+        els.stats.innerHTML = entries.map(([key, value]) => {
+            let home = '-', away = '-';
+            if (Array.isArray(value)) {
+                home = value[0] ?? '-';
+                away = value[1] ?? '-';
+            } else if (value && typeof value === 'object') {
+                home = value.home ?? value.home_value ?? '-';
+                away = value.away ?? value.away_value ?? '-';
+            }
+            return `<div class="azm-live-stat"><div class="azm-live-stat-row"><span class="azm-live-stat-val">${esc(home)}</span><span class="azm-live-stat-name">${esc(statLabel(key))}</span><span class="azm-live-stat-val">${esc(away)}</span></div></div>`;
+        }).join('');
     }
 
-    async function updateLive() {
-
+    async function refreshSituation() {
+        if (!currentMatch.match_id || !liveStarted) return;
+        const now = Date.now();
+        if (now - lastSituationAt < 80000) return;
+        lastSituationAt = now;
         try {
-
-            const live =
-                await getJSON(
-                    `${AZ_API}?action=live&match_id=${encodeURIComponent(AZ_MATCH_ID)}`
-                );
-
-            renderLive(live);
-
-            updateEl.textContent =
-                "آخر تحديث: " +
-                new Date().toLocaleTimeString(
-                    "ar-KW",
-                    {
-                        hour: "2-digit",
-                        minute: "2-digit"
-                    }
-                );
-
-        } catch (error) {
-
-            console.warn(
-                "Alzaeem Live Score:",
-                error
-            );
-        }
-    }
-
-    async function updateSituation() {
-
-        try {
-
-            const situation =
-                await getJSON(
-                    `${AZ_API}?action=situation&match_id=${encodeURIComponent(AZ_MATCH_ID)}`
-                );
-
-            renderEvents(situation);
-            renderStats(situation);
-
-        } catch (error) {
-
-            console.warn(
-                "Alzaeem Situation:",
-                error
-            );
-        }
-    }
-
-    async function initialLoad() {
-
-        await updateLive();
-
-        await new Promise(
-            resolve =>
-                setTimeout(resolve, 1200)
-        );
-
-        await updateSituation();
-    }
-
-    initialLoad();
-
-    /*
-      تجربة Free Trial:
-      تحديث كل 60 ثانية.
-      WebSocket غير مستخدم هنا.
-    */
-
-    setInterval(
-        updateLive,
-        60000
-    );
-
-    setInterval(
-        updateSituation,
-        60000
-    );
-
-})();
-</script>
-</body>
-</html>
+            const data = await getJSON(apiUrl('situation', currentMatch.match_id));
+            renderEvents(data);
+            renderStats(data);
