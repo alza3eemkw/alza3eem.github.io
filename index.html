@@ -12,6 +12,72 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <!-- مكتبة html2canvas لالتقاط صورة التشكيلة وحفظها -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+
+    <script>
+    /* =========================================================
+       ALZAEEM PREDICTION SUBMIT — NO REDIRECT
+       The inline onsubmit returns false immediately, so the
+       browser can never navigate to FormSubmit's webpage.
+    ========================================================= */
+    window.alzaeemSubmitPrediction = function (event) {
+        if (event) event.preventDefault();
+
+        const form = document.getElementById('my-form');
+        const status = document.getElementById('my-form-status');
+        const button = form ? form.querySelector('button[type="submit"]') : null;
+
+        if (!form || !status) return false;
+
+        const originalText = button ? button.textContent : 'إرسال التوقع';
+
+        status.className = '';
+        status.textContent = 'جاري إرسال التوقع…';
+
+        if (button) {
+            button.disabled = true;
+            button.textContent = 'جاري الإرسال…';
+        }
+
+        (async function () {
+            try {
+                const response = await fetch('https://formsubmit.co/ajax/alza3eem.kw@gmail.com', {
+                    method: 'POST',
+                    body: new FormData(form),
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+
+                let result = {};
+                try {
+                    result = await response.json();
+                } catch (_) {}
+
+                if (!response.ok || result.success === false) {
+                    throw new Error('FORM_SUBMIT_FAILED');
+                }
+
+                status.className = 'success';
+                status.textContent = '✅ تم إرسال توقعك بنجاح';
+                form.reset();
+
+            } catch (error) {
+                console.error('Alzaeem prediction submit:', error);
+                status.className = 'error';
+                status.textContent = '❌ ما انرسل التوقع. حاول مرة ثانية.';
+            } finally {
+                if (button) {
+                    button.disabled = false;
+                    button.textContent = originalText;
+                }
+            }
+        })();
+
+        // CRITICAL: never allow the browser's native form submission.
+        return false;
+    };
+    </script>
+
     <style>
         :root {
             --primary: #008000;
@@ -700,6 +766,15 @@
             transform: translateY(-1px);
         }
 
+
+        #my-form-status.success { color: #4ade80; }
+        #my-form-status.error { color: #f87171; }
+        #my-form button[type="submit"][disabled] {
+            opacity: 0.65;
+            cursor: wait;
+            transform: none;
+        }
+
         .match-details-box {
             background: linear-gradient(135deg, rgba(30, 41, 59, 0.85) 0%, rgba(15, 23, 42, 0.9) 100%);
             color: #ffffff;
@@ -1361,10 +1436,9 @@
                     <p style="margin: 4px 0; color: #f87171;"><strong>ملاحظة:</strong> يغلق باب التوقعات قبل صافرة البداية بخمس دقائق</p>
                 </div>
 
-                <form action="https://formsubmit.co/alza3eem.kw@gmail.com" method="POST" id="my-form">
+                <form action="https://formsubmit.co/ajax/alza3eem.kw@gmail.com" method="POST" id="my-form" onsubmit="return alzaeemSubmitPrediction(event);">
                     <input type="hidden" name="_captcha" value="false">
                     <input type="hidden" name="_subject" value="توقع جديد في منصة الزعيم ⚽️">
-                    <input type="hidden" name="_next" value="">
 
                     <input type="text" name="الاسم" id="name-input" placeholder="الاسم الكريم" required>
                     <input type="text" name="حساب_الانستقرام" id="insta-input" placeholder="@حساب الإنستغرام" required>
@@ -2400,4 +2474,4 @@
     async function loadNextMatch(force = false) {
         if (loadingNext) return null;
         const now = Date.now();
-        if (!force && now - lastNextAt < 600000) return currentMatch;
+        if (!force 
