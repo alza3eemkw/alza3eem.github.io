@@ -2565,3 +2565,59 @@
             renderPreMatch();
             return;
         }
+
+        const now = Date.now();
+        if (!force && now - lastLiveAt < 60000) return;
+        lastLiveAt = now;
+        loadingLive = true;
+
+        try {
+            const data = await getJSON(apiUrl('live', currentMatch.match_id));
+            const available = renderLive(data);
+
+            if (available) {
+                await refreshSituation(force);
+
+                if (matchState === 'finished') {
+                    /*
+                       Match ended: immediately ask AnySport for the next
+                       non-finished Al Arabi fixture. If the provider has
+                       not published it yet, the next scheduled check will retry.
+                    */
+                    await loadNextMatch(true);
+                }
+            }
+        } catch (error) {
+            console.warn('Alzaeem live:', error);
+        } finally {
+            loadingLive = false;
+        }
+    }
+
+    function clockTick() {
+        if (matchState === 'pre') renderPreMatch();
+    }
+
+    async function bootMatchCenter() {
+        await loadNextMatch(true);
+        renderPreMatch();
+
+        /*
+          Free-trial friendly REST schedule:
+          - live score: every 60 seconds
+          - situation/stats: every 2 minutes
+          - fixture discovery: every 10 minutes
+          This stays well below the 120 requests/hour trial ceiling
+          for the single Al Arabi match center.
+        */
+        setInterval(clockTick, 30000);
+        setInterval(() => refreshLive(false), 60000);
+        setInterval(() => refreshSituation(false), 120000);
+        setInterval(() => loadNextMatch(true), 600000);
+    }
+
+    bootMatchCenter();
+</script>
+
+</body>
+</html>
