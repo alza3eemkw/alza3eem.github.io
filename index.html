@@ -2038,6 +2038,79 @@
         }
 
         renderPlayers();
+        /* ===== ALZAEEM ANYSPORT LIVE UPDATE ===== */
+(async function () {
+    const API_URL = "https://alzaeem-anysport.vercel.app/api/anysport?action=next";
+
+    async function updateNextMatch() {
+        try {
+            const response = await fetch(API_URL, {
+                cache: "no-store"
+            });
+
+            const result = await response.json();
+
+            if (!result.success || !result.data || !result.data.match) {
+                return;
+            }
+
+            const match = result.data.match;
+
+            /* تحديث الخصم */
+            const opponent = document.querySelector(
+                ".next-match-teams .team-block:last-child .team-name-badge"
+            );
+
+            if (opponent && match.home && match.away) {
+                const isArabiHome =
+                    match.home.team_id === "ast_566fae55a8ae4bef9529b3692fc1bebe";
+
+                opponent.textContent = isArabiHome
+                    ? match.away.name
+                    : match.home.name;
+            }
+
+            /* تحديث التاريخ */
+            const dateElement = document.getElementById("matchDateDisplay");
+
+            if (dateElement && match.date) {
+                const parts = match.date.split("-");
+                dateElement.textContent =
+                    `${parseInt(parts[2])}/${parseInt(parts[1])}/${parts[0]}`;
+            }
+
+            /* تحديث الوقت */
+            const timeElement = document.getElementById("matchDayDisplay");
+
+            if (timeElement && match.time) {
+                const [hourString, minute] = match.time.split(":");
+                let hour = parseInt(hourString);
+
+                const suffix = hour >= 12 ? "pm" : "am";
+
+                if (hour > 12) {
+                    hour -= 12;
+                }
+
+                if (hour === 0) {
+                    hour = 12;
+                }
+
+                timeElement.textContent = `${hour}:${minute}${suffix}`;
+            }
+
+            console.log("AnySport updated:", match);
+
+        } catch (error) {
+            console.log("AnySport update error:", error);
+        }
+    }
+
+    updateNextMatch();
+
+    /* تحديث البيانات كل 30 ثانية */
+    setInterval(updateNextMatch, 30000);
+})();
     </script>
 </body>
 </html>
