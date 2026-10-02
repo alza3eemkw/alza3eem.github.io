@@ -1099,18 +1099,7 @@
 .azm-live-status.live::before { content:""; width:6px; height:6px; border-radius:50%; background:#ef4444; margin-left:5px; box-shadow:0 0 8px rgba(239,68,68,.8); }
 .azm-live-divider { height:1px; background:rgba(255,255,255,.06); margin:10px 0; }
 .azm-live-heading { font-size:.67rem; font-weight:900; color:#e2e8f0; margin:0 0 7px; }
-.azm-live-events { display:flex; flex-direction:column; gap:5px; }
-.azm-live-event { display:grid; grid-template-columns:32px 22px 1fr auto; align-items:center; gap:5px; padding:7px 8px; border-radius:9px; background:rgba(255,255,255,.035); font-size:.58rem; }
-.azm-live-event-minute { color:#4ade80; font-weight:900; }
-.azm-live-event-icon { text-align:center; }
-.azm-live-event-text { color:#e2e8f0; font-weight:800; min-width:0; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; }
-.azm-live-event-team { color:#64748b; font-size:.5rem; white-space:nowrap; }
 .azm-live-empty { padding:9px; border-radius:9px; background:rgba(255,255,255,.03); color:#64748b; text-align:center; font-size:.58rem; }
-.azm-live-stats { display:grid; gap:5px; }
-.azm-live-stat { padding:7px 8px; border-radius:9px; background:rgba(255,255,255,.03); }
-.azm-live-stat-row { display:grid; grid-template-columns:38px 1fr 38px; align-items:center; gap:6px; text-align:center; }
-.azm-live-stat-val { font-size:.61rem; font-weight:900; color:#e2e8f0; }
-.azm-live-stat-name { font-size:.51rem; color:#64748b; font-weight:800; }
 .azm-live-updated { margin-top:8px; text-align:center; color:#475569; font-size:.48rem; }
 
     
@@ -1133,7 +1122,7 @@
             align-items: center;
             justify-content: center;
             overflow: hidden;
-            animation: azmOpeningOut 0.18s ease 0.32s forwards;
+            animation: azmOpeningOut 0.22s ease 2.78s forwards;
             pointer-events: none;
         }
         #azm-opening-intro img {
@@ -1141,7 +1130,7 @@
             height: 100%;
             object-fit: cover;
             display: block;
-            animation: azmOpeningIn 0.5s ease-out forwards;
+            animation: azmOpeningIn 0.35s ease-out forwards;
         }
         @keyframes azmOpeningIn {
             from { opacity: 0; transform: scale(0.985); }
@@ -1155,7 +1144,7 @@
 </head>
 <body>
 
-    <div id="azm-opening-intro" aria-hidden="true"><img src="https://i.ibb.co/JR9q0ng5/A4-F5-A3-A1-52-F2-4623-BF11-F13-CFC2-FAB46.png" alt=""></div>
+    <div id="azm-opening-intro" aria-hidden="true"><img src="https://i.ibb.co/1tKqWXMZ/IMG-7301.jpg" alt="منصة الزعيم" loading="eager" decoding="sync" fetchpriority="high"></div>
 
     <div class="iphone-frame">
         <header class="sticky-header">
@@ -1342,7 +1331,7 @@
             <div id="next-match" class="content">
                 <div class="section-title" style="margin-bottom: 16px;">المباراة القادمة</div>
 
-                <div class="next-match-card"><div class="azm-fm-head"><span class="azm-fm-league" id="matchOpponentDisplay">دوري زين · الجولة 4</span><span class="azm-fm-status" id="azmDetailStatus">بعد 7 أيام</span></div><div class="azm-fm-teams"><div class="azm-fm-team"><div class="azm-fm-badge">ع</div><div class="azm-fm-name">العربي</div></div><div class="azm-fm-center"><div class="azm-fm-center-main" id="azmDetailScore">8:05pm</div><div class="azm-fm-center-sub" id="azmDetailCountdown">9/10/2026</div></div><div class="azm-fm-team opponent"><div class="azm-fm-badge">ك</div><div class="azm-fm-name" id="matchTimeDisplay">كاظمة</div></div></div><div class="azm-fm-meta"><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">التاريخ</div><div class="azm-fm-meta-value" id="matchDateDisplay">9/10/2026</div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الملعب</div><div class="azm-fm-meta-value" id="matchStadiumDisplay">الصداقة والسلام</div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الوقت</div><div class="azm-fm-meta-value" id="matchDayDisplay">8:05pm</div></div></div><div class="azm-fm-tabs"><div class="azm-fm-tab active">نظرة عامة</div></div><div class="azm-fm-livebox" id="azmDetailLiveBox" hidden><div class="azm-fm-live-row"><div class="azm-fm-live-team" id="azmLiveHome">كاظمة</div><div><div class="azm-fm-live-score" id="azmLiveScore">- : -</div><div class="azm-fm-live-minute" id="azmLiveMinute">—</div></div><div class="azm-fm-live-team" id="azmLiveAway">العربي</div></div><div class="azm-fm-note" id="azmLiveUpdated">آخر تحديث —</div></div><div class="azm-live-panel" id="azmLivePanel" hidden><div class="azm-live-status" id="azmLiveStatus">لم تبدأ</div><div class="azm-live-divider"></div><div class="azm-live-heading">أحداث المباراة</div><div class="azm-live-events" id="azmLiveEvents"><div class="azm-live-empty">بانتظار بداية المباراة</div></div><div class="azm-live-divider"></div><div class="azm-live-heading">إحصائيات المباراة</div><div class="azm-live-stats" id="azmLiveStats"><div class="azm-live-empty">الإحصائيات تظهر أثناء المباراة</div></div></div></div>
+                <div class="next-match-card"><div class="azm-fm-head"><span class="azm-fm-league" id="matchOpponentDisplay">دوري زين · الجولة 4</span><span class="azm-fm-status" id="azmDetailStatus">بعد 7 أيام</span></div><div class="azm-fm-teams"><div class="azm-fm-team"><div class="azm-fm-badge">ع</div><div class="azm-fm-name">العربي</div></div><div class="azm-fm-center"><div class="azm-fm-center-main" id="azmDetailScore">8:05pm</div><div class="azm-fm-center-sub" id="azmDetailCountdown">9/10/2026</div></div><div class="azm-fm-team opponent"><div class="azm-fm-badge">ك</div><div class="azm-fm-name" id="matchTimeDisplay">كاظمة</div></div></div><div class="azm-fm-meta"><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">التاريخ</div><div class="azm-fm-meta-value" id="matchDateDisplay">9/10/2026</div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الملعب</div><div class="azm-fm-meta-value" id="matchStadiumDisplay">الصداقة والسلام</div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الوقت</div><div class="azm-fm-meta-value" id="matchDayDisplay">8:05pm</div></div></div><div class="azm-fm-tabs"><div class="azm-fm-tab active">نظرة عامة</div></div><div class="azm-fm-livebox" id="azmDetailLiveBox" hidden><div class="azm-fm-live-row"><div class="azm-fm-live-team" id="azmLiveHome">كاظمة</div><div><div class="azm-fm-live-score" id="azmLiveScore">- : -</div><div class="azm-fm-live-minute" id="azmLiveMinute">—</div></div><div class="azm-fm-live-team" id="azmLiveAway">العربي</div></div><div class="azm-fm-note" id="azmLiveUpdated">آخر تحديث —</div></div></div>
                 <div class="rules-box" style="margin-top: 16px;">
                     <h3 style="margin-top: 0; margin-bottom: 10px; font-weight: 800; color: #38bdf8;">معلومات إضافية</h3>
                     <p style="margin: 4px 0;">جميع التفاصيل قابلة للتحديث من إدارة المنصة.</p>
@@ -2130,8 +2119,6 @@
         away: $('azmLiveAway'),
         score: $('azmLiveScore'),
         minute: $('azmLiveMinute'),
-        events: $('azmLiveEvents'),
-        stats: $('azmLiveStats'),
         updated: $('azmLiveUpdated'),
         tournament: $('matchOpponentDisplay'),
         mainArabi: document.querySelector('#next-match .azm-fm-name'),
@@ -2406,181 +2393,11 @@
         return 'حدث';
     }
 
-    function normalizeEvents(payload) {
-        const data = payload?.data || payload || {};
-        const list = data?.events || data?.situation || data?.events_json || [];
-        if (Array.isArray(list)) return list;
-        if (list && typeof list === 'object') {
-            return Object.values(list).flatMap(v => Array.isArray(v) ? v : [v]).filter(Boolean);
-        }
-        return [];
-    }
-
-    function renderEvents(payload) {
-        if (!els.events) return;
-        const events = normalizeEvents(payload);
-        if (!events.length) {
-            els.events.innerHTML = '<div class="azm-live-empty">لا توجد أحداث حتى الآن</div>';
-            return;
-        }
-
-        els.events.innerHTML = events.map(e => {
-            const type = e?.type || e?.event_type || e?.kind || 'event';
-            const minute = e?.minute ?? e?.time ?? e?.match_time ?? '';
-            const player = e?.player_name || e?.player || e?.name || eventLabel(type);
-            const team = e?.team_name || e?.team || '';
-            return `<div class="azm-live-event"><span class="azm-live-event-minute">${esc(minute)}</span><span class="azm-live-event-icon">${eventIcon(type)}</span><span class="azm-live-event-text">${esc(player)}</span><span class="azm-live-event-team">${esc(team)}</span></div>`;
-        }).join('');
-    }
-
-    function statLabel(key) {
-        const labels = {
-            c: 'الركنيات', corners: 'الركنيات', possession: 'الاستحواذ', shots: 'التسديدات',
-            shots_on_target: 'على المرمى', fouls: 'الأخطاء', offsides: 'التسلل',
-            yellow_cards: 'الصفراء', red_cards: 'الحمراء', penalties: 'ركلات الجزاء',
-            attacks: 'الهجمات', dangerous_attacks: 'الهجمات الخطرة'
-        };
-        return labels[key] || String(key).replace(/_/g, ' ');
-    }
-
-    function renderStats(payload) {
-        if (!els.stats) return;
-        const data = payload?.data || payload || {};
-        const stats = data?.stats || data?.stats_json || {};
-        const entries = Object.entries(stats);
-        if (!entries.length) {
-            els.stats.innerHTML = '<div class="azm-live-empty">لا توجد إحصائيات حتى الآن</div>';
-            return;
-        }
-
-        els.stats.innerHTML = entries.map(([key, value]) => {
-            let home = '-', away = '-';
-            if (Array.isArray(value)) {
-                home = value[0] ?? '-';
-                away = value[1] ?? '-';
-            } else if (value && typeof value === 'object') {
-                home = value.home ?? value.home_value ?? '-';
-                away = value.away ?? value.away_value ?? '-';
-            }
-            return `<div class="azm-live-stat"><div class="azm-live-stat-row"><span class="azm-live-stat-val">${esc(home)}</span><span class="azm-live-stat-name">${esc(statLabel(key))}</span><span class="azm-live-stat-val">${esc(away)}</span></div></div>`;
-        }).join('');
-    }
-
     async function refreshSituation(force = false) {
-        if (!currentMatch.match_id || (matchState !== 'live' && matchState !== 'finished')) return;
-        const now = Date.now();
-        if (!force && now - lastSituationAt < 120000) return;
-        if (loadingSituation) return;
-        loadingSituation = true;
-        lastSituationAt = now;
-
-        try {
-            const data = await getJSON(apiUrl('situation', currentMatch.match_id));
-            renderEvents(data);
-            renderStats(data);
-        } catch (error) {
-            console.warn('Alzaeem situation:', error);
-        } finally {
-            loadingSituation = false;
-        }
+        return;
     }
 
     async function loadNextMatch(force = false) {
         if (loadingNext) return null;
         const now = Date.now();
         if (!force && now - lastNextAt < 600000) return currentMatch;
-        loadingNext = true;
-        lastNextAt = now;
-
-        try {
-            const data = await getJSON(apiUrl('next'));
-            const match = data?.data?.match;
-            if (match?.match_id) {
-                const oldId = currentMatch.match_id;
-                currentMatch = { ...FALLBACK_MATCH, ...match };
-                renderMatchDetails();
-
-                if (oldId !== currentMatch.match_id) {
-                    matchState = 'pre';
-                    lastLiveAt = 0;
-                    lastSituationAt = 0;
-                    if (els.events) els.events.innerHTML = '<div class="azm-live-empty">بانتظار بداية المباراة</div>';
-                    if (els.stats) els.stats.innerHTML = '<div class="azm-live-empty">الإحصائيات تظهر أثناء المباراة</div>';
-                    if (els.panel) els.panel.hidden = true;
-                }
-            }
-        } catch (error) {
-            console.warn('Alzaeem next match:', error);
-        } finally {
-            loadingNext = false;
-        }
-
-        renderMatchDetails();
-        if (matchState === 'pre') renderPreMatch();
-        return currentMatch;
-    }
-
-    async function refreshLive(force = false) {
-        if (!currentMatch.match_id || loadingLive) return;
-
-        const kick = kickoffDate(currentMatch);
-        if (!kick || Date.now() < kick.getTime()) {
-            renderPreMatch();
-            return;
-        }
-
-        const now = Date.now();
-        if (!force && now - lastLiveAt < 60000) return;
-        lastLiveAt = now;
-        loadingLive = true;
-
-        try {
-            const data = await getJSON(apiUrl('live', currentMatch.match_id));
-            const available = renderLive(data);
-
-            if (available) {
-                await refreshSituation(force);
-
-                if (matchState === 'finished') {
-                    /*
-                       Match ended: immediately ask AnySport for the next
-                       non-finished Al Arabi fixture. If the provider has
-                       not published it yet, the next scheduled check will retry.
-                    */
-                    await loadNextMatch(true);
-                }
-            }
-        } catch (error) {
-            console.warn('Alzaeem live:', error);
-        } finally {
-            loadingLive = false;
-        }
-    }
-
-    function clockTick() {
-        if (matchState === 'pre') renderPreMatch();
-    }
-
-    async function bootMatchCenter() {
-        await loadNextMatch(true);
-        renderPreMatch();
-
-        /*
-          Free-trial friendly REST schedule:
-          - live score: every 60 seconds
-          - situation/stats: every 2 minutes
-          - fixture discovery: every 10 minutes
-          This stays well below the 120 requests/hour trial ceiling
-          for the single Al Arabi match center.
-        */
-        setInterval(clockTick, 30000);
-        setInterval(() => refreshLive(false), 60000);
-        setInterval(() => refreshSituation(false), 120000);
-        setInterval(() => loadNextMatch(true), 600000);
-    }
-
-    bootMatchCenter();
-</script>
-
-</body>
-</html>
