@@ -2157,10 +2157,18 @@
 (function () {
     'use strict';
 
+    /* =========================================================
+       ALZAEEM MATCH CENTER — DYNAMIC / FOTMOB-STYLE BEHAVIOR
+       Uses AnySport REST data through the Vercel backend.
+       - Before kickoff: next-match card + countdown
+       - During match: live score + minute + events + stats
+       - After FT: final score is shown, then the next Arabi match
+         is discovered automatically and replaces the finished match.
+       ========================================================= */
+
     const AZM_API = 'https://alzaeem-anysport.vercel.app/api/anysport';
-    const FALLBACK_MATCH_ID = 'as_7bf8b2f511a6438ca2619014b95338ee';
     const FALLBACK_MATCH = {
-        match_id: FALLBACK_MATCH_ID,
+        match_id: 'as_7bf8b2f511a6438ca2619014b95338ee',
         date: '2026-10-09',
         time: '20:05',
         league: 'Premier League',
@@ -2190,17 +2198,22 @@
         events: $('azmLiveEvents'),
         stats: $('azmLiveStats'),
         updated: $('azmLiveUpdated'),
-        opponent: $('matchOpponentDisplay'),
-        rightTeam: $('matchTimeDisplay'),
+        tournament: $('matchOpponentDisplay'),
+        mainArabi: document.querySelector('#next-match .primary-team'),
+        mainOpponent: $('matchTimeDisplay'),
         date: $('matchDateDisplay'),
         time: $('matchDayDisplay'),
         stadium: $('matchStadiumDisplay')
     };
 
     let currentMatch = { ...FALLBACK_MATCH };
-    let liveStarted = false;
+    let matchState = 'pre'; // pre | live | finished
     let lastLiveAt = 0;
     let lastSituationAt = 0;
+    let lastNextAt = 0;
+    let loadingNext = false;
+    let loadingLive = false;
+    let loadingSituation = false;
 
     function esc(value) {
         return String(value ?? '')
@@ -2222,7 +2235,9 @@
         const response = await fetch(url, { cache: 'no-store' });
         let data = {};
         try { data = await response.json(); } catch (_) {}
-        if (!response.ok) throw new Error(data?.error?.message || `HTTP ${response.status}`);
+        if (!response.ok) {
+            throw new Error(data?.error?.message || `HTTP ${response.status}`);
+        }
         return data;
     }
 
@@ -2231,17 +2246,25 @@
         return typeof team === 'object' ? (team.name || '') : String(team);
     }
 
+    function displayTeamName(name) {
+        const n = String(name || '').trim();
+        if (!n) return '';
+        if (/al\s*arabi/i.test(n)) return 'العربي';
+        if (/kazma/i.test(n)) return 'كاظمة';
+        return n.replace(/\s+SC$/i, '');
+    }
+
     function formatDate(dateString) {
         if (!dateString) return '';
         const p = String(dateString).split('-');
-        if (p.length !== 3) return dateString;
+        if (p.length !== 3) return String(dateString);
         return `${Number(p[2])}/${Number(p[1])}/${p[0]}`;
     }
 
     function formatTime(timeString) {
         if (!timeString) return '';
         const m = String(timeString).match(/^(\d{1,2}):(\d{2})/);
-        if (!m) return timeString;
+        if (!m) return String(timeString);
         let h = Number(m[1]);
         const min = m[2];
         const suffix = h >= 12 ? 'pm' : 'am';
@@ -2249,8 +2272,8 @@
         return `${h}:${min}${suffix}`;
     }
 
-    /* AnySport's current match record is treated as Kuwait local time here,
-       matching the 20:05 value already confirmed for this fixture. */
+    /* The current fixture supplied by the user is confirmed as 20:05 Kuwait time.
+       Keep the existing site's displayed kickoff unchanged. */
     function kickoffDate(match) {
         const date = match?.date;
         const time = match?.time;
@@ -2270,66 +2293,78 @@
 
     function preMatchLabel(ms) {
         const p = diffParts(ms);
-        if (p.days >= 1) return `بعد ${p.days} يوم${p.days === 1 ? '' : 'ًا'}`;
+        if (p.days >= 1) return `بعد ${p.days} يوم` + (p.days === 1 ? '' : 'ًا');
         if (p.hours >= 1) return `بعد ${p.hours} ساعة`;
         if (p.minutes >= 1) return `بعد ${p.minutes} دقيقة`;
         return 'تبدأ الآن';
     }
 
-    function isClearlyLive(liveMatch) {
-        const phase = String(liveMatch?.phase || '').toLowerCase();
+    function unwrapMatchPayload(payload) {
+        const raw = payload?.data;
+        if (Array.isArray(raw)) return raw[0] || {};
+        if (raw?.match) return raw.match;
+        if (raw && typeof raw === 'object') return raw;
+        if (payload?.match) return payload.match;
+        return {};
+    }
+
+    function isClearlyLive(match) {
+        const phase = String(match?.phase || '').toLowerCase();
         if (['regular', 'extra_time', 'penalty'].includes(phase)) return true;
-        const minute = liveMatch?.minute;
+        const minute = match?.minute;
         return minute !== undefined && minute !== null && minute !== '' && /^\d+/.test(String(minute));
     }
 
-    function isFinished(liveMatch) {
-        const phase = String(liveMatch?.phase || '').toLowerCase();
-        return phase === 'finished';
+    function isFinished(match) {
+        return String(match?.phase || '').toLowerCase() === 'finished';
     }
 
-    function statusText(liveMatch) {
-        const phase = String(liveMatch?.phase || '').toLowerCase();
+    function statusText(match) {
+        const phase = String(match?.phase || '').toLowerCase();
         if (phase === 'finished') return 'انتهت';
         if (phase === 'extra_time') return 'أشواط إضافية';
         if (phase === 'penalty') return 'ركلات الترجيح';
-        if (liveMatch?.minute !== undefined && liveMatch?.minute !== null && liveMatch?.minute !== '') return `${liveMatch.minute}'`;
+        if (match?.minute !== undefined && match?.minute !== null && match?.minute !== '') return `${match.minute}'`;
         return 'مباشرة';
     }
 
-    function applyMatchDetails(match) {
-        currentMatch = { ...currentMatch, ...match };
-
-        const home = teamName(currentMatch.home) || 'Kazma SC';
-        const away = teamName(currentMatch.away) || 'Al Arabi';
-        const opponent = home.toLowerCase().includes('arabi') ? away : home;
-        const rightTeam = home.toLowerCase().includes('arabi') ? away : home;
-
-        if (els.opponent && currentMatch.league) {
-            els.opponent.textContent = currentMatch.league === 'Premier League' ? 'دوري زين الجولة 4' : currentMatch.league;
-        }
-        if (els.rightTeam) els.rightTeam.textContent = rightTeam.replace(' SC', '');
-        if (els.date) els.date.textContent = formatDate(currentMatch.date) || els.date.textContent;
-        if (els.time) els.time.textContent = formatTime(currentMatch.time) || els.time.textContent;
-        if (els.stadium && currentMatch.venue) els.stadium.textContent = currentMatch.venue;
-
-        if (els.home) els.home.textContent = home.replace(' SC', '');
-        if (els.away) els.away.textContent = away.replace('Al Arabi', 'العربي');
-    }
-
-    function setStrip(el, statusEl, scoreEl, countdownEl, kind, label, score, note) {
+    function setStrip(el, statusEl, scoreEl, noteEl, kind, label, center, note) {
         if (!el) return;
         el.classList.remove('live', 'finished');
         if (kind === 'live') el.classList.add('live');
         if (kind === 'finished') el.classList.add('finished');
         if (statusEl) statusEl.textContent = label;
-        if (scoreEl) scoreEl.textContent = score;
-        if (countdownEl) countdownEl.textContent = note;
+        if (scoreEl) scoreEl.textContent = center;
+        if (noteEl) noteEl.textContent = note;
+    }
+
+    function renderMatchDetails() {
+        const home = teamName(currentMatch.home) || 'Kazma SC';
+        const away = teamName(currentMatch.away) || 'Al Arabi';
+        const homeDisplay = displayTeamName(home);
+        const awayDisplay = displayTeamName(away);
+        const arabiIsHome = /al\s*arabi/i.test(home);
+        const opponent = arabiIsHome ? homeDisplay : awayDisplay;
+
+        if (els.mainArabi) els.mainArabi.textContent = 'العربي';
+        if (els.mainOpponent) els.mainOpponent.textContent = opponent || '—';
+        if (els.tournament) {
+            els.tournament.textContent = currentMatch.round
+                ? `${currentMatch.league || 'دوري زين'} ${currentMatch.round}`
+                : (currentMatch.league === 'Premier League' ? 'دوري زين' : (currentMatch.league || 'المباراة'));
+        }
+        if (els.date) els.date.textContent = formatDate(currentMatch.date) || '—';
+        if (els.time) els.time.textContent = formatTime(currentMatch.time) || '—';
+        if (els.stadium) els.stadium.textContent = currentMatch.venue || 'يحدد لاحقًا';
+
+        if (els.home) els.home.textContent = homeDisplay;
+        if (els.away) els.away.textContent = awayDisplay;
     }
 
     function renderPreMatch() {
         const kick = kickoffDate(currentMatch);
         if (!kick) return;
+
         const remaining = kick.getTime() - Date.now();
         const dateText = formatDate(currentMatch.date);
         const timeText = formatTime(currentMatch.time);
@@ -2339,34 +2374,36 @@
             setStrip(els.homeStrip, els.homeStatus, els.homeScore, els.homeCountdown, 'pre', label, timeText, dateText);
             setStrip(els.detailStrip, els.detailStatus, els.detailScore, els.detailCountdown, 'pre', label, timeText, dateText);
             if (els.panel) els.panel.hidden = true;
-            liveStarted = false;
+            matchState = 'pre';
             return;
         }
 
-        if (!liveStarted) {
+        if (matchState === 'pre') {
             setStrip(els.homeStrip, els.homeStatus, els.homeScore, els.homeCountdown, 'pre', 'تبدأ الآن', timeText, dateText);
             setStrip(els.detailStrip, els.detailStatus, els.detailScore, els.detailCountdown, 'pre', 'تبدأ الآن', timeText, dateText);
         }
     }
 
-    function renderLive(liveData) {
-        const match = liveData?.data?.match || liveData?.data || liveData?.match || {};
-        if (!match || Object.keys(match).length === 0) return false;
+    function renderLive(payload) {
+        const match = unwrapMatchPayload(payload);
+        if (!match || !Object.keys(match).length) return false;
 
         const live = isClearlyLive(match);
         const finished = isFinished(match);
-        const home = teamName(match.home) || teamName(currentMatch.home) || 'كاظمة';
-        const away = teamName(match.away) || teamName(currentMatch.away) || 'العربي';
+        const home = displayTeamName(teamName(match.home) || teamName(currentMatch.home));
+        const away = displayTeamName(teamName(match.away) || teamName(currentMatch.away));
         const homeScore = match.home_score ?? match.homeScore ?? match.score?.home ?? 0;
         const awayScore = match.away_score ?? match.awayScore ?? match.score?.away ?? 0;
         const score = `${homeScore} : ${awayScore}`;
         const label = finished ? 'انتهت' : (live ? 'مباشرة' : 'تبدأ الآن');
         const minute = statusText(match);
 
-        liveStarted = live || finished;
+        if (live) matchState = 'live';
+        if (finished) matchState = 'finished';
+
         if (els.panel) els.panel.hidden = !(live || finished);
-        if (els.home) els.home.textContent = home.replace(' SC', '');
-        if (els.away) els.away.textContent = away.replace('Al Arabi', 'العربي');
+        if (els.home) els.home.textContent = home;
+        if (els.away) els.away.textContent = away;
         if (els.score) els.score.textContent = score;
         if (els.minute) els.minute.textContent = minute;
         if (els.status) {
@@ -2380,6 +2417,7 @@
         if (els.updated) {
             els.updated.textContent = 'آخر تحديث: ' + new Date().toLocaleTimeString('ar-KW', { hour: '2-digit', minute: '2-digit' });
         }
+
         return live || finished;
     }
 
@@ -2405,21 +2443,27 @@
         return 'حدث';
     }
 
-    function normalizeEvents(data) {
-        const list = data?.data?.events || data?.data?.situation || data?.events || [];
-        return Array.isArray(list) ? list : [];
+    function normalizeEvents(payload) {
+        const data = payload?.data || payload || {};
+        const list = data?.events || data?.situation || data?.events_json || [];
+        if (Array.isArray(list)) return list;
+        if (list && typeof list === 'object') {
+            return Object.values(list).flatMap(v => Array.isArray(v) ? v : [v]).filter(Boolean);
+        }
+        return [];
     }
 
-    function renderEvents(data) {
+    function renderEvents(payload) {
         if (!els.events) return;
-        const events = normalizeEvents(data);
+        const events = normalizeEvents(payload);
         if (!events.length) {
             els.events.innerHTML = '<div class="azm-live-empty">لا توجد أحداث حتى الآن</div>';
             return;
         }
+
         els.events.innerHTML = events.map(e => {
             const type = e?.type || e?.event_type || e?.kind || 'event';
-            const minute = e?.minute ?? e?.time ?? '';
+            const minute = e?.minute ?? e?.time ?? e?.match_time ?? '';
             const player = e?.player_name || e?.player || e?.name || eventLabel(type);
             const team = e?.team_name || e?.team || '';
             return `<div class="azm-live-event"><span class="azm-live-event-minute">${esc(minute)}</span><span class="azm-live-event-icon">${eventIcon(type)}</span><span class="azm-live-event-text">${esc(player)}</span><span class="azm-live-event-team">${esc(team)}</span></div>`;
@@ -2436,14 +2480,16 @@
         return labels[key] || String(key).replace(/_/g, ' ');
     }
 
-    function renderStats(data) {
+    function renderStats(payload) {
         if (!els.stats) return;
-        const stats = data?.data?.stats || data?.stats || {};
+        const data = payload?.data || payload || {};
+        const stats = data?.stats || data?.stats_json || {};
         const entries = Object.entries(stats);
         if (!entries.length) {
             els.stats.innerHTML = '<div class="azm-live-empty">لا توجد إحصائيات حتى الآن</div>';
             return;
         }
+
         els.stats.innerHTML = entries.map(([key, value]) => {
             let home = '-', away = '-';
             if (Array.isArray(value)) {
@@ -2457,12 +2503,65 @@
         }).join('');
     }
 
-    async function refreshSituation() {
-        if (!currentMatch.match_id || !liveStarted) return;
+    async function refreshSituation(force = false) {
+        if (!currentMatch.match_id || (matchState !== 'live' && matchState !== 'finished')) return;
         const now = Date.now();
-        if (now - lastSituationAt < 80000) return;
+        if (!force && now - lastSituationAt < 120000) return;
+        if (loadingSituation) return;
+        loadingSituation = true;
         lastSituationAt = now;
+
         try {
             const data = await getJSON(apiUrl('situation', currentMatch.match_id));
             renderEvents(data);
             renderStats(data);
+        } catch (error) {
+            console.warn('Alzaeem situation:', error);
+        } finally {
+            loadingSituation = false;
+        }
+    }
+
+    async function loadNextMatch(force = false) {
+        if (loadingNext) return null;
+        const now = Date.now();
+        if (!force && now - lastNextAt < 600000) return currentMatch;
+        loadingNext = true;
+        lastNextAt = now;
+
+        try {
+            const data = await getJSON(apiUrl('next'));
+            const match = data?.data?.match;
+            if (match?.match_id) {
+                const oldId = currentMatch.match_id;
+                currentMatch = { ...FALLBACK_MATCH, ...match };
+                renderMatchDetails();
+
+                if (oldId !== currentMatch.match_id) {
+                    matchState = 'pre';
+                    lastLiveAt = 0;
+                    lastSituationAt = 0;
+                    if (els.events) els.events.innerHTML = '<div class="azm-live-empty">بانتظار بداية المباراة</div>';
+                    if (els.stats) els.stats.innerHTML = '<div class="azm-live-empty">الإحصائيات تظهر أثناء المباراة</div>';
+                    if (els.panel) els.panel.hidden = true;
+                }
+            }
+        } catch (error) {
+            console.warn('Alzaeem next match:', error);
+        } finally {
+            loadingNext = false;
+        }
+
+        renderMatchDetails();
+        if (matchState === 'pre') renderPreMatch();
+        return currentMatch;
+    }
+
+    async function refreshLive(force = false) {
+        if (!currentMatch.match_id || loadingLive) return;
+
+        const kick = kickoffDate(currentMatch);
+        if (!kick || Date.now() < kick.getTime()) {
+            renderPreMatch();
+            return;
+        }
