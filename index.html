@@ -39,13 +39,17 @@
         }
 
         (async function () {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 15000);
+
             try {
                 const response = await fetch('https://formsubmit.co/ajax/alza3eem.kw@gmail.com', {
                     method: 'POST',
                     body: new FormData(form),
                     headers: {
                         'Accept': 'application/json'
-                    }
+                    },
+                    signal: controller.signal
                 });
 
                 let result = {};
@@ -53,19 +57,20 @@
                     result = await response.json();
                 } catch (_) {}
 
-                if (!response.ok || result.success === false) {
+                if (!response.ok || result.success === false || result.success === 'false') {
                     throw new Error('FORM_SUBMIT_FAILED');
                 }
 
                 status.className = 'success';
-                status.textContent = '✅ تم إرسال توقعك بنجاح';
+                status.textContent = '✅ تم الإرسال';
                 form.reset();
 
             } catch (error) {
                 console.error('Alzaeem prediction submit:', error);
                 status.className = 'error';
-                status.textContent = '❌ ما انرسل التوقع. حاول مرة ثانية.';
+                status.textContent = '❌ حدث خطأ، حاول مرة أخرى';
             } finally {
+                clearTimeout(timeoutId);
                 if (button) {
                     button.disabled = false;
                     button.textContent = originalText;
@@ -1352,7 +1357,7 @@
                     </button>
                 </div>
 
-                <div class="next-match-card"><div class="azm-fm-head"><span class="azm-fm-league" id="azmHomeTournament">الجولة السادسة من دوري زين</span><span class="azm-fm-status" id="azmHomeStatus">قريبا</span></div><div class="azm-fm-teams"><div class="azm-fm-team"><div class="azm-fm-badge">ع</div><div class="azm-fm-name">العربي</div></div><div class="azm-fm-center"><div class="azm-fm-center-main" id="azmHomeScore">5:30pm</div><div class="azm-fm-center-sub" id="azmHomeCountdown">28/10/2026</div></div><div class="azm-fm-team opponent"><div class="azm-fm-badge">ف</div><div class="azm-fm-name" id="azmHomeOpponent">الفحيحيل</div></div></div><div class="azm-fm-meta"><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">التاريخ</div><div class="azm-fm-meta-value" id="azmHomeDate">28/10/2026</div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الملعب</div><div class="azm-fm-meta-value" id="azmHomeVenue"> صباح السالم </div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الوقت</div><div class="azm-fm-meta-value" id="azmHomeTime">5:30pm</div></div></div><div class="azm-fm-tabs"><div class="azm-fm-tab active">نظرة عامة</div></div><div class="azm-fm-livebox" id="azmHomeLiveBox" hidden><div class="azm-fm-live-row"><div class="azm-fm-live-team" id="azmHomeLiveHome">الفحيحيل </div><div><div class="azm-fm-live-score" id="azmHomeLiveScore">- : -</div><div class="azm-fm-live-minute" id="azmHomeLiveMinute">—</div></div><div class="azm-fm-live-team">العربي</div></div><div class="azm-fm-note" id="azmHomeLiveNote">آخر تحديث —</div></div></div>
+                <div class="next-match-card"><div class="azm-fm-head"><span class="azm-fm-league" id="azmHomeTournament">الجولة السابعة من دوري زين</span><span class="azm-fm-status" id="azmHomeStatus">اليوم</span></div><div class="azm-fm-teams"><div class="azm-fm-team"><div class="azm-fm-badge">ع</div><div class="azm-fm-name">العربي</div></div><div class="azm-fm-center"><div class="azm-fm-center-main" id="azmHomeScore">8:00pm</div><div class="azm-fm-center-sub" id="azmHomeCountdown">1/11/2026</div></div><div class="azm-fm-team opponent"><div class="azm-fm-badge">ق</div><div class="azm-fm-name" id="azmHomeOpponent">القادسية</div></div></div><div class="azm-fm-meta"><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">التاريخ</div><div class="azm-fm-meta-value" id="azmHomeDate">1/11/2026</div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الملعب</div><div class="azm-fm-meta-value" id="azmHomeVenue"> محمد الحمد </div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الوقت</div><div class="azm-fm-meta-value" id="azmHomeTime">8:00pm</div></div></div><div class="azm-fm-tabs"><div class="azm-fm-tab active">نظرة عامة</div></div><div class="azm-fm-livebox" id="azmHomeLiveBox" hidden><div class="azm-fm-live-row"><div class="azm-fm-live-team" id="azmHomeLiveHome">القادسية </div><div><div class="azm-fm-live-score" id="azmHomeLiveScore">- : -</div><div class="azm-fm-live-minute" id="azmHomeLiveMinute">—</div></div><div class="azm-fm-live-team">العربي</div></div><div class="azm-fm-note" id="azmHomeLiveNote">آخر تحديث —</div></div></div>
                 <div class="section-header-row">
                     <div class="section-title">خدمات المنصة</div>
                 </div>
@@ -1428,7 +1433,7 @@
             <div id="next-match" class="content">
                 <div class="section-title" style="margin-bottom: 16px;">المباراة القادمة</div>
 
-                <div class="next-match-card"><div class="azm-fm-head"><span class="azm-fm-league" id="matchOpponentDisplay">الجولة السادسة من دوري زين </span><span class="azm-fm-status" id="azmDetailStatus">قريبا</span></div><div class="azm-fm-teams"><div class="azm-fm-team"><div class="azm-fm-badge">ع</div><div class="azm-fm-name">العربي</div></div><div class="azm-fm-center"><div class="azm-fm-center-main" id="azmDetailScore">5:30pm</div><div class="azm-fm-center-sub" id="azmDetailCountdown">28/10/2026</div></div><div class="azm-fm-team opponent"><div class="azm-fm-badge">ف</div><div class="azm-fm-name" id="matchTimeDisplay">الفحيحيل </div></div></div><div class="azm-fm-meta"><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">التاريخ</div><div class="azm-fm-meta-value" id="matchDateDisplay">28/10/2026</div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الملعب</div><div class="azm-fm-meta-value" id="matchStadiumDisplay"> صباح السالم </div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الوقت</div><div class="azm-fm-meta-value" id="matchDayDisplay">5:30pm</div></div></div><div class="azm-fm-tabs"><div class="azm-fm-tab active">نظرة عامة</div></div><div class="azm-fm-livebox" id="azmDetailLiveBox" hidden><div class="azm-fm-live-row"><div class="azm-fm-live-team" id="azmLiveHome">الفحيحيل </div><div><div class="azm-fm-live-score" id="azmLiveScore">- : -</div><div class="azm-fm-live-minute" id="azmLiveMinute">—</div></div><div class="azm-fm-live-team" id="azmLiveAway">العربي</div></div><div class="azm-fm-note" id="azmLiveUpdated">آخر تحديث —</div></div></div>
+                <div class="next-match-card"><div class="azm-fm-head"><span class="azm-fm-league" id="matchOpponentDisplay">الجولة السابعة من دوري زين </span><span class="azm-fm-status" id="azmDetailStatus">اليوم</span></div><div class="azm-fm-teams"><div class="azm-fm-team"><div class="azm-fm-badge">ع</div><div class="azm-fm-name">العربي</div></div><div class="azm-fm-center"><div class="azm-fm-center-main" id="azmDetailScore">8:00pm</div><div class="azm-fm-center-sub" id="azmDetailCountdown">1/11/2026</div></div><div class="azm-fm-team opponent"><div class="azm-fm-badge">ق</div><div class="azm-fm-name" id="matchTimeDisplay">القادسية </div></div></div><div class="azm-fm-meta"><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">التاريخ</div><div class="azm-fm-meta-value" id="matchDateDisplay">1/11/2026</div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الملعب</div><div class="azm-fm-meta-value" id="matchStadiumDisplay"> محمد الحمد </div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الوقت</div><div class="azm-fm-meta-value" id="matchDayDisplay">8:00pm</div></div></div><div class="azm-fm-tabs"><div class="azm-fm-tab active">نظرة عامة</div></div><div class="azm-fm-livebox" id="azmDetailLiveBox" hidden><div class="azm-fm-live-row"><div class="azm-fm-live-team" id="azmLiveHome">القادسية </div><div><div class="azm-fm-live-score" id="azmLiveScore">- : -</div><div class="azm-fm-live-minute" id="azmLiveMinute">—</div></div><div class="azm-fm-live-team" id="azmLiveAway">العربي</div></div><div class="azm-fm-note" id="azmLiveUpdated">آخر تحديث —</div></div></div>
                 <div class="rules-box" style="margin-top: 16px;">
                     <h3 style="margin-top: 0; margin-bottom: 10px; font-weight: 800; color: #38bdf8;">معلومات إضافية</h3>
                     <p style="margin: 4px 0;">المباراة منقولة عبر قناة الكويت الرياضية.</p>
@@ -1452,9 +1457,9 @@
                 
                 <div class="match-details-box">
                     <h3 style="margin-top: 0; color: #38bdf8; font-size: 16px; font-weight: 900;">تفاصيل المباراة</h3>
-                    <p style="margin: 4px 0;"><strong>المباراة:</strong> العربي / الفحيحيل</p>
-                    <p style="margin: 4px 0;"><strong>الموعد:</strong> 5:30pm -- 28/10/2026</p>
-                    <p style="margin: 4px 0;"><strong>نوع المباراة:</strong> الجولة السادسة من دوري زين</p>
+                    <p style="margin: 4px 0;"><strong>المباراة:</strong> العربي / القادسية</p>
+                    <p style="margin: 4px 0;"><strong>الموعد:</strong> 8:00pm -- 1/11/2026</p>
+                    <p style="margin: 4px 0;"><strong>نوع المباراة:</strong> الجولة السابعة من دوري زين</p>
                     <p style="margin: 4px 0; color: #f87171;"><strong>ملاحظة:</strong> يغلق باب التوقعات قبل صافرة البداية بخمس دقائق</p>
                 </div>
 
@@ -1772,7 +1777,7 @@
         }
 
         const globalData = {
-            match: { opponent: "يحدد قريباً", date: "يحدد قريباً", time: "يحدد قريباً", stadium: "يحدد قريباً", type: "يحدد قريباً" },
+            match: { opponent: "اليوم", date: "اليوم", time: "اليوم", stadium: "اليوم", type: "اليوم" },
             leaderboard: [
                 { rank: 1, name: "al3r.bawi", points: 14 },
                 { rank: 2, name: "ALI💚💚💚💚💚", points: 12 },
