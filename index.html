@@ -25,14 +25,16 @@
         const form = document.getElementById('my-form');
         const status = document.getElementById('my-form-status');
         const button = form ? form.querySelector('button[type="submit"]') : null;
-
         if (!form || !status) return false;
 
-        const originalText = button ? button.textContent : 'إرسال التوقع';
+        // لا نرسل طلبًا ناقصًا ولا نسمح بإرسال مزدوج.
+        if (!form.reportValidity()) return false;
+        if (form.dataset.submitting === 'true') return false;
 
+        const originalText = button ? button.textContent : 'إرسال التوقع';
+        form.dataset.submitting = 'true';
         status.className = '';
         status.textContent = 'جاري إرسال التوقع…';
-
         if (button) {
             button.disabled = true;
             button.textContent = 'جاري الإرسال…';
@@ -40,37 +42,43 @@
 
         (async function () {
             const controller = new AbortController();
-            const timeoutId = setTimeout(() => controller.abort(), 15000);
+            const timeoutId = setTimeout(() => controller.abort(), 20000);
 
             try {
                 const response = await fetch('https://formsubmit.co/ajax/alza3eem.kw@gmail.com', {
                     method: 'POST',
                     body: new FormData(form),
-                    headers: {
-                        'Accept': 'application/json'
-                    },
+                    headers: { 'Accept': 'application/json' },
+                    mode: 'cors',
+                    cache: 'no-store',
                     signal: controller.signal
                 });
 
+                const raw = await response.text();
                 let result = {};
-                try {
-                    result = await response.json();
-                } catch (_) {}
+                try { result = raw ? JSON.parse(raw) : {}; } catch (_) {}
 
-                if (!response.ok || result.success === false || result.success === 'false') {
-                    throw new Error('FORM_SUBMIT_FAILED');
+                const successValue = String(result.success ?? '').toLowerCase();
+                if (!response.ok || successValue === 'false' ||
+                    (result.success !== undefined && successValue !== 'true')) {
+                    const detail = result.message || result.error || `HTTP ${response.status}`;
+                    throw new Error(String(detail));
                 }
 
                 status.className = 'success';
-                status.textContent = '✅ تم الإرسال';
+                status.textContent = '✅ تم استلام التوقع بنجاح';
                 form.reset();
-
             } catch (error) {
                 console.error('Alzaeem prediction submit:', error);
                 status.className = 'error';
-                status.textContent = '❌ حدث خطأ، حاول مرة أخرى';
+                status.textContent = error.name === 'AbortError'
+                    ? '❌ انتهت مهلة الاتصال. تحقق من الإنترنت ثم أعد المحاولة.'
+                    : (error.message && error.message !== 'Failed to fetch'
+                        ? '❌ تعذر الإرسال: ' + error.message
+                        : '❌ تعذر الاتصال بخدمة الإرسال. تحقق من الإنترنت وحاول مرة أخرى.');
             } finally {
                 clearTimeout(timeoutId);
+                form.dataset.submitting = 'false';
                 if (button) {
                     button.disabled = false;
                     button.textContent = originalText;
@@ -78,7 +86,6 @@
             }
         })();
 
-        // CRITICAL: never allow the browser's native form submission.
         return false;
     };
     </script>
@@ -1242,6 +1249,18 @@
 .sc-puzzle{margin:14px 0}.sc-task-panel .sc-secret-box p{font-size:.73rem;line-height:1.8;color:#b7c5d6}
 .sc-puzzle{padding:15px;border:1px solid rgba(96,165,250,.2);border-radius:15px;background:linear-gradient(145deg,rgba(59,130,246,.075),rgba(255,255,255,.02))}.sc-puzzle-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}.sc-puzzle-head b{font-size:.82rem}.sc-puzzle-head span{font-size:.62rem;color:#93c5fd;border:1px solid rgba(96,165,250,.2);border-radius:99px;padding:4px 8px}.sc-puzzle p{font-size:.77rem;line-height:1.85;color:#c6d4e5;margin:0 0 10px}.sc-puzzle-options{display:grid;gap:7px}.sc-puzzle-options button{padding:10px 11px;border:1px solid rgba(255,255,255,.1);border-radius:10px;background:rgba(255,255,255,.03);color:#e5edf7;text-align:right;font-family:inherit;font-size:.75rem;cursor:pointer}.sc-puzzle-options button:disabled{cursor:default;opacity:.82}.sc-puzzle-options button.correct{border-color:#4ade80;background:rgba(74,222,128,.1)}.sc-puzzle-options button.wrong{border-color:#f87171;background:rgba(248,113,113,.08)}.sc-puzzle-feedback{margin-top:10px;padding:10px;border-radius:10px;background:rgba(255,255,255,.035);font-size:.73rem;line-height:1.8;color:#d1dbe8}.sc-debate-history{padding:12px;border:1px solid rgba(255,255,255,.08);border-radius:12px;background:rgba(255,255,255,.02);font-size:.73rem;line-height:1.85;color:#bdc9d8}.sc-debate-history b{color:#86efac}.sc-debate-actions{display:grid;grid-template-columns:1fr 1fr;gap:9px}.sc-debate-actions button{margin-top:0}.sc-stage-count{font-size:.66rem;color:#9fb0c5;margin-top:8px}@media(max-width:430px){.sc-agenda{gap:5px}.sc-agenda button{font-size:.61rem;padding:9px 3px}.sc-debate-actions{grid-template-columns:1fr}}
 
+
+        /* BUILD YOUR XI — تحسينات تفاعلية دون تغيير وظائف المنصة */
+        #xiPitchWrapper { isolation: isolate; contain: layout paint; }
+        #xiPlayersContainer { position: absolute; inset: 0; }
+        .xi-player-node { touch-action: none; will-change: left, top, transform; }
+        .xi-player-node.is-dragging { z-index: 30; cursor: grabbing; transform: translate(-50%, -50%) scale(1.12); }
+        .xi-player-circle { transition: box-shadow .18s ease, transform .18s ease; }
+        .xi-player-node:hover .xi-player-circle,
+        .xi-player-node.is-dragging .xi-player-circle {
+            box-shadow: 0 0 0 4px rgba(255,255,255,.18), 0 8px 18px rgba(0,0,0,.45);
+        }
+        #xiShareBtn:disabled { opacity: .65; cursor: wait; }
 </style>
 </head>
 <body>
@@ -2047,10 +2066,10 @@
             });
         }
 
-        // تحرير السحب والإفلات للتشكيلة
+        // سحب وإفلات أكثر سلاسة باستخدام Pointer Events (ماوس + لمس + قلم).
         let activeDragNode = null;
-        let dragOffsetX = 0;
-        let dragOffsetY = 0;
+        let dragPointerId = null;
+        const pitchWrapper = document.getElementById('xiPitchWrapper');
 
         if (xiEditToggleBtn) {
             xiEditToggleBtn.addEventListener('click', () => {
@@ -2064,6 +2083,7 @@
         if (xiCancelEditBtn) {
             xiCancelEditBtn.addEventListener('click', () => {
                 isEditMode = false;
+                activeDragNode = null;
                 xiEditToggleBtn.style.display = 'block';
                 xiCancelEditBtn.style.display = 'none';
                 renderPlayers();
@@ -2072,107 +2092,135 @@
 
         function setupDragAndDrop() {
             renderPlayers();
-            const pitchWrapper = document.getElementById('xiPitchWrapper');
-            if (!pitchWrapper) return;
+            if (!pitchWrapper || !xiPlayersContainer) return;
 
-            const nodes = xiPlayersContainer.querySelectorAll('.xi-player-node');
-            nodes.forEach(node => {
-                const onStart = (clientX, clientY) => {
-                    if (!isEditMode) return;
+            xiPlayersContainer.querySelectorAll('.xi-player-node').forEach(node => {
+                node.style.touchAction = 'none';
+                node.addEventListener('pointerdown', (event) => {
+                    if (!isEditMode || event.button > 0) return;
+                    event.preventDefault();
                     activeDragNode = node;
-                    const rect = pitchWrapper.getBoundingClientRect();
-                    // السماح بالسحب الطبيعي
-                };
-
-                node.addEventListener('touchstart', (e) => {
-                    onStart(e.touches[0].clientX, e.touches[0].clientY);
-                }, {passive: true});
-
-                node.addEventListener('mousedown', (e) => {
-                    onStart(e.clientX, e.clientY);
+                    dragPointerId = event.pointerId;
+                    node.classList.add('is-dragging');
+                    try { node.setPointerCapture(event.pointerId); } catch (_) {}
                 });
             });
-
-            const onMove = (clientX, clientY) => {
-                if (!activeDragNode || !isEditMode) return;
-                const rect = pitchWrapper.getBoundingClientRect();
-                let x = ((clientX - rect.left) / rect.width) * 100;
-                let y = ((clientY - rect.top) / rect.height) * 100;
-                x = Math.max(5, Math.min(95, x));
-                y = Math.max(5, Math.min(95, y));
-
-                activeDragNode.style.left = x + '%';
-                activeDragNode.style.top = y + '%';
-                const index = activeDragNode.getAttribute('data-index');
-                currentPlayers[index].x = x;
-                currentPlayers[index].y = y;
-            };
-
-            window.addEventListener('touchmove', (e) => {
-                if (activeDragNode) onMove(e.touches[0].clientX, e.touches[0].clientY);
-            }, {passive: true});
-
-            window.addEventListener('mousemove', (e) => {
-                if (activeDragNode) onMove(e.clientX, e.clientY);
-            });
-
-            const onEnd = () => {
-                activeDragNode = null;
-            };
-
-            window.addEventListener('touchend', onEnd);
-            window.addEventListener('mouseup', onEnd);
         }
 
-        // تفعيل زر المشاركة والحفظ (SHARE) ليعمل بشكل كامل وطبيعي
+        function moveDraggedPlayer(event) {
+            if (!activeDragNode || !isEditMode || event.pointerId !== dragPointerId) return;
+            event.preventDefault();
+            const rect = pitchWrapper.getBoundingClientRect();
+            if (!rect.width || !rect.height) return;
+
+            const x = Math.max(5, Math.min(95, ((event.clientX - rect.left) / rect.width) * 100));
+            const y = Math.max(5, Math.min(95, ((event.clientY - rect.top) / rect.height) * 100));
+            activeDragNode.style.left = x + '%';
+            activeDragNode.style.top = y + '%';
+
+            const index = Number(activeDragNode.getAttribute('data-index'));
+            if (Number.isInteger(index) && currentPlayers[index]) {
+                currentPlayers[index].x = x;
+                currentPlayers[index].y = y;
+            }
+        }
+
+        function finishDraggedPlayer(event) {
+            if (!activeDragNode || (event && event.pointerId !== dragPointerId)) return;
+            activeDragNode.classList.remove('is-dragging');
+            activeDragNode = null;
+            dragPointerId = null;
+        }
+
+        window.addEventListener('pointermove', moveDraggedPlayer, { passive: false });
+        window.addEventListener('pointerup', finishDraggedPlayer);
+        window.addEventListener('pointercancel', finishDraggedPlayer);
+
+        // تحديث المعاينة فور تغيير الاسم، مع تنظيف النص تلقائيًا في العرض.
+        // مشاركة/حفظ صورة الملعب كاملًا بدقة مرتفعة مع دعم Safari وiOS.
         if (xiShareBtn) {
             xiShareBtn.addEventListener('click', async () => {
-                const pitchWrapper = document.getElementById('xiPitchWrapper');
-                if (!pitchWrapper) return;
+                if (!pitchWrapper || typeof html2canvas !== 'function') {
+                    alert('مكتبة تجهيز الصورة غير متاحة. حدّث الصفحة وحاول مرة أخرى.');
+                    return;
+                }
 
-                // إظهار تنبيه بسيط أو تغيير حالة الزر أثناء المعالجة
-                xiShareBtn.textContent = 'جاري تجهيز الصورة...';
+                const originalLabel = xiShareBtn.textContent;
                 xiShareBtn.disabled = true;
+                xiShareBtn.textContent = 'جاري تجهيز التشكيلة…';
 
                 try {
+                    if (document.fonts && document.fonts.ready) {
+                        await document.fonts.ready;
+                    }
+
+                    // ضمان أن كل اللاعبين ظاهرون وأن الالتقاط يشمل الملعب والعنوان والتذييل.
                     const canvas = await html2canvas(pitchWrapper, {
-                        scale: 2,
+                        scale: Math.max(2, Math.min(3, window.devicePixelRatio || 2)),
                         useCORS: true,
-                        backgroundColor: null
+                        allowTaint: false,
+                        backgroundColor: '#10512f',
+                        logging: false,
+                        width: pitchWrapper.clientWidth,
+                        height: pitchWrapper.clientHeight,
+                        windowWidth: Math.max(document.documentElement.clientWidth, pitchWrapper.clientWidth),
+                        onclone: (clonedDocument) => {
+                            const clonedPitch = clonedDocument.getElementById('xiPitchWrapper');
+                            if (clonedPitch) {
+                                clonedPitch.style.overflow = 'hidden';
+                                clonedPitch.style.maxHeight = 'none';
+                                clonedPitch.style.height = pitchWrapper.clientHeight + 'px';
+                            }
+                        }
                     });
 
-                    canvas.toBlob(async (blob) => {
-                        xiShareBtn.textContent = 'SHARE';
-                        xiShareBtn.disabled = false;
+                    const blob = await new Promise((resolve, reject) => {
+                        canvas.toBlob(value => value ? resolve(value) : reject(new Error('تعذر إنشاء ملف الصورة')), 'image/png');
+                    });
 
-                        if (!blob) return;
-                        const file = new File([blob], "Alza3eem-Lineup.png", { type: "image/png" });
+                    const file = new File([blob], 'Alzaeem-Lineup.png', { type: 'image/png' });
+                    let shared = false;
 
-                        // محاولة المشاركة عبر واجهة المشاركة الأصلية للمتصفح (Web Share API)
-                        if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                            try {
+                    if (navigator.share && navigator.canShare) {
+                        try {
+                            if (navigator.canShare({ files: [file] })) {
                                 await navigator.share({
-                                    title: 'تشكيلة النادي العربي',
+                                    title: teamName || 'تشكيلتي عبر منصة الزعيم',
                                     text: 'تشكيلتي عبر منصة الزعيم الرياضية ⚽️💚',
                                     files: [file]
                                 });
+                                shared = true;
+                            }
+                        } catch (shareError) {
+                            // إلغاء نافذة المشاركة من المستخدم ليس خطأ؛ نترك خيار الحفظ متاحًا.
+                            if (shareError && shareError.name !== 'AbortError') {
+                                console.warn('Alzaeem share fallback:', shareError);
+                            } else if (shareError && shareError.name === 'AbortError') {
                                 return;
-                            } catch (err) {
-                                if (err.name !== 'AbortError') console.log(err);
                             }
                         }
+                    }
 
-                        // الحل البديل: تحميل الصورة مباشرة للأجهزة التي لا تدعم المشاركة المباشرة
+                    if (!shared) {
+                        const url = URL.createObjectURL(blob);
                         const link = document.createElement('a');
-                        link.download = 'Alza3eem-Lineup.png';
-                        link.href = URL.createObjectURL(blob);
+                        link.href = url;
+                        link.download = 'Alzaeem-Lineup.png';
+                        link.style.display = 'none';
+                        document.body.appendChild(link);
                         link.click();
-                    }, 'image/png');
-
+                        link.remove();
+                        setTimeout(() => URL.revokeObjectURL(url), 1500);
+                        xiShareBtn.textContent = 'تم تجهيز الصورة ✓';
+                    } else {
+                        xiShareBtn.textContent = 'تم فتح المشاركة ✓';
+                    }
                 } catch (error) {
-                    xiShareBtn.textContent = 'SHARE';
+                    console.error('Alzaeem lineup export:', error);
+                    alert('تعذر تجهيز الصورة. تأكد من اتصال الإنترنت ثم حاول مرة أخرى.');
+                } finally {
                     xiShareBtn.disabled = false;
-                    alert('تعذر حفظ الصورة، يرجى المحاولة مرة أخرى.');
+                    setTimeout(() => { xiShareBtn.textContent = originalLabel; }, 1800);
                 }
             });
         }
