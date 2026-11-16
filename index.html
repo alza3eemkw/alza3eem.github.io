@@ -1261,6 +1261,99 @@
             box-shadow: 0 0 0 4px rgba(255,255,255,.18), 0 8px 18px rgba(0,0,0,.45);
         }
         #xiShareBtn:disabled { opacity: .65; cursor: wait; }
+
+        /* BUILD YOUR XI — refined, modern workspace */
+        #build-xi .xi-container { display:flex; flex-direction:column; gap:13px; }
+        #build-xi .section-title { letter-spacing:.4px; }
+        #build-xi .xi-edit-mode-bar { gap:9px; }
+        #build-xi .xi-edit-mode-btn {
+            min-height:44px; border-radius:13px; background:rgba(255,255,255,.045);
+            border-color:rgba(255,255,255,.09); color:#d5e2ef;
+            transition:background .22s ease,border-color .22s ease,transform .22s ease;
+        }
+        #build-xi .xi-edit-mode-btn:active { transform:scale(.985); }
+        #build-xi .xi-controls-grid {
+            gap:11px; padding:14px; border:1px solid rgba(255,255,255,.075);
+            border-radius:19px; background:linear-gradient(145deg,rgba(20,35,58,.88),rgba(10,20,37,.88));
+        }
+        #build-xi .xi-control-group { gap:6px; min-width:0; }
+        #build-xi .xi-control-group label {
+            font-size:.68rem; letter-spacing:.65px; color:#a8b8cb; font-weight:800;
+        }
+        #build-xi .xi-control-group input:not([type=color]),
+        #build-xi .xi-control-group select {
+            min-height:44px; margin:0; padding:10px 12px; border-radius:12px;
+            background:rgba(4,12,25,.72); border-color:rgba(255,255,255,.09);
+            font-size:.82rem;
+        }
+        #build-xi .xi-colors-row { gap:8px; }
+        #build-xi .xi-color-dot { width:25px; height:25px; box-shadow:0 2px 7px rgba(0,0,0,.22); }
+        #build-xi .xi-color-dot.active { outline:2px solid rgba(74,222,128,.35); outline-offset:2px; }
+        #build-xi .xi-pitch-wrapper {
+            width:min(100%,520px); aspect-ratio:4/5; max-height:none;
+            margin:0 auto; border:1px solid rgba(255,255,255,.22);
+            border-radius:22px; background:
+              radial-gradient(ellipse at 50% 50%,rgba(255,255,255,.055),transparent 55%),
+              linear-gradient(145deg,#145a37 0%,#0d432b 48%,#0a3524 100%);
+            box-shadow:0 18px 42px rgba(0,0,0,.28),inset 0 0 42px rgba(0,0,0,.13);
+        }
+        #build-xi .xi-svg-pitch { opacity:.82; }
+        #build-xi .xi-team-header {
+            top:13px; font-size:1.02rem; letter-spacing:.25px;
+            text-shadow:0 2px 8px rgba(0,0,0,.65);
+        }
+        #build-xi .xi-created-footer { bottom:10px; font-size:.68rem; }
+        #build-xi .xi-player-node { width:66px; transition:filter .18s ease,transform .18s ease; }
+        #build-xi .xi-player-node:active { transform:translate(-50%,-50%) scale(1.06); }
+        #build-xi .xi-player-circle {
+            width:37px; height:37px; border-width:2px;
+            box-shadow:0 4px 11px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.25);
+        }
+        #build-xi .xi-player-name-badge {
+            margin-top:4px; max-width:76px; padding:3px 7px;
+            border-radius:7px; font-size:.62rem; line-height:1.35;
+            background:rgba(3,10,18,.82); border-color:rgba(255,255,255,.22);
+            box-shadow:0 2px 7px rgba(0,0,0,.2);
+        }
+        #build-xi .xi-action-btn-single {
+            min-height:48px; margin-top:0; border-radius:14px;
+            letter-spacing:.3px; box-shadow:0 8px 22px rgba(0,128,0,.19);
+        }
+        #build-xi #xiShareBtn { background:linear-gradient(135deg,#16a36a,#087343); }
+        #build-xi #xiResetBtn { margin-top:0 !important; }
+        .xi-share-sheet { position:fixed; inset:0; z-index:5000; display:none; align-items:flex-end; justify-content:center; }
+        .xi-share-sheet.open { display:flex; }
+        .xi-share-backdrop { position:absolute; inset:0; background:rgba(1,7,16,.72); backdrop-filter:blur(9px); }
+        .xi-share-panel {
+            position:relative; width:min(100%,520px); max-height:90dvh; overflow:auto;
+            padding:12px 18px calc(22px + env(safe-area-inset-bottom));
+            border:1px solid rgba(255,255,255,.12); border-bottom:0;
+            border-radius:25px 25px 0 0;
+            background:linear-gradient(160deg,#14243d,#091426);
+            box-shadow:0 -18px 55px rgba(0,0,0,.4); animation:xiSheetIn .24s ease-out;
+        }
+        @keyframes xiSheetIn { from { transform:translateY(24px); opacity:.5; } to { transform:translateY(0); opacity:1; } }
+        .xi-share-handle { width:42px; height:4px; border-radius:99px; margin:0 auto 17px; background:rgba(255,255,255,.22); }
+        .xi-share-heading { display:flex; align-items:flex-start; justify-content:space-between; gap:12px; }
+        .xi-share-eyebrow { color:#4ade80; font-size:.58rem; font-weight:900; letter-spacing:1.2px; }
+        .xi-share-heading h3 { margin:4px 0 2px; font-size:1.08rem; font-weight:900; color:#fff; }
+        .xi-share-heading p { margin:0; color:#9aabc0; font-size:.7rem; line-height:1.6; }
+        .xi-share-close { width:32px; height:32px; flex:0 0 auto; border:1px solid rgba(255,255,255,.1); border-radius:50%; background:rgba(255,255,255,.06); color:#dce7f4; font-size:1.3rem; cursor:pointer; }
+        .xi-share-preview { display:block; width:auto; max-width:100%; max-height:34dvh; object-fit:contain; margin:15px auto; border-radius:13px; border:1px solid rgba(255,255,255,.1); background:#0b3d29; }
+        .xi-share-actions { display:grid; grid-template-columns:1fr 1fr; gap:9px; }
+        .xi-share-actions button,.xi-share-actions a {
+            min-height:47px; display:flex; justify-content:center; align-items:center;
+            border-radius:13px; font-family:'Cairo',sans-serif; font-size:.78rem;
+            font-weight:900; text-decoration:none; cursor:pointer;
+        }
+        .xi-share-primary { border:1px solid rgba(74,222,128,.35); color:#fff; background:linear-gradient(135deg,#14945e,#087044); }
+        .xi-share-download { color:#dce9f6; border:1px solid rgba(255,255,255,.13); background:rgba(255,255,255,.06); }
+        @media (max-width:380px) {
+            #build-xi .xi-controls-grid { padding:11px; gap:8px; }
+            #build-xi .xi-player-node { width:58px; }
+            #build-xi .xi-player-circle { width:33px; height:33px; }
+            #build-xi .xi-player-name-badge { max-width:66px; font-size:.56rem; }
+        }
 </style>
 </head>
 <body>
@@ -1376,7 +1469,7 @@
                     </button>
                 </div>
 
-                <div class="next-match-card"><div class="azm-fm-head"><span class="azm-fm-league" id="azmHomeTournament">الجولة الثامنة من دوري زين</span><span class="azm-fm-status" id="azmHomeStatus">اليوم</span></div><div class="azm-fm-teams"><div class="azm-fm-team"><div class="azm-fm-badge">ع</div><div class="azm-fm-name">العربي</div></div><div class="azm-fm-center"><div class="azm-fm-center-main" id="azmHomeScore">5:25pm</div><div class="azm-fm-center-sub" id="azmHomeCountdown">7/11/2026</div></div><div class="azm-fm-team opponent"><div class="azm-fm-badge">ن</div><div class="azm-fm-name" id="azmHomeOpponent">النصر</div></div></div><div class="azm-fm-meta"><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">التاريخ</div><div class="azm-fm-meta-value" id="azmHomeDate">7/11/2026</div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الملعب</div><div class="azm-fm-meta-value" id="azmHomeVenue"> صباح السالم </div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الوقت</div><div class="azm-fm-meta-value" id="azmHomeTime">5:25pm</div></div></div><div class="azm-fm-tabs"><div class="azm-fm-tab active">نظرة عامة</div></div><div class="azm-fm-livebox" id="azmHomeLiveBox" hidden><div class="azm-fm-live-row"><div class="azm-fm-live-team" id="azmHomeLiveHome">النصر </div><div><div class="azm-fm-live-score" id="azmHomeLiveScore">- : -</div><div class="azm-fm-live-minute" id="azmHomeLiveMinute">—</div></div><div class="azm-fm-live-team">العربي</div></div><div class="azm-fm-note" id="azmHomeLiveNote">آخر تحديث —</div></div></div>
+                <div class="next-match-card"><div class="azm-fm-head"><span class="azm-fm-league" id="azmHomeTournament">الجولة التاسعة من دوري زين</span><span class="azm-fm-status" id="azmHomeStatus">قريبًا</span></div><div class="azm-fm-teams"><div class="azm-fm-team"><div class="azm-fm-badge">ع</div><div class="azm-fm-name">العربي</div></div><div class="azm-fm-center"><div class="azm-fm-center-main" id="azmHomeScore">يحدد لاحقًا</div><div class="azm-fm-center-sub" id="azmHomeCountdown">7/11/2026</div></div><div class="azm-fm-team opponent"><div class="azm-fm-badge">ت</div><div class="azm-fm-name" id="azmHomeOpponent">التضامن</div></div></div><div class="azm-fm-meta"><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">التاريخ</div><div class="azm-fm-meta-value" id="azmHomeDate">7/11/2026</div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الملعب</div><div class="azm-fm-meta-value" id="azmHomeVenue">يحدد لاحقًا</div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الوقت</div><div class="azm-fm-meta-value" id="azmHomeTime">يحدد لاحقًا</div></div></div><div class="azm-fm-tabs"><div class="azm-fm-tab active">نظرة عامة</div></div><div class="azm-fm-livebox" id="azmHomeLiveBox" hidden><div class="azm-fm-live-row"><div class="azm-fm-live-team" id="azmHomeLiveHome">التضامن</div><div><div class="azm-fm-live-score" id="azmHomeLiveScore">- : -</div><div class="azm-fm-live-minute" id="azmHomeLiveMinute">—</div></div><div class="azm-fm-live-team">العربي</div></div><div class="azm-fm-note" id="azmHomeLiveNote">آخر تحديث —</div></div></div>
                 <div class="section-header-row">
                     <div class="section-title">خدمات المنصة</div>
                 </div>
@@ -1452,7 +1545,7 @@
             <div id="next-match" class="content">
                 <div class="section-title" style="margin-bottom: 16px;">المباراة القادمة</div>
 
-                <div class="next-match-card"><div class="azm-fm-head"><span class="azm-fm-league" id="matchOpponentDisplay">الجولة الثامنة من دوري زين </span><span class="azm-fm-status" id="azmDetailStatus">اليوم</span></div><div class="azm-fm-teams"><div class="azm-fm-team"><div class="azm-fm-badge">ع</div><div class="azm-fm-name">العربي</div></div><div class="azm-fm-center"><div class="azm-fm-center-main" id="azmDetailScore">5:25pm</div><div class="azm-fm-center-sub" id="azmDetailCountdown">7/11/2026</div></div><div class="azm-fm-team opponent"><div class="azm-fm-badge">ن</div><div class="azm-fm-name" id="matchTimeDisplay">النصر </div></div></div><div class="azm-fm-meta"><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">التاريخ</div><div class="azm-fm-meta-value" id="matchDateDisplay">7/11/2026</div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الملعب</div><div class="azm-fm-meta-value" id="matchStadiumDisplay"> صباح السالم </div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الوقت</div><div class="azm-fm-meta-value" id="matchDayDisplay">5:25pm</div></div></div><div class="azm-fm-tabs"><div class="azm-fm-tab active">نظرة عامة</div></div><div class="azm-fm-livebox" id="azmDetailLiveBox" hidden><div class="azm-fm-live-row"><div class="azm-fm-live-team" id="azmLiveHome">النصر </div><div><div class="azm-fm-live-score" id="azmLiveScore">- : -</div><div class="azm-fm-live-minute" id="azmLiveMinute">—</div></div><div class="azm-fm-live-team" id="azmLiveAway">العربي</div></div><div class="azm-fm-note" id="azmLiveUpdated">آخر تحديث —</div></div></div>
+                <div class="next-match-card"><div class="azm-fm-head"><span class="azm-fm-league" id="matchOpponentDisplay">الجولة التاسعة من دوري زين </span><span class="azm-fm-status" id="azmDetailStatus">قريبًا</span></div><div class="azm-fm-teams"><div class="azm-fm-team"><div class="azm-fm-badge">ع</div><div class="azm-fm-name">العربي</div></div><div class="azm-fm-center"><div class="azm-fm-center-main" id="azmDetailScore">يحدد لاحقًا</div><div class="azm-fm-center-sub" id="azmDetailCountdown">7/11/2026</div></div><div class="azm-fm-team opponent"><div class="azm-fm-badge">ت</div><div class="azm-fm-name" id="matchTimeDisplay">التضامن </div></div></div><div class="azm-fm-meta"><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">التاريخ</div><div class="azm-fm-meta-value" id="matchDateDisplay">7/11/2026</div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الملعب</div><div class="azm-fm-meta-value" id="matchStadiumDisplay">يحدد لاحقًا</div></div><div class="azm-fm-meta-item"><div class="azm-fm-meta-label">الوقت</div><div class="azm-fm-meta-value" id="matchDayDisplay">يحدد لاحقًا</div></div></div><div class="azm-fm-tabs"><div class="azm-fm-tab active">نظرة عامة</div></div><div class="azm-fm-livebox" id="azmDetailLiveBox" hidden><div class="azm-fm-live-row"><div class="azm-fm-live-team" id="azmLiveHome">العربي</div><div><div class="azm-fm-live-score" id="azmLiveScore">- : -</div><div class="azm-fm-live-minute" id="azmLiveMinute">—</div></div><div class="azm-fm-live-team" id="azmLiveAway">التضامن</div></div><div class="azm-fm-note" id="azmLiveUpdated">آخر تحديث —</div></div></div>
                 <div class="rules-box" style="margin-top: 16px;">
                     <h3 style="margin-top: 0; margin-bottom: 10px; font-weight: 800; color: #38bdf8;">معلومات إضافية</h3>
                     <p style="margin: 4px 0;">المباراة منقولة عبر قناة الكويت الرياضية.</p>
@@ -1476,9 +1569,9 @@
                 
                 <div class="match-details-box">
                     <h3 style="margin-top: 0; color: #38bdf8; font-size: 16px; font-weight: 900;">تفاصيل المباراة</h3>
-                    <p style="margin: 4px 0;"><strong>المباراة:</strong> العربي / النصر</p>
-                    <p style="margin: 4px 0;"><strong>الموعد:</strong> 5:25pm -- 7/11/2026</p>
-                    <p style="margin: 4px 0;"><strong>نوع المباراة:</strong> الجولة الثامنة من دوري زين</p>
+                    <p style="margin: 4px 0;"><strong>المباراة:</strong> العربي / التضامن</p>
+                    <p style="margin: 4px 0;"><strong>الموعد:</strong> يحدد لاحقًا -- 7/11/2026</p>
+                    <p style="margin: 4px 0;"><strong>نوع المباراة:</strong> الجولة التاسعة من دوري زين</p>
                     <p style="margin: 4px 0; color: #f87171;"><strong>ملاحظة:</strong> يغلق باب التوقعات قبل صافرة البداية بخمس دقائق</p>
                 </div>
 
@@ -1631,6 +1724,25 @@
 
                     <button class="xi-action-btn-single" id="xiShareBtn">SHARE</button>
                     <button class="xi-action-btn-single" id="xiResetBtn" style="margin-top: 8px; background: rgba(239, 68, 68, 0.15); border-color: rgba(239, 68, 68, 0.3); color: #fca5a5;">RESET XI</button>
+                    <div class="xi-share-sheet" id="xiShareSheet" aria-hidden="true">
+                        <div class="xi-share-backdrop" data-xi-share-close></div>
+                        <div class="xi-share-panel" role="dialog" aria-modal="true" aria-labelledby="xiShareTitle">
+                            <div class="xi-share-handle"></div>
+                            <div class="xi-share-heading">
+                                <div>
+                                    <div class="xi-share-eyebrow">ALZAEEM • BUILD YOUR XI</div>
+                                    <h3 id="xiShareTitle">تشكيلتك جاهزة</h3>
+                                    <p>اختر طريقة مشاركة أو حفظ الصورة بجودتها الكاملة</p>
+                                </div>
+                                <button type="button" class="xi-share-close" data-xi-share-close aria-label="إغلاق">×</button>
+                            </div>
+                            <img id="xiSharePreview" class="xi-share-preview" alt="معاينة التشكيلة">
+                            <div class="xi-share-actions">
+                                <button type="button" class="xi-share-primary" id="xiNativeShareAction">مشاركة التشكيلة</button>
+                                <a class="xi-share-download" id="xiDownloadAction" download="Alzaeem-Lineup.png">حفظ / تنزيل الصورة</a>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="footer">
@@ -1796,7 +1908,7 @@
         }
 
         const globalData = {
-            match: { opponent: "اليوم", date: "اليوم", time: "اليوم", stadium: "اليوم", type: "اليوم" },
+            match: { opponent: "التضامن", date: "يحدد لاحقًا", time: "يحدد لاحقًا", stadium: "يحدد لاحقًا", type: "الجولة التاسعة من دوري زين" },
             leaderboard: [
                 { rank: 1, name: "al3r.bawi", points: 14 },
                 { rank: 2, name: "ALI💚💚💚💚💚", points: 12 },
@@ -1965,10 +2077,17 @@
                 const circleColor = kitColor;
                 const txtColorHex = (textColor === 'BLACK') ? '#000000' : '#FFFFFF';
 
-                node.innerHTML = `
-                    <div class="xi-player-circle" style="background: ${circleColor}; color: ${txtColorHex};">${p.no || ''}</div>
-                    <div class="xi-player-name-badge">${p.name || ''}</div>
-                `;
+                const numberBadge = document.createElement('div');
+                numberBadge.className = 'xi-player-circle';
+                numberBadge.style.background = circleColor;
+                numberBadge.style.color = txtColorHex;
+                numberBadge.textContent = p.no ?? '';
+
+                const nameBadge = document.createElement('div');
+                nameBadge.className = 'xi-player-name-badge';
+                nameBadge.textContent = p.name ?? '';
+
+                node.append(numberBadge, nameBadge);
 
                 if (!isEditMode) {
                     node.addEventListener('click', () => {
@@ -2138,6 +2257,63 @@
 
         // تحديث المعاينة فور تغيير الاسم، مع تنظيف النص تلقائيًا في العرض.
         // مشاركة/حفظ صورة الملعب كاملًا بدقة مرتفعة مع دعم Safari وiOS.
+        let preparedLineupBlob = null;
+        let preparedLineupUrl = null;
+        const xiShareSheet = document.getElementById('xiShareSheet');
+        const xiSharePreview = document.getElementById('xiSharePreview');
+        const xiNativeShareAction = document.getElementById('xiNativeShareAction');
+        const xiDownloadAction = document.getElementById('xiDownloadAction');
+
+        function closeXiShareSheet() {
+            if (!xiShareSheet) return;
+            xiShareSheet.classList.remove('open');
+            xiShareSheet.setAttribute('aria-hidden', 'true');
+        }
+
+        function openXiShareSheet(blob) {
+            if (!xiShareSheet || !xiSharePreview || !xiDownloadAction) return;
+            if (preparedLineupUrl) URL.revokeObjectURL(preparedLineupUrl);
+            preparedLineupUrl = URL.createObjectURL(blob);
+            xiSharePreview.src = preparedLineupUrl;
+            xiDownloadAction.href = preparedLineupUrl;
+            xiShareSheet.classList.add('open');
+            xiShareSheet.setAttribute('aria-hidden', 'false');
+        }
+
+        if (xiShareSheet) {
+            xiShareSheet.querySelectorAll('[data-xi-share-close]').forEach(el =>
+                el.addEventListener('click', closeXiShareSheet)
+            );
+        }
+
+        async function invokeNativeLineupShare(blob) {
+            const file = new File([blob], 'Alzaeem-Lineup.png', { type: 'image/png' });
+            if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+                await navigator.share({
+                    title: teamName || 'تشكيلتي عبر منصة الزعيم',
+                    text: 'تشكيلتي عبر منصة الزعيم الرياضية ⚽️💚',
+                    files: [file]
+                });
+                return true;
+            }
+            return false;
+        }
+
+        if (xiNativeShareAction) {
+            xiNativeShareAction.addEventListener('click', async () => {
+                if (!preparedLineupBlob) return;
+                try {
+                    const shared = await invokeNativeLineupShare(preparedLineupBlob);
+                    if (!shared) alert('المشاركة المباشرة للصور غير مدعومة في هذا المتصفح. استخدم حفظ / تنزيل الصورة ثم أرسلها من تطبيق الصور.');
+                } catch (error) {
+                    if (error?.name !== 'AbortError') {
+                        console.warn('Alzaeem native share:', error);
+                        alert('تعذرت المشاركة من المتصفح. يمكنك حفظ الصورة وإرسالها من تطبيق الصور.');
+                    }
+                }
+            });
+        }
+
         if (xiShareBtn) {
             xiShareBtn.addEventListener('click', async () => {
                 if (!pitchWrapper || typeof html2canvas !== 'function') {
@@ -2147,77 +2323,62 @@
 
                 const originalLabel = xiShareBtn.textContent;
                 xiShareBtn.disabled = true;
-                xiShareBtn.textContent = 'جاري تجهيز التشكيلة…';
+                xiShareBtn.textContent = 'جاري تجهيز الصورة…';
 
                 try {
-                    if (document.fonts && document.fonts.ready) {
-                        await document.fonts.ready;
-                    }
+                    if (document.fonts?.ready) await document.fonts.ready;
 
-                    // ضمان أن كل اللاعبين ظاهرون وأن الالتقاط يشمل الملعب والعنوان والتذييل.
                     const canvas = await html2canvas(pitchWrapper, {
-                        scale: Math.max(2, Math.min(3, window.devicePixelRatio || 2)),
+                        scale: Math.max(3, Math.min(4, (window.devicePixelRatio || 2) * 1.5)),
                         useCORS: true,
                         allowTaint: false,
-                        backgroundColor: '#10512f',
+                        backgroundColor: '#0d432b',
                         logging: false,
+                        imageTimeout: 15000,
                         width: pitchWrapper.clientWidth,
                         height: pitchWrapper.clientHeight,
-                        windowWidth: Math.max(document.documentElement.clientWidth, pitchWrapper.clientWidth),
                         onclone: (clonedDocument) => {
                             const clonedPitch = clonedDocument.getElementById('xiPitchWrapper');
                             if (clonedPitch) {
-                                clonedPitch.style.overflow = 'hidden';
-                                clonedPitch.style.maxHeight = 'none';
+                                clonedPitch.style.width = pitchWrapper.clientWidth + 'px';
                                 clonedPitch.style.height = pitchWrapper.clientHeight + 'px';
+                                clonedPitch.style.maxHeight = 'none';
+                                clonedPitch.style.aspectRatio = 'auto';
+                                clonedPitch.style.overflow = 'hidden';
+                                clonedPitch.style.fontFamily = "'Cairo', sans-serif";
                             }
+                            const clonedNodes = clonedDocument.querySelectorAll('#xiPitchWrapper .xi-player-node');
+                            clonedNodes.forEach(node => {
+                                node.style.visibility = 'visible';
+                                node.style.opacity = '1';
+                            });
                         }
                     });
 
                     const blob = await new Promise((resolve, reject) => {
                         canvas.toBlob(value => value ? resolve(value) : reject(new Error('تعذر إنشاء ملف الصورة')), 'image/png');
                     });
+                    preparedLineupBlob = blob;
 
-                    const file = new File([blob], 'Alzaeem-Lineup.png', { type: 'image/png' });
+                    // Open the native share sheet where supported. Otherwise show a clear
+                    // in-page share/save panel with a working PNG download link.
                     let shared = false;
-
-                    if (navigator.share && navigator.canShare) {
-                        try {
-                            if (navigator.canShare({ files: [file] })) {
-                                await navigator.share({
-                                    title: teamName || 'تشكيلتي عبر منصة الزعيم',
-                                    text: 'تشكيلتي عبر منصة الزعيم الرياضية ⚽️💚',
-                                    files: [file]
-                                });
-                                shared = true;
-                            }
-                        } catch (shareError) {
-                            // إلغاء نافذة المشاركة من المستخدم ليس خطأ؛ نترك خيار الحفظ متاحًا.
-                            if (shareError && shareError.name !== 'AbortError') {
-                                console.warn('Alzaeem share fallback:', shareError);
-                            } else if (shareError && shareError.name === 'AbortError') {
-                                return;
-                            }
-                        }
+                    try {
+                        shared = await invokeNativeLineupShare(blob);
+                    } catch (shareError) {
+                        if (shareError?.name === 'AbortError') return;
+                        console.warn('Alzaeem share fallback:', shareError);
                     }
 
-                    if (!shared) {
-                        const url = URL.createObjectURL(blob);
-                        const link = document.createElement('a');
-                        link.href = url;
-                        link.download = 'Alzaeem-Lineup.png';
-                        link.style.display = 'none';
-                        document.body.appendChild(link);
-                        link.click();
-                        link.remove();
-                        setTimeout(() => URL.revokeObjectURL(url), 1500);
-                        xiShareBtn.textContent = 'تم تجهيز الصورة ✓';
-                    } else {
+                    if (shared) {
                         xiShareBtn.textContent = 'تم فتح المشاركة ✓';
+                    } else {
+                        openXiShareSheet(blob);
+                        xiShareBtn.textContent = 'الصورة جاهزة ✓';
                     }
                 } catch (error) {
                     console.error('Alzaeem lineup export:', error);
-                    alert('تعذر تجهيز الصورة. تأكد من اتصال الإنترنت ثم حاول مرة أخرى.');
+                    alert('تعذر تجهيز الصورة. تأكد من اتصال الإنترنت وحاول مرة أخرى.');
                 } finally {
                     xiShareBtn.disabled = false;
                     setTimeout(() => { xiShareBtn.textContent = originalLabel; }, 1800);
@@ -2435,11 +2596,11 @@
         const homeDisplay = displayTeamName(home);
         const awayDisplay = displayTeamName(away);
         const arabiIsHome = /al\s*arabi/i.test(home);
-        const opponent = arabiIsHome ? homeDisplay : awayDisplay;
-        const tournament = currentMatch.round ? `${currentMatch.league || 'دوري زين'} ${currentMatch.round}` : (currentMatch.league === 'Premier League' ? 'دوري زين' : (currentMatch.league || 'المباراة'));
-        const date = formatDate(currentMatch.date) || '—';
-        const time = formatTime(currentMatch.time) || '—';
-        const venue = currentMatch.venue || 'الصداقة والسلام';
+        const opponent = 'التضامن';
+        const tournament = 'الجولة التاسعة من دوري زين';
+        const date = formatDate(currentMatch.date) || 'يحدد لاحقًا';
+        const time = 'يحدد لاحقًا';
+        const venue = 'يحدد لاحقًا';
         if (els.mainArabi) els.mainArabi.textContent = 'العربي';
         if (els.mainOpponent) els.mainOpponent.textContent = opponent || '—';
         if (els.tournament) els.tournament.textContent = tournament;
@@ -2461,10 +2622,10 @@
 
         const remaining = kick.getTime() - Date.now();
         const dateText = formatDate(currentMatch.date);
-        const timeText = formatTime(currentMatch.time);
+        const timeText = 'يحدد لاحقًا';
 
         if (remaining > 0) {
-            const label = preMatchLabel(remaining);
+            const label = 'قريبًا';
             setStrip(els.homeStrip, els.homeStatus, els.homeScore, els.homeCountdown, 'pre', label, timeText, dateText);
             setStrip(els.detailStrip, els.detailStatus, els.detailScore, els.detailCountdown, 'pre', label, timeText, dateText);
             if (els.homeStatus) { els.homeStatus.classList.remove('live','finished'); els.homeStatus.textContent = label; }
@@ -2481,8 +2642,8 @@
         }
 
         if (matchState === 'pre') {
-            setStrip(els.homeStrip, els.homeStatus, els.homeScore, els.homeCountdown, 'pre', 'تبدأ الآن', timeText, dateText);
-            setStrip(els.detailStrip, els.detailStatus, els.detailScore, els.detailCountdown, 'pre', 'تبدأ الآن', timeText, dateText);
+            setStrip(els.homeStrip, els.homeStatus, els.homeScore, els.homeCountdown, 'pre', 'قريبًا', timeText, dateText);
+            setStrip(els.detailStrip, els.detailStatus, els.detailScore, els.detailCountdown, 'pre', 'قريبًا', timeText, dateText);
         }
     }
 
@@ -2506,11 +2667,11 @@
         if (els.panel) els.panel.hidden = !(live || finished);
         if (els.homeLiveBox) els.homeLiveBox.hidden = !(live || finished);
         if (els.detailLiveBox) els.detailLiveBox.hidden = !(live || finished);
-        if (els.home) els.home.textContent = home;
-        if (els.away) els.away.textContent = away;
+        if (els.home) els.home.textContent = 'العربي';
+        if (els.away) els.away.textContent = 'التضامن';
         if (els.score) els.score.textContent = score;
         if (els.minute) els.minute.textContent = minute;
-        if (els.homeLiveHome) els.homeLiveHome.textContent = home;
+        if (els.homeLiveHome) els.homeLiveHome.textContent = 'التضامن';
         if (els.homeLiveScore) els.homeLiveScore.textContent = score;
         if (els.homeLiveMinute) els.homeLiveMinute.textContent = minute;
         if (els.homeLiveNote) els.homeLiveNote.textContent = 'آخر تحديث: ' + new Date().toLocaleTimeString('ar-KW', { hour: '2-digit', minute: '2-digit' });
