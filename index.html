@@ -15,9 +15,10 @@
 
     <script>
     /* =========================================================
-       ALZAEEM PREDICTION SUBMIT — NO REDIRECT
-       The inline onsubmit returns false immediately, so the
-       browser can never navigate to FormSubmit's webpage.
+       ALZAEEM PREDICTION SUBMIT — WEB3FORMS
+       Sends the existing prediction fields to the same inbox.
+       Replace the access key placeholder with the key created
+       for the existing recipient email in this project.
     ========================================================= */
     window.alzaeemSubmitPrediction = function (event) {
         if (event) event.preventDefault();
@@ -27,53 +28,53 @@
         const button = form ? form.querySelector('button[type="submit"]') : null;
         if (!form || !status) return false;
 
-        // لا نرسل طلبًا ناقصًا ولا نسمح بإرسال مزدوج.
         if (!form.reportValidity()) return false;
         if (form.dataset.submitting === 'true') return false;
 
         const originalText = button ? button.textContent : 'إرسال التوقع';
         form.dataset.submitting = 'true';
         status.className = '';
-        status.textContent = 'جاري إرسال توقعك والتحقق من استلامه…';
+        status.textContent = 'جاري إرسال توقعك…';
         if (button) {
             button.disabled = true;
             button.textContent = 'جاري الإرسال…';
         }
 
-        // إظهار توضيح للمستخدم إذا تأخر رد خدمة البريد، دون الادعاء
-        // بأن التوقع استُلم قبل وصول تأكيد فعلي من FormSubmit.
-        const waitingNoticeId = setTimeout(() => {
-            if (form.dataset.submitting === 'true') {
-                status.textContent = 'طلبك قيد المعالجة، يرجى عدم إعادة الإرسال حتى لا يتكرر التوقع…';
-            }
-        }, 8000);
-
         (async function () {
+            const controller = new AbortController();
+            const timeoutId = setTimeout(() => controller.abort(), 15000);
+
             try {
-                // توثيق FormSubmit يوصي بإرسال بيانات AJAX بصيغة JSON.
                 const formData = new FormData(form);
                 const payload = {};
-                formData.forEach((value, key) => { payload[key] = value; });
+                formData.forEach((value, key) => {
+                    if (key !== 'botcheck') payload[key] = value;
+                });
 
-                const response = await fetch('https://formsubmit.co/ajax/alza3eem.kw@gmail.com', {
+                const response = await fetch('https://api.web3forms.com/submit', {
                     method: 'POST',
-                    body: JSON.stringify(payload),
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json'
                     },
-                    mode: 'cors',
-                    cache: 'no-store'
+                    body: JSON.stringify(payload),
+                    cache: 'no-store',
+                    signal: controller.signal
                 });
 
                 const raw = await response.text();
                 let result = {};
                 try { result = raw ? JSON.parse(raw) : {}; } catch (_) {}
 
-                // FormSubmit قد يعيد HTTP 200 حتى عند رفض الطلب؛ لذلك
-                // لا نعتبره ناجحًا إلا إذا كانت success تساوي true حرفيًا.
-                if (!response.ok || String(result.success).toLowerCase() !== 'true') {
-                    const detail = result.message || result.error || `HTTP ${response.status}`;
+                const succeeded = response.ok &&
+                    (result.success === true ||
+                     String(result.success).toLowerCase() === 'true');
+
+                if (!succeeded) {
+                    const detail = result.message ||
+                        (result.body && result.body.message) ||
+                        result.error ||
+                        `HTTP ${response.status}`;
                     throw new Error(String(detail));
                 }
 
@@ -83,11 +84,12 @@
             } catch (error) {
                 console.error('Alzaeem prediction submit:', error);
                 status.className = 'error';
-                status.textContent = error.message && error.message !== 'Failed to fetch'
-                    ? '❌ لم نتمكن من تأكيد استلام التوقع: ' + error.message + ' — يرجى المحاولة بعد التأكد من عدم وصول رسالة تأكيد.'
-                    : '❌ تعذر الاتصال بخدمة إرسال التوقعات. لم يصلنا تأكيد بالاستلام؛ تحقق من اتصالك قبل إعادة المحاولة.';
+                status.textContent = error.name === 'AbortError'
+                    ? '❌ انتهت مهلة الإرسال. تحقق من الاتصال وحاول مرة أخرى.'
+                    : '❌ تعذر تأكيد استلام التوقع: ' +
+                      (error.message || 'تحقق من إعداد مفتاح الإرسال وحاول مرة أخرى.');
             } finally {
-                clearTimeout(waitingNoticeId);
+                clearTimeout(timeoutId);
                 form.dataset.submitting = 'false';
                 if (button) {
                     button.disabled = false;
@@ -1649,9 +1651,10 @@
                     <p style="margin: 4px 0; color: #f87171;"><strong>ملاحظة:</strong> يغلق باب التوقعات قبل صافرة البداية بخمس دقائق</p>
                 </div>
 
-                <form action="https://formsubmit.co/ajax/alza3eem.kw@gmail.com" method="POST" id="my-form" onsubmit="return alzaeemSubmitPrediction(event);">
-                    <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_subject" value="توقع جديد في منصة الزعيم ⚽️">
+                <form action="https://api.web3forms.com/submit" method="POST" id="my-form" onsubmit="return alzaeemSubmitPrediction(event);">
+                    <input type="hidden" name="access_key" value="a3af2fe8-ea6e-4241-939e-52c87f11cc8e">
+                    <input type="hidden" name="subject" value="توقع جديد في منصة الزعيم ⚽️">
+                    <input type="hidden" name="from_name" value="منصة الزعيم الرياضية">
 
                     <input type="text" name="الاسم" id="name-input" placeholder="الاسم الكريم" required>
                     <input type="text" name="حساب_الانستقرام" id="insta-input" placeholder="@حساب الإنستغرام" required>
